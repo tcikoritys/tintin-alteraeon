@@ -1,0 +1,703 @@
+#ACTION {^A clay man stops following you.$}
+{
+	#if {"$autoclay" == "true"}
+	{
+		c clay man
+	}
+}
+{1}
+
+#ACTION {^You are rescued from certain death by %1!}
+{
+	a
+}
+{1}
+
+#ACTION {^You fail the rescue!}
+{
+	rescue $rescue
+}
+{1}
+
+#ACTION {^You scramble to retrieve%1!}
+{
+	#if {"$disarm" == "true"}
+	{
+		disarm
+	}
+}
+{1}
+
+#ACTION {^Your blood freezes as you hear%1death cry!$}
+{
+	get all.$throwWeapon corpse;
+	get coins corpse;
+	#if {"$combat" != "false"}
+	{
+		c $combat
+	};
+	#variable {combat} {false};
+	#if {"$corpseCutter" == "true"}
+	{
+		harvest components corpse
+	};
+	#if {"$consume" == "true"}
+	{
+		control all consume corpse
+	};
+	#if {"$harvestTeeth" == "true"}
+	{
+		harvest teeth corpse
+	};
+	#if {"$bot" == "true"}
+	{
+		x
+	}
+}
+{1}
+
+#ACTION {^You fail to cast the spell %1.}
+{
+	cast $lastSpell
+}
+{2}
+
+#ACTION {^You fail to cast the spell.}
+{
+	cast $lastSpell
+}
+{2}
+
+#ACTION {%1is mortally wounded, and will die soon if not aided.$}
+{
+	#if {"$soulSteal" == "true"}
+	{
+		stop;
+		c soulsteal
+	}
+}
+{3}
+
+#ACTION {%1 wield%2.$}
+{
+	play wield.ogg
+}
+{5}
+
+#ACTION {You wake up.}
+{
+	#ungag {You have %1 mana of %2 max};
+	#unticker {sleeping};
+	#unaction {You have %1 mana of %2 max.}
+}
+{5}
+
+#ACTION {^            consume%1}
+{
+	#variable {consume} {true}
+}
+{5}
+
+#ACTION {^            faith shield%1}
+{
+	#variable {faithShield} {true}
+}
+{5}
+
+#ACTION {^          bless%1}
+{
+	#variable {bless} {true}
+}
+{5}
+
+#ACTION {^          cure serious wounds%1}
+{
+	#variable {healSpell} {cure serious wounds}
+}
+{5}
+
+#ACTION {^          dexterity%1}
+{
+	#variable {dexterity} {true}
+}
+{5}
+
+#ACTION {^          disarm%1}
+{
+	#variable {disarm} {true}
+}
+{5}
+
+#ACTION {^          hide%1}
+{
+	#variable {hide} {true}
+}
+{5}
+
+#ACTION {^          soulsteal%1}
+{
+	#variable {soulSteal} {true}
+}
+{5}
+
+#ACTION {^        armor%1}
+{
+	#variable {armor} {true}
+}
+{5}
+
+#ACTION {^        blood sacrifice%1}
+{
+	#variable {bloodSacrifice} {true}
+}
+{5}
+
+#ACTION {^        bone shield%1}
+{
+	#variable {boneShield} {true}
+}
+{5}
+
+#ACTION {^        corpsecutter%1}
+{
+	#variable {corpseCutter} {true}
+}
+{5}
+
+#ACTION {^        cure light wounds%1}
+{
+	#variable {healSpell} {cure light wounds}
+}
+{5}
+
+#ACTION {^        faerie fire%1}
+{
+	#variable {faerieFire} {true}
+}
+{5}
+
+#ACTION {^        foulblood%1}
+{
+	#variable {foulBlood} {true}
+}
+{5}
+
+#ACTION {^        shield%1}
+{
+	#variable {shield} {true}
+}
+{5}
+
+#ACTION {^        strength%1}
+{
+	#variable {strength} {true}
+}
+{5}
+
+#ACTION {^A twisted bone shield fractures, splits, and abruptly crumbles to dust! (worn by you)$}
+{
+	#if {"$boneShield" == "true"}
+	{
+		c bone shield
+	}
+}
+{5}
+
+#ACTION {^You can't concentrate enough!$}
+{
+	#variable {combat} {$lastSpell}
+}
+{5}
+
+#ACTION {^You weep as you think of the %1 experience that you lost.$}
+{
+	tweet $name was defeated in combat and lost %1 experience points. :,( #AlterAeon
+}
+{5}
+
+#ACTION {%1attracts your attention, fresh meat!  KILLLLLLLL!$}
+{
+	#if {"$disarm" == "true"}
+	{
+		disarm
+	}
+}
+{8}
+
+#ACTION {^You try to disarm %1, but fail.}
+{
+	#if {"$disarm" == "true"}
+	{
+		disarm
+	}
+}
+{8}
+
+#ACTION {^Your force shield slowly dissipates.}
+{
+	#if {"$shield" == "true"}
+	{
+		c shield
+	}
+}
+{8}
+
+#ACTION {^Your muscles deflate as your strength spell wears out.}
+{
+	#if {"$strength" == "true"}
+	{
+		c strength;
+		c strength;
+		c strength
+	}
+}
+{8}
+
+#ACTION {%1 {tells you|tells the group|replies to you},%2}
+{
+	play msg.ogg
+}
+{9}
+
+#ACTION {^        harvest teeth%1}
+{
+	#variable {harvestTeeth} {true}
+}
+{9}
+
+#ACTION {^(notify) $name%1}
+{
+	#if {"$twitter" == "true"}
+	{
+		tweet $name %1 #AlterAeon
+	}
+}
+{9}
+
+#ACTION {^A ball of light flies idly in circles around your head.}
+{
+	emot flies idly in circles around a ball of light.
+}
+{9}
+
+#ACTION {^A magical hammer disappears in a blinding flash of light! (worn by you)}
+{
+	#if {"$spiritHammer" == "true"}
+	{
+		c spirit
+	}
+}
+{9}
+
+#ACTION {^You are asleep... ZZZZZZZZ *snork* ZZZZZ...}
+{
+	wake;
+	cast $lastSpell;
+	sleep
+}
+{9}
+
+#ACTION {^You end up with a stinky, nasty mess, but no magic potion.}
+{
+	empty $brewContainer
+}
+{9}
+
+#ACTION {^You end up with a stinky, nasty mess, but nothing useful.}
+{
+	empty $brewContainer
+}
+{9}
+
+#ACTION {^You fail to pick the lock.}
+{
+	#if {"$pickLocks" == "true"}
+	{
+		pick $lock
+	}
+}
+{9}
+
+#ACTION {^You feel a slight tingle and you feel somehow abandoned.}
+{
+	#if {"$bless" == "true"}
+	{
+		c bless
+	}
+}
+{9}
+
+#ACTION {^You feel less protected.}
+{
+	#if {"$armor" == "true"}
+	{
+		c armor
+	}
+}
+{9}
+
+#ACTION {^You have completed the achievement:%1}
+{
+	#if {"$twitter" == "true"}
+	{
+		tweet $name has completed the achievement %1! #AlterAeon
+	}
+}
+{9}
+
+#ACTION {^You notice that the foul taste in your mouth seems to be gone.$}
+{
+	#if {"$foulBlood" == "true"}
+	{
+		c foulblood
+	}
+}
+{9}
+
+#ACTION {^You quickly place a hand on the inside of a bone shield to bind it to you.$}
+{
+	wear shield
+}
+{9}
+
+#ACTION {^You receive %1 gold coins for your sacrifice.}
+{
+	split %1
+}
+{9}
+
+#ACTION {^You {tell|reply}%1,%2'$}
+{
+	play sendmsg.ogg
+}
+{9}
+
+#ACTION {^Your magically induced dexterity abruptly disappears.}
+{
+	#if {"$dexterity" == "true"}
+	{
+		c dex;
+		c dex;
+		c dex
+	}
+}
+{9}
+
+#ACTION {^Your shield of faith dissipates, and you no longer feel as protected by your god.$}
+{
+	#if {"$faithShield" == "true"}
+	{
+		c faith shield
+	}
+}
+{9}
+
+#ACTION {{^You gain|%* bestows upon you} the official rank of level %1 %2!$}
+{
+	#if {"$twitter" == "true"}
+	{
+		tweet $name just gained the official rank of level %1 #%2! #AlterAeon
+	}
+}
+{9}
+
+#ALIAS {skill %1}
+{
+	skills | grep -i %1
+}
+{(}
+
+#ALIAS {c %1}
+{
+	#variable {lastSpell} {%1};
+	cast %1
+}
+{1}
+
+#ALIAS {fle}
+{
+	run
+}
+{1}
+
+#ALIAS {flee}
+{
+	run
+}
+{1}
+
+#ALIAS {h}
+{
+	c $healSpell
+}
+{1}
+
+#ALIAS {r}
+{
+	rescue $rescue
+}
+{1}
+
+#ALIAS {t}
+{
+	throw $throwWeapon;
+	get $throwWeapon
+}
+{3}
+
+#ALIAS {t %1}
+{
+	throw $throwWeapon %1;
+	get $throwWeapon
+}
+{3}
+
+#ALIAS {f}
+{
+	c $harmSpell
+}
+{4}
+
+#ALIAS {autoclay}
+{
+	#variable {autoclay} {true};
+	#showme {Clay man will now autocast}
+}
+{5}
+
+#ALIAS {bot}
+{
+	#variable {bot} {true};
+	#showme {You are now botting.}
+}
+{5}
+
+#ALIAS {id %1}
+{
+	c id %1
+}
+{5}
+
+#ALIAS {k}
+{
+	kick
+}
+{5}
+
+#ALIAS {noautoclay}
+{
+	#variable {autoclay} {false};
+	#showme {Clay man will no longer autocast.}
+}
+{5}
+
+#ALIAS {nobot}
+{
+	#variable {bot} {false};
+	#showme {You are no longer botting.}
+}
+{5}
+
+#ALIAS {pl %1}
+{
+	pick %1;
+	#variable {lock} {%1}
+}
+{5}
+
+#ALIAS {r %1}
+{
+	rescue %1;
+	#variable {rescue} {%1}
+}
+{5}
+
+#ALIAS {aa}
+{
+	#session {Alter Aeon} {dentinmud.org} {3010};
+	$name;
+	$password;
+	;
+	1
+}
+{9}
+
+#ALIAS {b %1}
+{
+	#if {"$faerieFire" == "true"}
+	{
+		c faerie fire %1
+	};
+	#variable {victim} {%1};
+	remove $weapon;
+	remove shield;
+	wield $stabWeapon;
+	#if {"$hide" == "true"}
+	{
+		hide
+	};
+	backstab %1;
+	remove $stabWeapon;
+	wield $weapon;
+	wear shield
+}
+{9}
+
+#ALIAS {g}
+{
+	get all corpse
+}
+{9}
+
+#ALIAS {hands}
+{
+	c burn;
+	c shock
+}
+{9}
+
+#ALIAS {hands %1}
+{
+	c shock %1;
+	c burn %1
+}
+{9}
+
+#ALIAS {junk %1}
+{
+	drop %1;
+	sac %1
+}
+{9}
+
+#ALIAS {lic}
+{
+	look in corpse
+}
+{9}
+
+#ALIAS {notwitter}
+{
+	#unvariable {twitter};
+	#showme {Achievements will no longer be posted to Twitter.}
+}
+{9}
+
+#ALIAS {p %1}
+{
+	pickp %1
+}
+{9}
+
+#ALIAS {play %1}
+{
+	#system {$soundCommand "sounds/%1"&}
+}
+{9}
+
+#ALIAS {repeat %1}
+{
+	replay | grep -i %1
+}
+{9}
+
+#ALIAS {slay %1 %2}
+{
+	#variable {victim} {%1};
+	remove $weapon;
+	remove shield;
+	wield $stabWeapon;
+	sneak %2;
+	backstab %1;
+	remove $stabWeapon;
+	wear shield;
+	wield $weapon
+}
+{9}
+
+#ALIAS {spell %1}
+{
+	spells | grep -i %1
+}
+{9}
+
+#ALIAS {tweet %1}
+{
+	#system {ttytter -norc -silent -readline=0 -status="%1"}
+}
+{9}
+
+#ALIAS {twitter}
+{
+	#variable {twitter} {true};
+	#showme {Achievements will now be posted to Twitter.}
+}
+{9}
+
+#ALIAS {x}
+{
+	get gold corpse;
+	#if {"$bloodSacrifice" == "true"}
+	{
+		bsac corpse
+	};
+	sac corpse
+}
+{9}
+
+#CONFIG           {256 COLORS}  {ON}
+#CONFIG           {AUTO TAB}  {5000}
+#CONFIG           {BUFFER SIZE}  {20000}
+#CONFIG           {CHARSET}  {ASCII}
+#CONFIG           {COMMAND COLOR}  {<078>}
+#CONFIG           {COMMAND ECHO}  {ON}
+#CONFIG           {CONNECT RETRY}  {15}
+#CONFIG           {HISTORY SIZE}  {1000}
+#CONFIG           {LOG}  {RAW}
+#CONFIG           {PACKET PATCH}  {0.01}
+#CONFIG           {REPEAT CHAR}  {!}
+#CONFIG           {REPEAT ENTER}  {OFF}
+#CONFIG           {SCROLL LOCK}  {ON}
+#CONFIG           {SPEEDWALK}  {OFF}
+#CONFIG           {TINTIN CHAR}  {#}
+#CONFIG           {VERBATIM}  {OFF}
+#CONFIG           {VERBATIM CHAR}  {\}
+#CONFIG           {VERBOSE}  {OFF}
+#CONFIG           {WORDWRAP}  {ON}
+#GAG              {A ball of light flies idly in circles around your head.}
+#GAG              {You don't see any of your group members here to split the gold with}
+#GAG              {You don't see anything by that name here.}
+#GAG              {You don't see anything named that in the corpse of %1}
+#GAG              {You emote: %1 flies idly in circles around a ball of light}
+#GAG              {You have %1 mana of %2 Max.}
+#GAG              {You see nothing in it for you to get.}
+#GAG              {^(You can only split gold with players, not minions.)$}
+#GAG              {^Stop doing what? You don't seem to be doing anything.$}
+#GAG              {^The {corpse|gutted carcass} of%1is no longer suitable for blood sacrifice.$}
+#GAG              {^You can only blood sacrifice corpses with blood in them.$}
+#GAG              {^You didn't find anything by that name.}
+#GAG              {^Your collected {dragon teeth|teeth} grow restless.  It would be unwise to collect any more.$}
+#PATHDIR          {d}  {u}  {32}
+#PATHDIR          {e}  {w}  {2}
+#PATHDIR          {n}  {s}  {1}
+#PATHDIR          {ne}  {sw}  {3}
+#PATHDIR          {nw}  {se}  {9}
+#PATHDIR          {s}  {n}  {4}
+#PATHDIR          {se}  {nw}  {6}
+#PATHDIR          {sw}  {ne}  {12}
+#PATHDIR          {u}  {d}  {16}
+#PATHDIR          {w}  {e}  {8}
+#VARIABLE         {brewContainer}  {bowl}
+#VARIABLE         {container}  {case}
+#VARIABLE         {harmSpell}  {cause critical}
+#VARIABLE         {healSpell}  {cure serious wounds}
+#VARIABLE         {lastSpell}  {clay}
+#VARIABLE         {lock}  {door}
+#VARIABLE         {name}  {Charactername}
+#VARIABLE         {password}  {PassWord}
+#VARIABLE         {rescue}  {none}
+#VARIABLE         {soundCommand}  {paplay}
+#VARIABLE         {stabWeapon}  {spear}
+#VARIABLE         {throwWeapon}  {hammer}
+#VARIABLE         {victim}  {dwarf}
+#VARIABLE         {weapon}  {frost}

@@ -1,0 +1,7 @@
+License GPL
+
+To connect edit aa.tin and find the name and password variables at the bottom of the file. Change the text in the second set of braces in each variable to match your character's details. Load the file with tt++ aa.tin.
+
+To get full binnifits, when you first load the file type skills. Press enter until you have seen your full list of skills. Repeat this for spells. When you gain a new spell or skill type either spells or skills again to update the variables. Type #write aa.tin to save your changes. Note necromancers can autocast clay man. To turn it on type autoclay and to turn it back off type noautoclay.
+
+You can have achievements like backstabs, levels, and achievements posted to Twitter. If you have the CLI Twitter client TTYtter installed and configured correctly type twitter and events will be posted. To turn it off type notwitter.
