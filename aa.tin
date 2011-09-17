@@ -1,3 +1,9 @@
+#ACTION {%1's %2 $rescue{!\.}$}
+{
+	r $rescue
+}
+{1}
+
 #ACTION {^A clay man stops following you.$}
 {
 	#if {"$autoclay" == "true"}
@@ -265,6 +271,12 @@
 }
 {9}
 
+#ACTION {^ %1kick%2}
+{
+	#alias {k} {kick}
+}
+{9}
+
 #ACTION {^(notify) $name%1}
 {
 	#if {"$twitter" == "true"}
@@ -286,6 +298,12 @@
 	{
 		c spirit
 	}
+}
+{9}
+
+#ACTION {^The blade splits down the red lines and shatters, leaving behind oddly bloody fragments that seem to vanish when you're not looking at them. (worn by you)$}
+{
+	c bone blade
 }
 {9}
 
@@ -438,6 +456,13 @@
 }
 {1}
 
+#ALIAS {{r|re|res|resc|rescu|rescue} %1}
+{
+	#variable {rescue} {%1};
+	\rescue %1
+}
+{1}
+
 #ALIAS {t}
 {
 	throw $throwWeapon;
@@ -478,12 +503,6 @@
 }
 {5}
 
-#ALIAS {k}
-{
-	kick
-}
-{5}
-
 #ALIAS {noautoclay}
 {
 	#variable {autoclay} {false};
@@ -505,10 +524,24 @@
 }
 {5}
 
-#ALIAS {r %1}
+#ALIAS {{p|pu|put} %1 %2}
 {
-	rescue %1;
-	#variable {rescue} {%1}
+	#variable {container} {%2};
+	\put %1 %2
+}
+{5}
+
+#ALIAS {{swi|swie|swiel|swield} %1}
+{
+	#variable {stabWeapon} {%1};
+	#showme {You will now use the %1 for backstabs.}
+}
+{5}
+
+#ALIAS {{wi|wie|wiel|wield} %1}
+{
+	#variable {weapon} {%1};
+	\wield %1
 }
 {5}
 
@@ -693,9 +726,8 @@
 #VARIABLE         {healSpell}  {cure serious wounds}
 #VARIABLE         {lastSpell}  {clay}
 #VARIABLE         {lock}  {door}
-#VARIABLE         {name}  {Charactername}
-#VARIABLE         {password}  {PassWord}
-#VARIABLE         {rescue}  {none}
+#VARIABLE         {name}  {CharacterName}
+#VARIABLE         {password}  {password}
 #VARIABLE         {soundCommand}  {paplay}
 #VARIABLE         {stabWeapon}  {spear}
 #VARIABLE         {throwWeapon}  {hammer}
