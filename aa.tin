@@ -1,3 +1,5 @@
+#var {damageDescription} {*** %1 ***|devistates|scratches|mauls|hits}
+#act {^ %1 bone blade%2} {#var {boneBlade} {true}}
 #ACTION {%1's %2 $rescue{!\.}$}
 {
 	r $rescue
@@ -13,6 +15,17 @@
 }
 {1}
 
+#ACTION {^You are in an awful condition!$}
+{
+	#if {"$bot" == "true"}
+	{
+		nobot;
+		flee;
+		/
+	}
+}
+{1}
+
 #ACTION {^You are rescued from certain death by %1!}
 {
 	a
@@ -22,6 +35,16 @@
 #ACTION {^You fail the rescue!}
 {
 	rescue $rescue
+}
+{1}
+
+#ACTION {^You run away from the battle like a yellow bellied coward!!$}
+{
+	#if {"$bot" == "true"}
+	{
+		nobot
+	};
+	/
 }
 {1}
 
@@ -51,7 +74,7 @@
 	{
 		control all consume corpse
 	};
-	#if {"$harvestTeeth" == "true"}
+	#if {"$harvestTeeth" == "true" && "$bot" != "true"}
 	{
 		harvest teeth corpse
 	};
@@ -215,6 +238,15 @@
 }
 {5}
 
+#ACTION {^You have {quite a few|big nasty} {wounds and scratches|wounds}.$}
+{
+	#if {"$bot" == "true"}
+	{
+		h
+	}
+}
+{5}
+
 #ACTION {^You weep as you think of the %1 experience that you lost.$}
 {
 	tweet $name was defeated in combat and lost %1 experience points. :,( #AlterAeon
@@ -303,7 +335,7 @@
 
 #ACTION {^The blade splits down the red lines and shatters, leaving behind oddly bloody fragments that seem to vanish when you're not looking at them. (worn by you)$}
 {
-	c bone blade
+	#if {"$boneBlade" == "true"} {c bone blade}
 }
 {9}
 
@@ -406,6 +438,15 @@
 	#if {"$faithShield" == "true"}
 	{
 		c faith shield
+	}
+}
+{9}
+
+#ACTION {^{The|One of the|A fisherman's|An old|A small|A large|An obnoxious|A|An} %1 has arrived.$}
+{
+	#if {"$bot" == "true"}
+	{
+		#showme {Attacking %1};k %1
 	}
 }
 {9}
@@ -726,7 +767,7 @@
 #VARIABLE         {healSpell}  {cure serious wounds}
 #VARIABLE         {lastSpell}  {clay}
 #VARIABLE         {lock}  {door}
-#VARIABLE         {name}  {CharacterName}
+#VARIABLE         {name}  {name}
 #VARIABLE         {password}  {password}
 #VARIABLE         {soundCommand}  {paplay}
 #VARIABLE         {stabWeapon}  {spear}
