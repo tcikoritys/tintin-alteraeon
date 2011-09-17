@@ -1,6 +1,4 @@
-#act {^ %1 cure critical wounds%2} {#var {healSpell} {cure critical}}
-#var {damageDescription} {*** %1 ***|devistates|scratches|mauls|hits}
-#act {^ %1 bone blade%2} {#var {boneBlade} {true}}
+#act {%1 {throws|throw} a ball of freezing unfire at %1!$} {play coldfire.ogg}
 #ACTION {%1's %2 $rescue{!\.}$}
 {
 	r $rescue
@@ -35,7 +33,7 @@
 
 #ACTION {^You fail the rescue!}
 {
-	rescue $rescue
+	r $rescue
 }
 {1}
 
@@ -102,7 +100,6 @@
 {
 	#if {"$soulSteal" == "true"}
 	{
-		stop;
 		c soulsteal
 	}
 }
@@ -114,13 +111,18 @@
 }
 {5}
 
-#ACTION {You wake up.}
+#ACTION {%1 {throw|throws} %2 at %3!$}
 {
-	#ungag {You have %1 mana of %2 max};
-	#unticker {sleeping};
-	#unaction {You have %1 mana of %2 max.}
+	play throw_hit.ogg
 }
 {5}
+
+#ACTION {%1 {throw|throws}%1at%2, but miss.$}
+{
+	play throw_miss.ogg
+}
+{5}
+
 
 #ACTION {^            consume%1}
 {
@@ -221,6 +223,24 @@
 #ACTION {^        strength%1}
 {
 	#variable {strength} {true}
+}
+{5}
+
+#ACTION {^ %1 bone blade%2}
+{
+	#variable {boneBlade} {true}
+}
+{5}
+
+#ACTION {^ %1 cure critical wounds%2}
+{
+	#variable {healSpell} {cure critical}
+}
+{5}
+
+#ACTION {^A clay man forms from nearby dirt and clay to serve you.$}
+{
+	#unvariable {lastSpell}
 }
 {5}
 
@@ -334,9 +354,12 @@
 }
 {9}
 
-#ACTION {^The blade splits down the red lines and shatters, leaving behind oddly bloody fragments that seem to vanish when you're not looking at them. (worn by you)$}
+#ACTION {^The blade splits down the red lines and shatters, leaving behind oddly bloody fragments that seem to vanish when %1 not looking at them. (worn by you)$}
 {
-	#if {"$boneBlade" == "true"} {c bone blade}
+	#if {"$boneBlade" == "true"}
+	{
+		c bone blade
+	}
 }
 {9}
 
@@ -447,7 +470,8 @@
 {
 	#if {"$bot" == "true"}
 	{
-		#showme {Attacking %1};k %1
+		#showme {Attacking %1};
+		k %1
 	}
 }
 {9}
@@ -590,10 +614,9 @@
 #ALIAS {aa}
 {
 	#session {Alter Aeon} {dentinmud.org} {3010};
-	$name;
+$name;
 	$password;
 	;
-	1
 }
 {9}
 
@@ -763,13 +786,16 @@
 #PATHDIR          {u}  {d}  {16}
 #PATHDIR          {w}  {e}  {8}
 #VARIABLE         {brewContainer}  {bowl}
+#VARIABLE         {combat}  {false}
 #VARIABLE         {container}  {case}
+#VARIABLE         {damageDescription}  {*** %1 ***|devistates|scratches|mauls|hits|enjures}
 #VARIABLE         {harmSpell}  {cause critical}
 #VARIABLE         {healSpell}  {cure serious wounds}
-#VARIABLE         {lastSpell}  {clay}
+#VARIABLE         {lastSpell}  {str}
 #VARIABLE         {lock}  {door}
 #VARIABLE         {name}  {name}
 #VARIABLE         {password}  {password}
+#VARIABLE         {rescue}  {none}
 #VARIABLE         {soundCommand}  {paplay}
 #VARIABLE         {stabWeapon}  {spear}
 #VARIABLE         {throwWeapon}  {hammer}
