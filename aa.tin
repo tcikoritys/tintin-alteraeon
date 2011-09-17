@@ -1,3 +1,4 @@
+#act {^ %1 cure critical wounds%2} {#var {healSpell} {cure critical}}
 #var {damageDescription} {*** %1 ***|devistates|scratches|mauls|hits}
 #act {^ %1 bone blade%2} {#var {boneBlade} {true}}
 #ACTION {%1's %2 $rescue{!\.}$}
@@ -6,7 +7,7 @@
 }
 {1}
 
-#ACTION {^A clay man stops following you.$}
+#ACTION {^A {clay man|flesh beast|wood woad} stops following you.$}
 {
 	#if {"$autoclay" == "true"}
 	{
@@ -442,7 +443,7 @@
 }
 {9}
 
-#ACTION {^{The|One of the|A fisherman's|An old|A small|A large|An obnoxious|A|An} %1 has arrived.$}
+#ACTION {^{The hideous|One of the|A fisherman's|An old|A small|A large|An obnoxious|A|An|The} %1 has arrived.$}
 {
 	#if {"$bot" == "true"}
 	{
