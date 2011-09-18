@@ -345,6 +345,12 @@
 }
 {5}
 
+#ACTION {^You find a small bladder of %1 fluid, and carefully tie off the ends before removing it.$}
+{
+	play corpsecutter.ogg
+}
+{5}
+
 #ACTION {^You have {quite a few|big nasty} {wounds and scratches|wounds}.$}
 {
 	#if {"$bot" == "true"}
@@ -357,6 +363,12 @@
 #ACTION {^You hear the loud -clang- *CLANG* of a hammer on anvil to the north.$}
 {
 	play hammer-on-anvil.ogg
+}
+{5}
+
+#ACTION {^You make a small incision and drain some fluid into a vial of bile.$}
+{
+	play corpsecutter.ogg
 }
 {5}
 
@@ -886,6 +898,7 @@
 #VARIABLE         {damageDescription}  {*** %1 ***|devistates|scratches|mauls|hits|enjures}
 #VARIABLE         {harmSpell}  {cause critical}
 #VARIABLE         {healSpell}  {cure serious wounds}
+#VARIABLE         {lastSpell}  {cold fire}
 #VARIABLE         {lock}  {door}
 #VARIABLE         {name}  {name}
 #VARIABLE         {password}  {password}
