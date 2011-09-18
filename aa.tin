@@ -1,3 +1,5 @@
+#act {^As %1 {hits|hit} %2, a bright fan of lightning bolts leaps from %3 hands to blast %4!$} {play shocking-hit.ogg}
+#act {%1 lightly {touches|touch} %2 hands, and a crackling %3 glow surrounds them.$} {play shocking-grasp.ogg}
 #ACTION {%1's %2 $rescue{!\.}$}
 {
 	r $rescue
@@ -292,7 +294,7 @@
 
 #ACTION {^You weep as you think of the %1 experience that you lost.$}
 {
-	tweet $name was defeated in combat and lost %1 experience points. :,( #AlterAeon
+	#if {"$twitter" == "true"} {tweet $name was defeated in combat and lost %1 experience points. :,( #AlterAeon}; play died.ogg
 }
 {5}
 
