@@ -1,5 +1,3 @@
-#act {^As %1 {hits|hit} %2, a bright fan of lightning bolts leaps from %3 hands to blast %4!$} {play shocking-hit.ogg}
-#act {%1 lightly {touches|touch} %2 hands, and a crackling %3 glow surrounds them.$} {play shocking-grasp.ogg}
 #ACTION {%1's %2 $rescue{!\.}$}
 {
 	r $rescue
@@ -48,9 +46,9 @@
 {
 	#if {"$bot" == "true"}
 	{
-		nobot
-	};
-	/
+		nobot;
+		/
+	}
 }
 {1}
 
@@ -115,6 +113,42 @@
 #ACTION {%1 conjures and {throws|throw} a %2 fireball at %3!$}
 {
 	play fireball.ogg
+}
+{5}
+
+#ACTION {%1 hits, and a bright fan of lightning bolts blasts %2!$}
+{
+	play shocking-hit.ogg
+}
+{5}
+
+#ACTION {%1 hits, and a bright flash of %2 fire scorches %3!$}
+{
+	play burning-hit.ogg
+}
+{5}
+
+#ACTION {%1 lightly touches %2 and crackling %3 glow surrounds %4 hands.$}
+{
+	play shocking-grasp.ogg
+}
+{5}
+
+#ACTION {%1 lightly touches %2 and pale red glow surrounds %4 hands.$}
+{
+	play burning-hands.ogg
+}
+{5}
+
+#ACTION {%1 lightly touches %2 hands, and a pale red glow surrounds them.$}
+{
+	play burning-hands.ogg
+}
+{5}
+
+#ACTION {%1 lightly {touches|touch} %2 hands, and a crackling %3 glow surrounds them.$}
+{
+	play shocking-grasp.ogg
 }
 {5}
 
@@ -256,12 +290,30 @@
 }
 {5}
 
+#ACTION {^A shower of %1 sparks suddenly engulfs %2!$}
+{
+	play shower-of-sparks.ogg
+}
+{5}
+
 #ACTION {^A twisted bone shield fractures, splits, and abruptly crumbles to dust! (worn by you)$}
 {
 	#if {"$boneShield" == "true"}
 	{
 		c bone shield
 	}
+}
+{5}
+
+#ACTION {^As %1 {hits|hit} %2, a bright fan of lightning bolts leaps from %3 hands to blast %4!$}
+{
+	play shocking-hit.ogg
+}
+{5}
+
+#ACTION {^As you hit %1, a bright flash of %2 fire leaps from your hands to scorch %3!$}
+{
+	play burning-hit.ogg
 }
 {5}
 
@@ -294,7 +346,11 @@
 
 #ACTION {^You weep as you think of the %1 experience that you lost.$}
 {
-	#if {"$twitter" == "true"} {tweet $name was defeated in combat and lost %1 experience points. :,( #AlterAeon}; play died.ogg
+	#if {"$twitter" == "true"}
+	{
+		tweet $name was defeated in combat and lost %1 experience points. :,( #AlterAeon
+	};
+	play died.ogg
 }
 {5}
 
