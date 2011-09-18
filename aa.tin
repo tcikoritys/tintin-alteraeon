@@ -1,7 +1,12 @@
-#act {%1 {throws|throw} a ball of freezing unfire at %1!$} {play coldfire.ogg}
 #ACTION {%1's %2 $rescue{!\.}$}
 {
 	r $rescue
+}
+{1}
+
+#ACTION {^A clay man forms from nearby dirt and clay to serve you.$}
+{
+	#unvariable {lastSpell}
 }
 {1}
 
@@ -105,9 +110,21 @@
 }
 {3}
 
+#ACTION {%1 conjures and {throws|throw} a %2 fireball at %3!$}
+{
+	play fireball.ogg
+}
+{5}
+
 #ACTION {%1 wield%2.$}
 {
 	play wield.ogg
+}
+{5}
+
+#ACTION {%1 {throws|throw} a ball of freezing unfire at %1!$}
+{
+	play coldfire.ogg
 }
 {5}
 
@@ -122,7 +139,6 @@
 	play throw_miss.ogg
 }
 {5}
-
 
 #ACTION {^            consume%1}
 {
@@ -238,18 +254,18 @@
 }
 {5}
 
-#ACTION {^A clay man forms from nearby dirt and clay to serve you.$}
-{
-	#unvariable {lastSpell}
-}
-{5}
-
 #ACTION {^A twisted bone shield fractures, splits, and abruptly crumbles to dust! (worn by you)$}
 {
 	#if {"$boneShield" == "true"}
 	{
 		c bone shield
 	}
+}
+{5}
+
+#ACTION {^The light above the wizard's shop flickers for an instant, looks like it needs maintenance.$}
+{
+	play wizard-shop-light.ogg
 }
 {5}
 
@@ -265,6 +281,12 @@
 	{
 		h
 	}
+}
+{5}
+
+#ACTION {^You hear the loud -clang- *CLANG* of a hammer on anvil to the north.$}
+{
+	play hammer-on-anvil.ogg
 }
 {5}
 
@@ -614,9 +636,8 @@
 #ALIAS {aa}
 {
 	#session {Alter Aeon} {dentinmud.org} {3010};
-$name;
-	$password;
-	;
+	$name;
+	$password
 }
 {9}
 
@@ -791,7 +812,6 @@ $name;
 #VARIABLE         {damageDescription}  {*** %1 ***|devistates|scratches|mauls|hits|enjures}
 #VARIABLE         {harmSpell}  {cause critical}
 #VARIABLE         {healSpell}  {cure serious wounds}
-#VARIABLE         {lastSpell}  {str}
 #VARIABLE         {lock}  {door}
 #VARIABLE         {name}  {name}
 #VARIABLE         {password}  {password}
