@@ -65,6 +65,10 @@
 {
 	get all.$throwWeapon corpse;
 	get coins corpse;
+	#if {"$cryOfVictory" == "true"}
+	{
+		victory
+	};
 	#if {"$combat" != "false"}
 	{
 		c $combat
@@ -149,6 +153,12 @@
 #ACTION {%1 lightly {touches|touch} %2 hands, and a crackling %3 glow surrounds them.$}
 {
 	play shocking-grasp.ogg
+}
+{5}
+
+#ACTION {%1 throws %2 fireball at %3!$}
+{
+	play fireball.ogg
 }
 {5}
 
@@ -281,6 +291,12 @@
 #ACTION {^ %1 bone blade%2}
 {
 	#variable {boneBlade} {true}
+}
+{5}
+
+#ACTION {^ %1 cry of victory %2}
+{
+	#variable {cryOfVictory} {true}
 }
 {5}
 
