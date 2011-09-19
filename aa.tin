@@ -358,6 +358,12 @@
 }
 {5}
 
+#ACTION {^An ethereal hand appears and attacks %1 from behind!$}
+{
+	play spectral-hand.ogg
+}
+{5}
+
 #ACTION {^As %1 {hits|hit} %2, a bright fan of lightning bolts leaps from %3 hands to blast %4!$}
 {
 	play shocking-hit.ogg
@@ -379,6 +385,12 @@
 #ACTION {^You can't concentrate enough!$}
 {
 	#variable {combat} {$lastSpell}
+}
+{5}
+
+#ACTION {^You create a thick fog of icy particles from the air.$}
+{
+	play ice-fog.ogg
 }
 {5}
 
@@ -966,6 +978,7 @@
 #VARIABLE         {brewContainer}  {bowl}
 #VARIABLE         {combat}  {false}
 #VARIABLE         {container}  {case}
+#VARIABLE         {damageDescription}  {*** %1 ***|devastates|scratches|mauls|hits|enjures|DISEMBOWELS}
 #VARIABLE         {harmSpell}  {cause critical}
 #VARIABLE         {healSpell}  {cure serious wounds}
 #VARIABLE         {lastSpell}  {tar deer}
