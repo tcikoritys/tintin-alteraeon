@@ -1,6 +1,3 @@
-#act {^A ghoul bites %1 with diseased, razor sharp teeth!$} {play ghoul-attack.ogg}
-#act {^A ghoul jumps at %1 clawing and biting!$} {play ghoul-attack.ogg}
-#act {^A ghoul rips and tears into %1 with filthy, diseased claws!$}} {play ghoul-attack.ogg}
 #ACTION {%1's %2 $rescue{!\.}$}
 {
 	r $rescue
@@ -306,6 +303,24 @@
 #ACTION {^ %1 cure critical wounds%2}
 {
 	#variable {healSpell} {cure critical}
+}
+{5}
+
+#ACTION {^A ghoul bites %1 with diseased, razor sharp teeth!$}
+{
+	play ghoul-attack.ogg
+}
+{5}
+
+#ACTION {^A ghoul jumps at %1 clawing and biting!$}
+{
+	play ghoul-attack.ogg
+}
+{5}
+
+#ACTION {^A ghoul rips and tears into %1 with filthy, diseased claws!$}
+{
+	play ghoul-attack.ogg
 }
 {5}
 
@@ -726,7 +741,7 @@
 {
 	#session {Alter Aeon} {dentinmud.org} {3010};
 	$name;
-	$password;
+	$password
 }
 {9}
 
