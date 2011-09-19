@@ -120,6 +120,12 @@
 }
 {5}
 
+#ACTION {%1 delivers a powerful kick to%2!$}
+{
+	play kick.ogg
+}
+{5}
+
 #ACTION {%1 hits, and a bright fan of lightning bolts blasts %2!$}
 {
 	play shocking-hit.ogg
@@ -129,6 +135,12 @@
 #ACTION {%1 hits, and a bright flash of %2 fire scorches %3!$}
 {
 	play burning-hit.ogg
+}
+{5}
+
+#ACTION {%1 kicks %2 in the back of the head, and you hear a faint crack of something breaking.$}
+{
+	play fatal-kick.ogg
 }
 {5}
 
@@ -153,6 +165,12 @@
 #ACTION {%1 lightly {touches|touch} %2 hands, and a crackling %3 glow surrounds them.$}
 {
 	play shocking-grasp.ogg
+}
+{5}
+
+#ACTION {%1 takes the full force of %2's beautiful full circle kick!$}
+{
+	play kick.ogg
 }
 {5}
 
@@ -188,7 +206,8 @@
 
 #ACTION {^            consume%1}
 {
-	#variable {consume} {true}
+	#variable {consume} {true};
+	#alias {{fe|fee|feed}} {control all consume corpse}
 }
 {5}
 
@@ -384,7 +403,25 @@
 }
 {5}
 
+#ACTION {^You kick %1 in the back of the head, causing critical damage.$}
+{
+	play fatal-kick.ogg
+}
+{5}
+
+#ACTION {^You land your roundhouse kick squarely on%1!$}
+{
+	play kick.ogg
+}
+{5}
+
 #ACTION {^You make a small incision and drain some fluid into a vial of bile.$}
+{
+	play corpsecutter.ogg
+}
+{5}
+
+#ACTION {^You roughly hack out a small bladder of %1 fluid and tie off the ends with string.$}
 {
 	play corpsecutter.ogg
 }
@@ -397,6 +434,18 @@
 		tweet $name was defeated in combat and lost %1 experience points. :,( #AlterAeon
 	};
 	play died.ogg
+}
+{5}
+
+#ACTION {^Your full circle kick plants a foot right where it should be.$}
+{
+	play kick.ogg
+}
+{5}
+
+#ACTION {^Your kick to %1 could have been better, but you got the point across.$}
+{
+	play kick.ogg
 }
 {5}
 
@@ -741,7 +790,8 @@
 {
 	#session {Alter Aeon} {dentinmud.org} {3010};
 	$name;
-	$password
+	$password;
+	#cr
 }
 {9}
 
@@ -895,10 +945,13 @@
 #GAG              {You have %1 mana of %2 Max.}
 #GAG              {You see nothing in it for you to get.}
 #GAG              {^(You can only split gold with players, not minions.)$}
+#GAG              {^Looks like the corpse of %1 is too damaged for you to use.$}
+#GAG              {^None of your minions seem hungry at the moment.$}
 #GAG              {^Stop doing what? You don't seem to be doing anything.$}
 #GAG              {^The {corpse|gutted carcass} of%1is no longer suitable for blood sacrifice.$}
 #GAG              {^You can only blood sacrifice corpses with blood in them.$}
 #GAG              {^You didn't find anything by that name.}
+#GAG              {^You haven't had a recent victory worth shouting about.$}
 #GAG              {^Your collected {dragon teeth|teeth} grow restless.  It would be unwise to collect any more.$}
 #PATHDIR          {d}  {u}  {32}
 #PATHDIR          {e}  {w}  {2}
@@ -913,7 +966,6 @@
 #VARIABLE         {brewContainer}  {bowl}
 #VARIABLE         {combat}  {false}
 #VARIABLE         {container}  {case}
-#VARIABLE         {damageDescription}  {*** %1 ***|devistates|scratches|mauls|hits|enjures}
 #VARIABLE         {harmSpell}  {cause critical}
 #VARIABLE         {healSpell}  {cure serious wounds}
 #VARIABLE         {lastSpell}  {tar deer}
