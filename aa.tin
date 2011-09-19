@@ -10,15 +10,6 @@
 }
 {1}
 
-#ACTION {^A {clay man|flesh beast|wood woad} stops following you.$}
-{
-	#if {"$autoclay" == "true"}
-	{
-		c clay man
-	}
-}
-{1}
-
 #ACTION {^You are in an awful condition!$}
 {
 	#if {"$bot" == "true"}
@@ -93,6 +84,15 @@
 }
 {1}
 
+#ACTION {^A {clay man|flesh beast|wood woad} stops following you.$}
+{
+	#if {"$autoclay" == "true"}
+	{
+		c clay man
+	}
+}
+{2}
+
 #ACTION {^You fail to cast the spell %1.}
 {
 	cast $lastSpell
@@ -123,6 +123,15 @@
 #ACTION {%1 delivers a powerful kick to%2!$}
 {
 	play kick.ogg
+}
+{5}
+
+#ACTION {%1 flail %2 %3{.|!}$}
+{
+	#if {"%2" != "misses"}
+	{
+		play flail.ogg
+	}
 }
 {5}
 
@@ -168,6 +177,15 @@
 }
 {5}
 
+#ACTION {%1 punch %2 %3{.|!}$}
+{
+	#if {"%2" != "misses"}
+	{
+		play punch.ogg
+	}
+}
+{5}
+
 #ACTION {%1 takes the full force of %2's beautiful full circle kick!$}
 {
 	play kick.ogg
@@ -183,6 +201,15 @@
 #ACTION {%1 wield%2.$}
 {
 	play wield.ogg
+}
+{5}
+
+#ACTION {%1 {slash|slice} %2 %3{.|!}$}
+{
+	#if {"%2" != "misses"}
+	{
+		play slash.ogg
+	}
 }
 {5}
 
@@ -736,6 +763,76 @@
 }
 {4}
 
+#ALIAS {^{d|do|dow|down}$}
+{
+	play footstep.ogg;
+	\d
+}
+{5}
+
+#ALIAS {^{e|ea|eas|east}$}
+{
+	play footstep.ogg;
+	\e
+}
+{5}
+
+#ALIAS {^{ne|northe|northea|northeas|northeast}$}
+{
+	play footstep.ogg;
+	\ne
+}
+{5}
+
+#ALIAS {^{nw|northw|northwe|northwes|northwest}$}
+{
+	play footstep.ogg;
+	\nw
+}
+{5}
+
+#ALIAS {^{n|no|nor|nort|north}$}
+{
+	play footstep.ogg;
+	\n
+}
+{5}
+
+#ALIAS {^{se|southe|southea|southeas|southeast}$}
+{
+	play footstep.ogg;
+	\se
+}
+{5}
+
+#ALIAS {^{sw|southw|southwe|southwes|southwest}$}
+{
+	play footstep.ogg;
+	\nw
+}
+{5}
+
+#ALIAS {^{s|so|sou|sout|south}$}
+{
+	play footstep.ogg;
+	\s
+}
+{5}
+
+#ALIAS {^{u|up}$}
+{
+	play footstep.ogg;
+	\u
+}
+{5}
+
+#ALIAS {^{w|we|wes|west}$}
+{
+	play footstep.ogg;
+	\w
+}
+{5}
+
 #ALIAS {autoclay}
 {
 	#variable {autoclay} {true};
@@ -922,6 +1019,10 @@
 #ALIAS {x}
 {
 	get gold corpse;
+	#if {"$consume" == "true"}
+	{
+		control all consume corpse
+	};
 	#if {"$bloodSacrifice" == "true"}
 	{
 		bsac corpse
