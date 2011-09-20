@@ -197,7 +197,7 @@
 }
 {5}
 
-#ACTION {%1 punch %2 %3{.|!}$}
+#ACTION {%1 {punch|pound} %2 %3{.|!}$}
 {
 	#if {"%2" != "misses"}
 	{
