@@ -1,3 +1,9 @@
+#act {^A zombie slams into %1!$} {play bash.ogg}
+#act {^You catch %1 a little off center with your bash!$} {play bash.ogg}
+#act {^You bash full tilt into %1!$} {play bash.ogg}
+#act {%1 takes the full force of %2 bodyslam bash!$} {play bash.ogg}
+#act {%1 shield bash %2{!|.}$} {play bash.ogg}
+#act {^A zombie gnaws hungrily on %1 with filthy, rotten teeth.$} {play ghoul-attack.ogg}
 #ACTION {%1's %2 $rescue{!\.}$}
 {
 	r $rescue
@@ -210,6 +216,12 @@
 #ACTION {%1 wield%2.$}
 {
 	play wield.ogg
+}
+{5}
+
+#ACTION {%1 {parry|parries} %2 attack.$}
+{
+	play parry.ogg
 }
 {5}
 
@@ -830,7 +842,7 @@
 #ALIAS {^{sw|southw|southwe|southwes|southwest}$}
 {
 	play footstep.ogg;
-	\nw
+	\sw
 }
 {5}
 
