@@ -1,4 +1,3 @@
-#act {^You disarm %1 and send %2 weapon flying!$} {play disarm.ogg}
 #ACTION {%1's %2 $rescue{!\.}$}
 {
 	r $rescue
@@ -129,9 +128,21 @@
 }
 {5}
 
+#ACTION {%1 disarms %2 and sends %3 weapon flying!$}
+{
+	play disarm.ogg
+}
+{5}
+
 #ACTION {%1 disarms you and sends your weapon flying!$}
 {
 	play disarm.ogg
+}
+{5}
+
+#ACTION {%1 enters a huge portal and disappears.$}
+{
+	play portal.ogg
 }
 {5}
 
@@ -511,6 +522,18 @@
 #ACTION {^You create a thick fog of icy particles from the air.$}
 {
 	play ice-fog.ogg
+}
+{5}
+
+#ACTION {^You disarm %1 and send %2 weapon flying!$}
+{
+	play disarm.ogg
+}
+{5}
+
+#ACTION {^You enter a huge portal.$}
+{
+	play portal.ogg
 }
 {5}
 
