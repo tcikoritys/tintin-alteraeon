@@ -1,9 +1,3 @@
-#act {^A zombie slams into %1!$} {play bash.ogg}
-#act {^You catch %1 a little off center with your bash!$} {play bash.ogg}
-#act {^You bash full tilt into %1!$} {play bash.ogg}
-#act {%1 takes the full force of %2 bodyslam bash!$} {play bash.ogg}
-#act {%1 shield bash %2{!|.}$} {play bash.ogg}
-#act {^A zombie gnaws hungrily on %1 with filthy, rotten teeth.$} {play ghoul-attack.ogg}
 #ACTION {%1's %2 $rescue{!\.}$}
 {
 	r $rescue
@@ -12,7 +6,8 @@
 
 #ACTION {^A clay man forms from nearby dirt and clay to serve you.$}
 {
-	#unvariable {lastSpell}
+	#unvariable {lastSpell};
+	play clay-man-rises.ogg
 }
 {1}
 
@@ -189,6 +184,18 @@
 	{
 		play punch.ogg
 	}
+}
+{5}
+
+#ACTION {%1 shield bash %2{!|.}$}
+{
+	play bash.ogg
+}
+{5}
+
+#ACTION {%1 takes the full force of %2 bodyslam bash!$}
+{
+	play bash.ogg
 }
 {5}
 
@@ -409,12 +416,30 @@
 }
 {5}
 
+#ACTION {^A skeleton rips a bone from the corpse of %1 as a replacement.$}
+{
+	play bone-rip.ogg
+}
+{5}
+
 #ACTION {^A twisted bone shield fractures, splits, and abruptly crumbles to dust! (worn by you)$}
 {
 	#if {"$boneShield" == "true"}
 	{
 		c bone shield
 	}
+}
+{5}
+
+#ACTION {^A zombie gnaws hungrily on %1 with filthy, rotten teeth.$}
+{
+	play ghoul-attack.ogg
+}
+{5}
+
+#ACTION {^A zombie slams into %1!$}
+{
+	play bash.ogg
 }
 {5}
 
@@ -436,15 +461,33 @@
 }
 {5}
 
+#ACTION {^The clay man crumbles back into the dust and dirt from whence it came.$}
+{
+	play clay-man-death.ogg
+}
+{5}
+
 #ACTION {^The light above the wizard's shop flickers for an instant, looks like it needs maintenance.$}
 {
 	play wizard-shop-light.ogg
 }
 {5}
 
+#ACTION {^You bash full tilt into %1!$}
+{
+	play bash.ogg
+}
+{5}
+
 #ACTION {^You can't concentrate enough!$}
 {
 	#variable {combat} {$lastSpell}
+}
+{5}
+
+#ACTION {^You catch %1 a little off center with your bash!$}
+{
+	play bash.ogg
 }
 {5}
 
