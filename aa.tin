@@ -232,11 +232,20 @@
 }
 {5}
 
-#ACTION {%1 {slash|slice} %2 %3{.|!}$}
+#ACTION {%1 {slash|slice|chop|hack} %2 %3{.|!}$}
 {
 	#if {"%2" != "misses"}
 	{
 		play slash.ogg
+	}
+}
+{5}
+
+#ACTION {%1 {stab|pierce|bite|peck} %2 %3{.|!}$}
+{
+	#if {"%2" != "misses"}
+	{
+		play stab.ogg
 	}
 }
 {5}
