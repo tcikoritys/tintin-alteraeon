@@ -198,6 +198,15 @@
 }
 {5}
 
+#ACTION {%1 whip %2 %3{.|!}$}
+{
+	#if {"%2" != "misses"}
+	{
+		play whip.ogg
+	}
+}
+{5}
+
 #ACTION {%1 wield%2.$}
 {
 	play wield.ogg
@@ -352,6 +361,18 @@
 }
 {5}
 
+#ACTION {^A %1 claws at and begins eating the corpse of %2!$}
+{
+	play undead-eating.ogg
+}
+{5}
+
+#ACTION {^A %1 rips and tears into the corpse of %2, devouring it!$}
+{
+	play undead-eating.ogg
+}
+{5}
+
 #ACTION {^A ghoul bites %1 with diseased, razor sharp teeth!$}
 {
 	play ghoul-attack.ogg
@@ -432,7 +453,8 @@
 	#if {"$bot" == "true"}
 	{
 		h
-	}
+	};
+	play heart.ogg
 }
 {5}
 
