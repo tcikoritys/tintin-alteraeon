@@ -1,3 +1,4 @@
+#act {^You disarm %1 and send %2 weapon flying!$} {play disarm.ogg}
 #ACTION {%1's %2 $rescue{!\.}$}
 {
 	r $rescue
