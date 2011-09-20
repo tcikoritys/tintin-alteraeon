@@ -46,6 +46,7 @@
 
 #ACTION {^You scramble to retrieve%1!}
 {
+	wield $weapon;
 	#if {"$disarm" == "true"}
 	{
 		disarm
@@ -124,6 +125,12 @@
 #ACTION {%1 delivers a powerful kick to%2!$}
 {
 	play kick.ogg
+}
+{5}
+
+#ACTION {%1 disarms you and sends your weapon flying!$}
+{
+	play disarm.ogg
 }
 {5}
 
