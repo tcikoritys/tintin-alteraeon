@@ -1,3 +1,4 @@
+#act {^You bash headfirst into %1!$} {play bash.ogg}
 #ACTION {%1's %2 $rescue{!\.}$}
 {
 	r $rescue
@@ -1007,7 +1008,7 @@
 
 #ALIAS {{wi|wie|wiel|wield} %1}
 {
-	#variable {weapon} {%1};
+	#if {"%1" != "$stabWeapon"} {#variable {weapon} {%1}};
 	\wield %1
 }
 {5}
