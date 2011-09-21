@@ -1,7 +1,3 @@
-#act {^A clay man cracks and crumbles, becoming a pile of dust and dirt.$} {play clay-man-death.ogg}
-#act {^You find an out-of-place dark mass, and carefully cut it from its surroundings.$} {play corpsecutter.ogg}
-#act {^PANIC!!  You couldn't escape!$} {run} {1}
-#act {^You bash headfirst into %1!$} {play bash.ogg}
 #ACTION {%1's %2 $rescue{!\.}$}
 {
 	r $rescue
@@ -12,6 +8,12 @@
 {
 	#unvariable {lastSpell};
 	play clay-man-rises.ogg
+}
+{1}
+
+#ACTION {^PANIC!!  You couldn't escape!$}
+{
+	run
 }
 {1}
 
@@ -86,6 +88,14 @@
 	#if {"$bot" == "true"}
 	{
 		x
+	};
+	#if {"$automove" == "true" && "$bot" == "true"}
+	{
+		wander
+	};
+	#if {"$taunt" == "true"}
+	{
+		taunt
 	}
 }
 {1}
@@ -120,12 +130,6 @@
 }
 {3}
 
-#ACTION {%1 conjures and {throws|throw} a %2 fireball at %3!$}
-{
-	play fireball.ogg
-}
-{5}
-
 #ACTION {%1 delivers a powerful kick to%2!$}
 {
 	play kick.ogg
@@ -147,24 +151,6 @@
 #ACTION {%1 enters a huge portal and disappears.$}
 {
 	play portal.ogg
-}
-{5}
-
-#ACTION {%1's flail %2 %3{.|!}$}
-{
-	#if {"%2" != "misses"}
-	{
-		play flail.ogg
-	}
-}
-{5}
-
-#ACTION {Your flail %1 %2{.|!}$}
-{
-	#if {"%1" != "misses"}
-	{
-		play flail.ogg
-	}
 }
 {5}
 
@@ -210,15 +196,6 @@
 }
 {5}
 
-#ACTION {%1 {punch|pound} %2 %3{.|!}$}
-{
-	#if {"%2" != "misses"}
-	{
-		play punch.ogg
-	}
-}
-{5}
-
 #ACTION {%1 shield bash %2{!|.}$}
 {
 	play bash.ogg
@@ -258,9 +235,24 @@
 }
 {5}
 
+#ACTION {%1 {conjures|conjure} and {throws|throw} a %2 fireball at %3!$}
+{
+	play fireball.ogg
+}
+{5}
+
 #ACTION {%1 {parry|parries} %2 attack.$}
 {
 	play parry.ogg
+}
+{5}
+
+#ACTION {%1 {punch|pound} %2 %3{.|!}$}
+{
+	#if {"%2" != "misses"}
+	{
+		play punch.ogg
+	}
 }
 {5}
 
@@ -297,6 +289,24 @@
 #ACTION {%1 {throw|throws}%1at%2, but miss.$}
 {
 	play throw_miss.ogg
+}
+{5}
+
+#ACTION {%1's flail %2 %3{.|!}$}
+{
+	#if {"%2" != "misses"}
+	{
+		play flail.ogg
+	}
+}
+{5}
+
+#ACTION {Your flail %1 %2{.|!}$}
+{
+	#if {"%1" != "misses"}
+	{
+		play flail.ogg
+	}
 }
 {5}
 
@@ -421,6 +431,12 @@
 }
 {5}
 
+#ACTION {^ %1 taunt%2}
+{
+	#variable {taunt} {true}
+}
+{5}
+
 #ACTION {^A %1 claws at and begins eating the corpse of %2!$}
 {
 	play undead-eating.ogg
@@ -430,6 +446,12 @@
 #ACTION {^A %1 rips and tears into the corpse of %2, devouring it!$}
 {
 	play undead-eating.ogg
+}
+{5}
+
+#ACTION {^A clay man cracks and crumbles, becoming a pile of dust and dirt.$}
+{
+	play clay-man-death.ogg
 }
 {5}
 
@@ -520,6 +542,12 @@
 }
 {5}
 
+#ACTION {^You bash headfirst into %1!$}
+{
+	play bash.ogg
+}
+{5}
+
 #ACTION {^You can't concentrate enough!$}
 {
 	#variable {combat} {$lastSpell}
@@ -551,6 +579,12 @@
 {5}
 
 #ACTION {^You find a small bladder of %1 fluid, and carefully tie off the ends before removing it.$}
+{
+	play corpsecutter.ogg
+}
+{5}
+
+#ACTION {^You find an out-of-place dark mass, and carefully cut it from its surroundings.$}
 {
 	play corpsecutter.ogg
 }
@@ -970,6 +1004,13 @@
 }
 {5}
 
+#ALIAS {automove}
+{
+	#variable {automove} {true};
+	#showme {You will now automove while botting.}
+}
+{5}
+
 #ALIAS {bot}
 {
 	#variable {bot} {true};
@@ -987,6 +1028,13 @@
 {
 	#variable {autoclay} {false};
 	#showme {Clay man will no longer autocast.}
+}
+{5}
+
+#ALIAS {noautomove}
+{
+	#unvariable {automove};
+	#showme {You will not automove while botting.}
 }
 {5}
 
@@ -1020,7 +1068,10 @@
 
 #ALIAS {{wi|wie|wiel|wield} %1}
 {
-	#if {"%1" != "$stabWeapon"} {#variable {weapon} {%1}};
+	#if {"%1" != "$stabWeapon"}
+	{
+		#variable {weapon} {%1}
+	};
 	\wield %1
 }
 {5}
