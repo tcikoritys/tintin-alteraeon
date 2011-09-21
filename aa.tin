@@ -1,3 +1,4 @@
+#act {^PANIC!!  You couldn't escape!$} {run} {1}
 #act {^You bash headfirst into %1!$} {play bash.ogg}
 #ACTION {%1's %2 $rescue{!\.}$}
 {
