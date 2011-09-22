@@ -91,11 +91,11 @@
 	};
 	#if {"$automove" == "true" && "$bot" == "true"}
 	{
-		wander
-	};
-	#if {"$taunt" == "true"}
-	{
-		taunt
+		wander;
+		#if {"$taunt" == "true"}
+		{
+			taunt
+		}
 	}
 }
 {1}
