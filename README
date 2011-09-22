@@ -12,6 +12,15 @@ You can have achievements like backstabs, levels, and achievements posted to Twi
 Contributing
 If you make triggers or edit the aa.tin file in any way please load it with tintin++ and save it with #write it aa.tin before committing it so that everything will be in the standard tintin++ format. Please test your code before submitting.
 
+Aliases
+To sac a corpse type x and press enter. You will use any skills you have like corpsecutter aand/or bloodsacrifice.
+If you have the kick skill k will be aliased to kick.
+b is currently set to backstab. before using it you should set your stab weapon with the swield alias.
+swield set your backstab weapon. e.g. swield dagger
+load will show all your skills and spells and set the variables necessary for their automatic use.
+t will throw a weapon.
+Some of thee will work  even if you don't have the skill, this will change as work progresses.
+
 Botting:
 To start botting type bot. To turn it off type nobot. To move while botting type automove, to stop moving type noautomove. If you have the taunt skill you will use it each time you enter a new room. Botting will try and autouse the best heal spell you have. Botting will try to not get you killed and try to recall you out if things get too bad. You can, of course, still die while botting.
 

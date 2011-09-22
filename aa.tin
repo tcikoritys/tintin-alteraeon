@@ -6,8 +6,8 @@
 
 #ACTION {^A clay man forms from nearby dirt and clay to serve you.$}
 {
-	#unvariable {lastSpell};
-	play clay-man-rises.ogg
+	play clay-man-rises.ogg;
+	#unvariable {lastSpell}
 }
 {1}
 
@@ -1049,6 +1049,22 @@
 {
 	pick %1;
 	#variable {lock} {%1}
+}
+{5}
+
+#ALIAS {{loa|load}}
+{
+	spells;
+	#cr;
+	#cr;
+	#cr;
+	#cr;
+	skills;
+	#cr;
+	#cr;
+	#cr;
+	#cr;
+	#cr
 }
 {5}
 
