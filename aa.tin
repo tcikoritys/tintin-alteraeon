@@ -437,6 +437,12 @@
 }
 {5}
 
+#ACTION {^ %1knife throwing%2}
+{
+	#alias {^{t|th|thr|thro}$}{throw $throwWeapon;get $throwWeapon}
+}
+{5}
+
 #ACTION {^A %1 claws at and begins eating the corpse of %2!$}
 {
 	play undead-eating.ogg
@@ -818,6 +824,12 @@
 }
 {9}
 
+#ACTION {^You try to push beyond the boundries of your endurance, but nothing happens!$}
+{
+	second wind
+}
+{9}
+
 #ACTION {^You {tell|reply}%1,%2'$}
 {
 	play sendmsg.ogg
@@ -869,20 +881,7 @@
 }
 {(}
 
-#ALIAS {c %1}
-{
-	#variable {lastSpell} {%1};
-	cast %1
-}
-{1}
-
-#ALIAS {fle}
-{
-	run
-}
-{1}
-
-#ALIAS {flee}
+#ALIAS {^{fl|fle|flee}$}
 {
 	run
 }
@@ -900,26 +899,19 @@
 }
 {1}
 
+#ALIAS {{c|ca|cas|cast} %1}
+{
+	#variable {lastSpell} {%1};
+	\cast %1
+}
+{1}
+
 #ALIAS {{r|re|res|resc|rescu|rescue} %1}
 {
 	#variable {rescue} {%1};
 	\rescue %1
 }
 {1}
-
-#ALIAS {t}
-{
-	throw $throwWeapon;
-	get $throwWeapon
-}
-{3}
-
-#ALIAS {t %1}
-{
-	throw $throwWeapon %1;
-	get $throwWeapon
-}
-{3}
 
 #ALIAS {f}
 {
@@ -980,6 +972,13 @@
 {
 	play footstep.ogg;
 	\s
+}
+{5}
+
+#ALIAS {^{t|th|thr|thro|throw} %1 %2}
+{
+	#variable {throwWeapon} {%1};
+	\throw %1 %2;get %1
 }
 {5}
 
@@ -1276,7 +1275,6 @@
 #VARIABLE         {brewContainer}  {bowl}
 #VARIABLE         {combat}  {false}
 #VARIABLE         {container}  {case}
-#VARIABLE         {damageDescription}  {*** %1 ***|devastates|scratches|mauls|hits|enjures|DISEMBOWELS}
 #VARIABLE         {harmSpell}  {cause critical}
 #VARIABLE         {healSpell}  {cure serious wounds}
 #VARIABLE         {lastSpell}  {tar deer}
