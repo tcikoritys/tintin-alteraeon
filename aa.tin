@@ -23,7 +23,7 @@
 	{
 		nobot;
 		flee;
-		/
+		#if {"$wordOfRecall" == "true"} {c word of recall;/}; #else {/}
 	}
 }
 {1}
@@ -70,7 +70,7 @@
 	};
 	#if {"$combat" != "false"}
 	{
-		c $combat
+		#foreach {$combat} {spell} {c $spell}
 	};
 	#variable {combat} {false};
 	#if {"$corpseCutter" == "true"}
@@ -437,9 +437,23 @@
 }
 {5}
 
+#ACTION {^ %1group recall%2}
+{
+	#variable {groupRecall} {true};
+	#alias {,} {c group recall} {1}
+}
+{5}
+
 #ACTION {^ %1knife throwing%2}
 {
 	#alias {^{t|th|thr|thro}$}{throw $throwWeapon;get $throwWeapon}
+}
+{5}
+
+#ACTION {^ %1word of recall%2}
+{
+	#variable {wordOfRecall} {true};
+	#alias {.} {c word of recall} {1}
 }
 {5}
 
@@ -485,7 +499,7 @@
 }
 {5}
 
-#ACTION {^A skeleton rips a bone from the corpse of %1 as a replacement.$}
+#ACTION {^A skele{tal mage|ton} rips a bone from the corpse of %1 as a replacement.$}
 {
 	play bone-rip.ogg
 }
@@ -556,7 +570,7 @@
 
 #ACTION {^You can't concentrate enough!$}
 {
-	#variable {combat} {$lastSpell}
+	#if {"$combat" == "false"} {#unvar {combat};#var {combat} {$lastSpell;}};#else {#variable {combat} {$combat $lastSpell;}}
 }
 {5}
 
