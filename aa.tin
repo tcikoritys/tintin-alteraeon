@@ -1,3 +1,41 @@
+#ACTION {%1 tells the group, ':help'$}
+{
+	#if {"$grbot" == "true"}
+	{
+		gt For any of this to work group botting must be enabled.;
+		gt All of my commands start with :. e.g. :/ or :recall will make me recall.;
+		gt You can do :c or :cast spell and I will try to cast the spell, you can include a target as well or use the keyword me to have to spell cast on yourself.
+	}
+}
+{1}
+
+#ACTION {%1 tells the group, ':{/|r|re|rec|reca|recal|recall}'$}
+{
+	#if {"$grbot" == "true"}
+	{
+		/
+	}
+}
+{1}
+
+#ACTION {%1 tells the group, ':{c|ca|cas|cast}%2'$}
+{
+	#if {"$grbot" == "true"}
+	{
+		c %2
+	}
+}
+{2}
+
+#ACTION {%1 tells the group, ':{c|ca|cas|cast}%2me'$}
+{
+	#if {"$grbot" == "true"}
+	{
+		c %2 %1
+	}
+}
+{1}
+
 #ACTION {%1's %2 $rescue{!\.}$}
 {
 	r $rescue
@@ -23,7 +61,15 @@
 	{
 		nobot;
 		flee;
-		#if {"$wordOfRecall" == "true"} {c word of recall;/}; #else {/}
+		#if {"$wordOfRecall" == "true"}
+		{
+			c word of recall;
+			/
+		};
+		#else
+		{
+			/
+		}
 	}
 }
 {1}
@@ -37,6 +83,12 @@
 #ACTION {^You fail the rescue!}
 {
 	r $rescue
+}
+{1}
+
+#ACTION {^You have lost %1 experience points so far due to deaths.$}
+{
+	#variable {lostExp} {%1}
 }
 {1}
 
@@ -70,7 +122,10 @@
 	};
 	#if {"$combat" != "false"}
 	{
-		#foreach {$combat} {spell} {c $spell}
+		#foreach {$combat} {spell}
+		{
+			c $spell
+		}
 	};
 	#variable {combat} {false};
 	#if {"$corpseCutter" == "true"}
@@ -310,109 +365,6 @@
 }
 {5}
 
-#ACTION {^            consume%1}
-{
-	#variable {consume} {true};
-	#alias {{fe|fee|feed}} {control all consume corpse}
-}
-{5}
-
-#ACTION {^            faith shield%1}
-{
-	#variable {faithShield} {true}
-}
-{5}
-
-#ACTION {^          bless%1}
-{
-	#variable {bless} {true}
-}
-{5}
-
-#ACTION {^          cure serious wounds%1}
-{
-	#variable {healSpell} {cure serious wounds}
-}
-{5}
-
-#ACTION {^          dexterity%1}
-{
-	#variable {dexterity} {true}
-}
-{5}
-
-#ACTION {^          disarm%1}
-{
-	#variable {disarm} {true}
-}
-{5}
-
-#ACTION {^          hide%1}
-{
-	#variable {hide} {true}
-}
-{5}
-
-#ACTION {^          soulsteal%1}
-{
-	#variable {soulSteal} {true}
-}
-{5}
-
-#ACTION {^        armor%1}
-{
-	#variable {armor} {true}
-}
-{5}
-
-#ACTION {^        blood sacrifice%1}
-{
-	#variable {bloodSacrifice} {true}
-}
-{5}
-
-#ACTION {^        bone shield%1}
-{
-	#variable {boneShield} {true}
-}
-{5}
-
-#ACTION {^        corpsecutter%1}
-{
-	#variable {corpseCutter} {true}
-}
-{5}
-
-#ACTION {^        cure light wounds%1}
-{
-	#variable {healSpell} {cure light wounds}
-}
-{5}
-
-#ACTION {^        faerie fire%1}
-{
-	#variable {faerieFire} {true}
-}
-{5}
-
-#ACTION {^        foulblood%1}
-{
-	#variable {foulBlood} {true}
-}
-{5}
-
-#ACTION {^        shield%1}
-{
-	#variable {shield} {true}
-}
-{5}
-
-#ACTION {^        strength%1}
-{
-	#variable {strength} {true}
-}
-{5}
-
 #ACTION {^ %1 bone blade%2}
 {
 	#variable {boneBlade} {true}
@@ -427,13 +379,92 @@
 
 #ACTION {^ %1 cure critical wounds%2}
 {
-	#variable {healSpell} {cure critical}
+	#variable {healSpell} {cure critical wounds}
 }
 {5}
 
 #ACTION {^ %1 taunt%2}
 {
 	#variable {taunt} {true}
+}
+{5}
+
+#ACTION {^ %1armor%2}
+{
+	#variable {armor} {true}
+}
+{5}
+
+#ACTION {^ %1bless%2}
+{
+	#variable {bless} {true}
+}
+{5}
+
+#ACTION {^ %1blood sacrifice%2}
+{
+	#variable {bloodSacrifice} {true}
+}
+{5}
+
+#ACTION {^ %1bone shield%2}
+{
+	#variable {boneShield} {true}
+}
+{5}
+
+#ACTION {^ %1consume%2}
+{
+	#variable {consume} {true};
+	#alias {{fe|fee|feed}} {control all consume corpse}
+}
+{5}
+
+#ACTION {^ %1corpsecutter%2}
+{
+	#variable {corpseCutter} {true}
+}
+{5}
+
+#ACTION {^ %1cure light wounds%2}
+{
+	#variable {healSpell} {cure light wounds}
+}
+{5}
+
+#ACTION {^ %1cure serious wounds%2}
+{
+	#variable {healSpell} {cure serious wounds}
+}
+{5}
+
+#ACTION {^ %1dexterity%2}
+{
+	#variable {dexterity} {true}
+}
+{5}
+
+#ACTION {^ %1disarm%2}
+{
+	#variable {disarm} {true}
+}
+{5}
+
+#ACTION {^ %1faerie fire%2}
+{
+	#variable {faerieFire} {true}
+}
+{5}
+
+#ACTION {^ %1faith shield%2}
+{
+	#variable {faithShield} {true}
+}
+{5}
+
+#ACTION {^ %1foulblood%2}
+{
+	#variable {foulBlood} {true}
 }
 {5}
 
@@ -444,9 +475,33 @@
 }
 {5}
 
+#ACTION {^ %1hide%2}
+{
+	#variable {hide} {true}
+}
+{5}
+
 #ACTION {^ %1knife throwing%2}
 {
 	#alias {^{t|th|thr|thro}$}{throw $throwWeapon;get $throwWeapon}
+}
+{5}
+
+#ACTION {^ %1shield%2}
+{
+	#variable {shield} {true}
+}
+{5}
+
+#ACTION {^ %1soulsteal%2}
+{
+	#variable {soulSteal} {true}
+}
+{5}
+
+#ACTION {^ %1strength%2}
+{
+	#variable {strength} {true}
 }
 {5}
 
@@ -570,7 +625,15 @@
 
 #ACTION {^You can't concentrate enough!$}
 {
-	#if {"$combat" == "false"} {#unvar {combat};#var {combat} {$lastSpell;}};#else {#variable {combat} {$combat $lastSpell;}}
+	#if {"$combat" == "false"}
+	{
+		#unvariable {combat};
+		#variable {combat} {$lastSpell;}
+	};
+	#else
+	{
+		#variable {combat} {$combat $lastSpell;}
+	}
 }
 {5}
 
@@ -607,6 +670,12 @@
 #ACTION {^You find an out-of-place dark mass, and carefully cut it from its surroundings.$}
 {
 	play corpsecutter.ogg
+}
+{5}
+
+#ACTION {^You find yourself too weak to use %1.$}
+{
+	#variable {rewield} {true}
 }
 {5}
 
@@ -652,10 +721,8 @@
 
 #ACTION {^You weep as you think of the %1 experience that you lost.$}
 {
-	#if {"$twitter" == "true"}
-	{
-		tweet $name was defeated in combat and lost %1 experience points. :,( #AlterAeon
-	};
+	experience | grep -i you have lost;
+	#if {"$twitter" == "true"}{tweet $name was defeated in combat and lost %1 exp for a total loss of $lostExp experience points. :,( #AlterAeon};
 	play died.ogg
 }
 {5}
@@ -705,7 +772,12 @@
 	{
 		c strength;
 		c strength;
-		c strength
+		c strength;
+		#if {"$rewield" == "true"}
+		{
+			wield $weapon;
+			#unvariable {rewield}
+		}
 	}
 }
 {8}
@@ -778,15 +850,6 @@
 #ACTION {^You end up with a stinky, nasty mess, but nothing useful.}
 {
 	empty $brewContainer
-}
-{9}
-
-#ACTION {^You fail to pick the lock.}
-{
-	#if {"$pickLocks" == "true"}
-	{
-		pick $lock
-	}
 }
 {9}
 
@@ -920,6 +983,23 @@
 }
 {1}
 
+#ALIAS {{loa|load}}
+{
+	experience | grep -i you have lost;
+	spells;
+	#cr;
+	#cr;
+	#cr;
+	#cr;
+	skills;
+	#cr;
+	#cr;
+	#cr;
+	#cr;
+	#cr
+}
+{1}
+
 #ALIAS {{r|re|res|resc|rescu|rescue} %1}
 {
 	#variable {rescue} {%1};
@@ -1031,6 +1111,13 @@
 }
 {5}
 
+#ALIAS {grbot}
+{
+	#variable {grbot} {true};
+	warn "Awwwww yih! Group botting is now on! (gt :help for info)
+}
+{5}
+
 #ALIAS {id %1}
 {
 	c id %1
@@ -1058,26 +1145,10 @@
 }
 {5}
 
-#ALIAS {pl %1}
+#ALIAS {nogrbot}
 {
-	pick %1;
-	#variable {lock} {%1}
-}
-{5}
-
-#ALIAS {{loa|load}}
-{
-	spells;
-	#cr;
-	#cr;
-	#cr;
-	#cr;
-	skills;
-	#cr;
-	#cr;
-	#cr;
-	#cr;
-	#cr
+	#unvariable {grbot};
+	warn "Group botting has been disabled.
 }
 {5}
 
@@ -1292,7 +1363,6 @@
 #VARIABLE         {harmSpell}  {cause critical}
 #VARIABLE         {healSpell}  {cure serious wounds}
 #VARIABLE         {lastSpell}  {tar deer}
-#VARIABLE         {lock}  {door}
 #VARIABLE         {name}  {name}
 #VARIABLE         {password}  {password}
 #VARIABLE         {rescue}  {none}
