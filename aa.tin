@@ -18,15 +18,6 @@
 }
 {1}
 
-#ACTION {%1 tells the group, ':{c|ca|cas|cast}%2'$}
-{
-	#if {"$grbot" == "true"}
-	{
-		c %2
-	}
-}
-{2}
-
 #ACTION {%1 tells the group, ':{c|ca|cas|cast}%2me'$}
 {
 	#if {"$grbot" == "true"}
@@ -52,6 +43,15 @@
 #ACTION {^PANIC!!  You couldn't escape!$}
 {
 	run
+}
+{1}
+
+#ACTION {^You are drowning!$}
+{
+	#if {"$waterBreathing" == "true"}
+	{
+		c water breathing
+	}
 }
 {1}
 
@@ -112,6 +112,24 @@
 }
 {1}
 
+#ACTION {^You struggle desparately for air to breathe!$}
+{
+	#if {"$waterBreathing" == "true"}
+	{
+		c water breathing
+	}
+}
+{1}
+
+#ACTION {^You struggle for air but find none!$}
+{
+	#if {"$waterBreathing" == "true"}
+	{
+		c water breathing
+	}
+}
+{1}
+
 #ACTION {^Your blood freezes as you hear%1death cry!$}
 {
 	get all.$throwWeapon corpse;
@@ -154,6 +172,15 @@
 	}
 }
 {1}
+
+#ACTION {%1 tells the group, ':{c|ca|cas|cast}%2'$}
+{
+	#if {"$grbot" == "true"}
+	{
+		c %2
+	}
+}
+{2}
 
 #ACTION {^A {clay man|flesh beast|wood woad} stops following you.$}
 {
@@ -233,21 +260,15 @@
 }
 {5}
 
-#ACTION {%1 lightly touches %2 and pale red glow surrounds %4 hands.$}
-{
-	play burning-hands.ogg
-}
-{5}
-
-#ACTION {%1 lightly touches %2 hands, and a pale red glow surrounds them.$}
-{
-	play burning-hands.ogg
-}
-{5}
-
 #ACTION {%1 lightly {touches|touch} %2 hands, and a crackling %3 glow surrounds them.$}
 {
 	play shocking-grasp.ogg
+}
+{5}
+
+#ACTION {%1 lightly {touches|touch} %2, and {pale|a pale} red glow {surrounds|surround} %3.$}
+{
+	play burning-hands.ogg
 }
 {5}
 
@@ -505,6 +526,12 @@
 }
 {5}
 
+#ACTION {^ %1water breathing%2}
+{
+	#variable {waterBreathing} {true}
+}
+{5}
+
 #ACTION {^ %1word of recall%2}
 {
 	#variable {wordOfRecall} {true};
@@ -722,7 +749,10 @@
 #ACTION {^You weep as you think of the %1 experience that you lost.$}
 {
 	experience | grep -i you have lost;
-	#if {"$twitter" == "true"}{tweet $name was defeated in combat and lost %1 exp for a total loss of $lostExp experience points. :,( #AlterAeon};
+	#if {"$twitter" == "true"}
+	{
+		tweet $name was defeated in combat and lost %1 exp for a total loss of $lostExp experience points. #AlterAeon
+	};
 	play died.ogg
 }
 {5}
@@ -815,6 +845,12 @@
 }
 {9}
 
+#ACTION {^A blood red winged demon {bites|claws at} %1!$}
+{
+	play bloodmist-attack.ogg
+}
+{9}
+
 #ACTION {^A magical hammer disappears in a blinding flash of light! (worn by you)}
 {
 	#if {"$spiritHammer" == "true"}
@@ -898,6 +934,12 @@
 #ACTION {^You receive %1 gold coins for your sacrifice.}
 {
 	split %1
+}
+{9}
+
+#ACTION {^You tap your life, and {a swarm of|a} blood red {demons|winged demon} {fly|flaps} quickly toward %1!$}
+{
+	play bloodmist.ogg
 }
 {9}
 
@@ -1176,6 +1218,12 @@
 }
 {5}
 
+#ALIAS {^{tee|teet|teeth}$}
+{
+	show teeth
+}
+{9}
+
 #ALIAS {aa}
 {
 	#session {Alter Aeon} {dentinmud.org} {3010};
@@ -1370,4 +1418,4 @@
 #VARIABLE         {stabWeapon}  {spear}
 #VARIABLE         {throwWeapon}  {hammer}
 #VARIABLE         {victim}  {dwarf}
-#VARIABLE         {weapon}  {frost}
+
