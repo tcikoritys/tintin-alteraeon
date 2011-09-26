@@ -1323,7 +1323,7 @@
 #ALIAS {aa}
 {
 	#session {Alter Aeon} {dentinmud.org} {3010};
-	#script {if [ -f "name.tin" ]; then cat name.tin; fi}$name;
+	$name;
 	$password;
 	#cr
 }

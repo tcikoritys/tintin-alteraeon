@@ -27,6 +27,7 @@ Some of thee will work  even if you don't have the skill, this will change as wo
 autostore put certain items in your container. For now just soulstones.
 noautostore turning autostorage off.
 You will not autostore yellow and red soulstones. If you are botting you will drop and sac yellow and red soulstones because they are the lowest worth.
+F If you have the skill shadow fiend you will try to stop battling long enough to get a pale blue souldstone from your container and summon a shadow fiend.
 
 Botting:
 To start botting type bot. To turn it off type nobot. To move while botting type automove, to stop moving type noautomove. If you have the taunt skill you will use it each time you enter a new room. Botting will try and autouse the best heal spell you have. Botting will try to not get you killed and try to recall you out if things get too bad. You can, of course, still die while botting.
