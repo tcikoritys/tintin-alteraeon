@@ -4,16 +4,16 @@ Storm Dragon
 License LGPL
 
 Connecting:
-To connect edit aa.tin and find the name and password variables at the bottom of the file. Change the text in the second set of braces in each variable to match your character's details. Load the file with tt++ aa.tin.
+To connect edit aa.tin and find the name and password variables at the bottom of the file. Change the text in the second set of braces in each variable to match your character's details. Load the file with tt++ aa.tin. If you would like to not have to enter your name and password each time you update from git create the file name.tin in the same directory as you launch tintin and put the variables in it:
+#variable {name} {YourName}
+#variable {password} {password}
+
 
 Skills and Spells:
 Some skills and spells can automatically be used while you are playing. OTo make sure everything is set up type load. You may also want to type load when you first practice a new skill or spell. An example of autousage is clay man for necromancers. To turn on automatica recast when your clay man dies type autoclay and to turn it back off type noautoclay.
 
 Twitter:
 You can have achievements like backstabs, levels, and achievements posted to Twitter. If you have the CLI Twitter client TTYtter installed and configured correctly type twitter and events will be posted. To turn it off type notwitter.
-
-Contributing
-If you make triggers or edit the aa.tin file in any way please load it with tintin++ and save it with #write it aa.tin before committing it so that everything will be in the standard tintin++ format. Please test your code before submitting.
 
 Aliases:
 id object cast identify on the specified object
@@ -24,7 +24,15 @@ swield set your backstab weapon. e.g. swield dagger
 load will show all your skills and spells and set the variables necessary for their automatic use.
 t will throw a weapon.
 Some of thee will work  even if you don't have the skill, this will change as work progresses.
+autostore put certain items in your container. For now just soulstones.
+noautostore turning autostorage off.
+You will not autostore yellow and red soulstones. If you are botting you will drop and sac yellow and red soulstones because they are the lowest worth.
 
 Botting:
 To start botting type bot. To turn it off type nobot. To move while botting type automove, to stop moving type noautomove. If you have the taunt skill you will use it each time you enter a new room. Botting will try and autouse the best heal spell you have. Botting will try to not get you killed and try to recall you out if things get too bad. You can, of course, still die while botting.
 If you trust the people you are grouping with type grbot to turn on group botting. nogrbot will turn it off. In game help is available while grbot is on by telling the group gt :help.
+
+Contributing
+If you make triggers or edit the aa.tin file in any way please load it with tintin++ and save it with #write it aa.tin before committing it so that everything will be in the standard tintin++ format. Please test your code before submitting.
+
+

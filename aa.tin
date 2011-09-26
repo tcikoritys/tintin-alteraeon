@@ -508,6 +508,12 @@
 }
 {5}
 
+#ACTION {^ %1shadow fiend%2}
+{
+	#alias {f} {get pale $container;stop;summon demon shadow pale;a} {1}
+}
+{5}
+
 #ACTION {^ %1shield%2}
 {
 	#variable {shield} {true}
@@ -812,6 +818,18 @@
 }
 {8}
 
+#ACTION {%1 arrives from a huge portal.$}
+{
+	play portal.ogg
+}
+{9}
+
+#ACTION {%1 blue dart singes %2.$}
+{
+	play blue-dart.ogg
+}
+{9}
+
 #ACTION {%1 {tells you|tells the group|replies to you},%2}
 {
 	play msg.ogg
@@ -845,9 +863,27 @@
 }
 {9}
 
+#ACTION {^A beastly looking dog growls at you as you pass.$}
+{
+	play beastly-fido.ogg
+}
+{9}
+
+#ACTION {^A blood red winged demon suddenly bursts into a spray of blood and falls to the ground.$}
+{
+	play bloodmist-death.ogg
+}
+{9}
+
 #ACTION {^A blood red winged demon {bites|claws at} %1!$}
 {
 	play bloodmist-attack.ogg
+}
+{9}
+
+#ACTION {^A crackling blue-white glow suddenly surrounds %1 hands.$}
+{
+	play shocking-grasp.ogg
 }
 {9}
 
@@ -857,6 +893,12 @@
 	{
 		c spirit
 	}
+}
+{9}
+
+#ACTION {^A pale red glow suddenly surrounds %1 hands.}
+{
+	play burning-hands.ogg
 }
 {9}
 
@@ -877,6 +919,25 @@
 }
 {9}
 
+#ACTION {^You cast the spell to separate soul from body, and pull %1's essence into a %2 soulstone!$}
+{
+	#if {"$bot" == "true" || "$autostore" == "true"}
+	{
+		#if {"%2" == "pale blue" || "%2" == "deep blue" || "%2" == "green" || "%2" == "purple" || "%2" == "white"}
+		{
+			put stone $container
+		};
+		#else
+		{
+			#if {"$autostore" != "true"}
+			{
+				junk stone
+			}
+		}
+	}
+}
+{9}
+
 #ACTION {^You end up with a stinky, nasty mess, but no magic potion.}
 {
 	empty $brewContainer
@@ -886,6 +947,13 @@
 #ACTION {^You end up with a stinky, nasty mess, but nothing useful.}
 {
 	empty $brewContainer
+}
+{9}
+
+#ACTION {^You fart then look around innocently.$}
+{
+	#math {fart} {1d4};
+	play fart$fart.ogg
 }
 {9}
 
@@ -934,6 +1002,13 @@
 #ACTION {^You receive %1 gold coins for your sacrifice.}
 {
 	split %1
+}
+{9}
+
+#ACTION {^You smell something foul. Ok, who farted?$}
+{
+	#math {fart} {1d4};
+	play fart$fart.ogg
 }
 {9}
 
@@ -1146,6 +1221,13 @@
 }
 {5}
 
+#ALIAS {autostore}
+{
+	#variable {autostore} {true};
+	#showme {You will now put certain items in your container when you get them.}
+}
+{5}
+
 #ALIAS {bot}
 {
 	#variable {bot} {true};
@@ -1177,6 +1259,13 @@
 {
 	#unvariable {automove};
 	#showme {You will not automove while botting.}
+}
+{5}
+
+#ALIAS {noautostore}
+{
+	#unvariable {autostore};
+	#showme {You will no longer autostore anything.}
 }
 {5}
 
@@ -1218,6 +1307,13 @@
 }
 {5}
 
+#ALIAS {^{di|dis|disa|disar|disarm} %1}
+{
+	#variable {victim} {%1};
+	\disarm %1
+}
+{9}
+
 #ALIAS {^{tee|teet|teeth}$}
 {
 	show teeth
@@ -1227,7 +1323,7 @@
 #ALIAS {aa}
 {
 	#session {Alter Aeon} {dentinmud.org} {3010};
-	$name;
+	#script {if [ -f "name.tin" ]; then cat name.tin; fi}$name;
 	$password;
 	#cr
 }
@@ -1418,4 +1514,4 @@
 #VARIABLE         {stabWeapon}  {spear}
 #VARIABLE         {throwWeapon}  {hammer}
 #VARIABLE         {victim}  {dwarf}
-
+#VARIABLE         {weapon}  {frost}
