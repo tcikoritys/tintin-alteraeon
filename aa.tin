@@ -754,8 +754,9 @@
 
 #ACTION {^You weep as you think of the %1 experience that you lost.$}
 {
-	experience | grep -i you have lost;
-	#if {"$twitter" == "true"}
+	#math {lostExp} {$lostExp + %1};
+	#if {"$twitter" == "true"};
+	experience | grep -i you have lost
 	{
 		tweet $name was defeated in combat and lost %1 exp for a total loss of $lostExp experience points. #AlterAeon
 	};
@@ -947,6 +948,13 @@
 #ACTION {^You end up with a stinky, nasty mess, but nothing useful.}
 {
 	empty $brewContainer
+}
+{9}
+
+#ACTION {%1 {fart|farts uncerimoniously} in %2 direction.$}
+{
+	#math {fart} {1d4};
+	play fart$fart.ogg
 }
 {9}
 
