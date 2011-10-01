@@ -130,49 +130,6 @@
 }
 {1}
 
-#ACTION {^Your blood freezes as you hear%1death cry!$}
-{
-	get all.$throwWeapon corpse;
-	get coins corpse;
-	#if {"$cryOfVictory" == "true"}
-	{
-		victory
-	};
-	#if {"$combat" != "false"}
-	{
-		#foreach {$combat} {spell}
-		{
-			c $spell
-		}
-	};
-	#variable {combat} {false};
-	#if {"$corpseCutter" == "true"}
-	{
-		harvest components corpse
-	};
-	#if {"$consume" == "true"}
-	{
-		control all consume corpse
-	};
-	#if {"$harvestTeeth" == "true" && "$bot" != "true"}
-	{
-		harvest teeth corpse
-	};
-	#if {"$bot" == "true"}
-	{
-		x
-	};
-	#if {"$automove" == "true" && "$bot" == "true"}
-	{
-		wander;
-		#if {"$taunt" == "true"}
-		{
-			taunt
-		}
-	}
-}
-{1}
-
 #ACTION {%1 tells the group, ':{c|ca|cas|cast}%2'$}
 {
 	#if {"$grbot" == "true"}
@@ -356,6 +313,12 @@
 }
 {5}
 
+#ACTION {^                          YOU GAIN A LEVEL!$}
+{
+	play levelup.ogg
+}
+{5}
+
 #ACTION {^ %1 cry of victory %2}
 {
 	#variable {cryOfVictory} {true}
@@ -481,6 +444,12 @@
 {
 	#variable {groupRecall} {true};
 	#alias {,} {c group recall} {1}
+}
+{5}
+
+#ACTION {^ %1heal  %2}
+{
+	#variable {healSpell} {heal}
 }
 {5}
 
@@ -783,6 +752,12 @@
 }
 {5}
 
+#ACTION {^kxwt_fighting%*}
+{
+	#variable {fighting} {%0}
+}
+{5}
+
 #ACTION {%1 {conjures|conjure} and {throws|throw} a %2 fireball at %3!$}
 {
 	play fireball.ogg
@@ -883,6 +858,12 @@
 }
 {9}
 
+#ACTION {%1 tries to disarm%2.$}
+{
+	play disarm-fail.ogg
+}
+{9}
+
 #ACTION {%1 {fart|farts uncerimoniously} in %2 direction.$}
 {
 	#math {fart} {1d4};
@@ -938,6 +919,13 @@
 #ACTION {^ %1kick%2}
 {
 	#alias {k} {kick}
+}
+{9}
+
+#ACTION {^(You can use waypoint %1 to bridge the distance.)$}
+{
+	#send {waypoint %1};
+	waypoint $waypoint
 }
 {9}
 
@@ -998,6 +986,12 @@
 #ACTION {^A pale red glow suddenly surrounds %1 hands.}
 {
 	play burning-hands.ogg
+}
+{9}
+
+#ACTION {^Logging in character '%1'$}
+{
+	#line {gag}set ctrigger on
 }
 {9}
 
@@ -1141,6 +1135,12 @@
 }
 {9}
 
+#ACTION {^You try to disarm%1but fail.$}
+{
+	play disarm-fail.ogg
+}
+{9}
+
 #ACTION {^You try to push beyond the boundries of your endurance, but nothing happens!$}
 {
 	second wind
@@ -1156,6 +1156,49 @@
 #ACTION {^You {tell|reply}%1,%2'$}
 {
 	play sendmsg.ogg
+}
+{9}
+
+#ACTION {^Your blood freezes as you hear%1death cry!$}
+{
+	get all.$throwWeapon corpse;
+	get coins corpse;
+	#if {"$cryOfVictory" == "true"}
+	{
+		victory
+	};
+	#if {"$combat" != "false"}
+	{
+		#foreach {$combat} {spell}
+		{
+			c $spell
+		}
+	};
+	#variable {combat} {false};
+	#if {"$corpseCutter" == "true"}
+	{
+		harvest components corpse
+	};
+	#if {"$consume" == "true"}
+	{
+		control all consume corpse
+	};
+	#if {"$harvestTeeth" == "true" && "$bot" != "true"}
+	{
+		harvest teeth corpse
+	};
+	#if {"$bot" == "true"}
+	{
+		x
+	};
+	#if {"$automove" == "true" && "$bot" == "true"}
+	{
+		wander;
+		#if {"$taunt" == "true"}
+		{
+			taunt
+		}
+	}
 }
 {9}
 
@@ -1181,6 +1224,25 @@
 	#if {"$faithShield" == "true"}
 	{
 		c faith shield
+	}
+}
+{9}
+
+#ACTION {^kxwt_terrain %1}
+{
+	#if {"$bgmusic" == "true"}
+	{
+		#if {"$terrain" != "%1"}
+		{
+			#if {"&{terrain}" != ""}
+			{
+				#line {gag};
+				#zap {backgroundMusic}
+			};
+			#variable {terrain} {%1};
+			#gts {#run {backgroundMusic} {ogg123 -r -q sounds/terrain-%1.ogg}};
+			#session {1}
+		}
 	}
 }
 {9}
@@ -1466,6 +1528,13 @@
 }
 {8}
 
+#ALIAS {^{way|wayp|waypo|waypoi|waypoin|waypoint} %1}
+{
+	#variable {waypoint} {%1};
+	\waypoint %1
+}
+{8}
+
 #ALIAS {{fb|fireb|fireba|firebal|fireball} %1}
 {
 	#if {"$fireball" == "true"}
@@ -1529,6 +1598,14 @@
 }
 {9}
 
+#ALIAS {^{quit|logoff}$}
+{
+	#line {gag};
+	set ctrigger off;
+	\quit
+}
+{9}
+
 #ALIAS {^{tee|teet|teeth}$}
 {
 	show teeth
@@ -1565,6 +1642,13 @@
 }
 {9}
 
+#ALIAS {bgmusic}
+{
+	#variable {bgmusic} {true};
+	#showme {Background music is now on.}
+}
+{9}
+
 #ALIAS {g}
 {
 	get all corpse
@@ -1581,6 +1665,16 @@
 #ALIAS {lic}
 {
 	look in corpse
+}
+{9}
+
+#ALIAS {nobgmusic}
+{
+	#unvariable {bgmusic};
+	#unvariable {terrain};
+	#line {gag};
+	#zap {backgroundMusic};
+	#showme {Background music is now off.}
 }
 {9}
 
@@ -1709,6 +1803,9 @@
 #GAG              {You emote: %1 flies idly in circles around a ball of light}
 #GAG              {You have %1 mana of %2 Max.}
 #GAG              {You see nothing in it for you to get.}
+#GAG              {^#NO SESSION WITH THAT NAME!$}
+#GAG              {^#SESSION 'aa' ACTIVATED.$}
+#GAG              {^#SESSION 'backgroundMusic' DIED.$}
 #GAG              {^(You can only split gold with players, not minions.)$}
 #GAG              {^Looks like the corpse of %1 is too damaged for you to use.$}
 #GAG              {^None of your minions seem hungry at the moment.$}
@@ -1718,6 +1815,7 @@
 #GAG              {^You didn't find anything by that name.}
 #GAG              {^You haven't had a recent victory worth shouting about.$}
 #GAG              {^Your collected {dragon teeth|teeth} grow restless.  It would be unwise to collect any more.$}
+#GAG              {^kxwt_%*}
 #PATHDIR          {d}  {u}  {32}
 #PATHDIR          {e}  {w}  {2}
 #PATHDIR          {n}  {s}  {1}

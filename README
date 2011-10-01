@@ -3,6 +3,11 @@ Storm Dragon
 
 License LGPL
 
+NOTE:
+Work has started on background music/sound effects. If you happen to notice a lot of blank lines and the screen is hard to read type:
+set ctrigger off
+There are no sound effects for backgrounds yet. If you want to make some read help wxkt_terrain in the game. the terrain files should be terrain-number.ogg where number is the number corrisponding to the terrain type. For example, terain-2.ogg would be for towns. Until work is finished on terrain sounds music will be off by default.
+
 Connecting:
 To connect edit aa.tin and find the name and password variables at the bottom of the file. Change the text in the second set of braces in each variable to match your character's details. Load the file with tt++ aa.tin.
 #variable {password} {password}
@@ -14,6 +19,8 @@ Twitter:
 You can have achievements like backstabs, levels, and achievements posted to Twitter. If you have the CLI Twitter client TTYtter installed and configured correctly type twitter and events will be posted. To turn it off type notwitter.
 
 Aliases:
+bgmusic turn background music on
+nobgmusic turn background music off
 bless cast bless n yourself
 bless target cast bless on someone else
 fireball and fb cast fireball
