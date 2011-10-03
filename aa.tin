@@ -1,3 +1,14 @@
+#act {%1 {are|is} engulfed in flames!$} {play flame-engulf.ogg} {9}
+#act {^{Fats the moogle|A warrior moogle|a warrior moogle|The moogle guard|the moogle guard|Stripe the moogle|The librarian moogle|the librarian moogle|A tan moogle|a tan moogle|Bert the moogle|A white moogle|a white moogle|A gray moogle|a gray moogle|A baby moogle|a baby moogle|An injured moogle|an injured moogle|Maria the water faerie|The soul faerie|the soul faerie}'s %1 %2 %3{!|.}$} {#if {"%2" != "misses"} {#if {1d2 == 2} {play ff-hit2.ogg};#else {play ff-hit1.ogg}};#else {play ff-miss.ogg}} {8}
+#act {^Yo%1miss%2{tonberry|moogle}.$} {play ff-miss.ogg} {8}
+#act {^{A small tonberry|a small tonberry|the Master Tonberry}'s {hack|tail} %1 %2{!|.}$} {#if {"%1" != "misses"} {play ff-hit1.ogg};#else {play ff-miss.ogg}} {8}
+#act {^Yo%1miss%2{tonberry|moogle}.$} {play ff-miss.ogg} {8}
+#act {^REBOOT IN APPROXIMATELY %1 MINUTES, FYI.$} {play reboot-%1.ogg} {9}
+#act {^REBOOT IMPENDING, EVERYONE PLEASE RECALL AND SAVE.$} {play reboot.ogg} {9}
+#act {^The game has been rebooted.  Please try again in about %1 seconds.$} {#delay {%1} {aa}} {9}
+#act {^{Fats the moogle|A warrior moogle|The moogle guard|Stripe the moogle|The librarian moogle|A tan moogle|Bert the moogle|A white moogle|A gray moogle|A baby moogle|An injured moogle|A small tonberry|Maria the water faerie|The soul faerie} is DEAD!$} {play ff-death.ogg} {9}
+#act {^The Master Tonberry is DEAD!$} {play ff-boss-death.ogg} {9}
+#act {^Your skin tingles as you pass through the magical barrier.$} {play ff-barrier.ogg} {9}
 #ACTION {%1 tells the group, ':help'$}
 {
 	#if {"$grbot" == "true"}
@@ -167,85 +178,85 @@
 		c soulsteal
 	}
 }
-{3}
+{5}
 
 #ACTION {%1 delivers a powerful kick to%2!$}
 {
 	play kick.ogg
 }
-{5}
+{9}
 
 #ACTION {%1 disarms %2 and sends %3 weapon flying!$}
 {
 	play disarm.ogg
 }
-{5}
+{9}
 
 #ACTION {%1 disarms you and sends your weapon flying!$}
 {
 	play disarm.ogg
 }
-{5}
+{9}
 
 #ACTION {%1 enters a huge portal and disappears.$}
 {
 	play portal.ogg
 }
-{5}
+{9}
 
 #ACTION {%1 hits, and a bright fan of lightning bolts blasts %2!$}
 {
 	play shocking-hit.ogg
 }
-{5}
+{9}
 
 #ACTION {%1 hits, and a bright flash of %2 fire scorches %3!$}
 {
 	play burning-hit.ogg
 }
-{5}
+{9}
 
 #ACTION {%1 kicks %2 in the back of the head, and you hear a faint crack of something breaking.$}
 {
 	play fatal-kick.ogg
 }
-{5}
+{9}
 
 #ACTION {%1 lightly touches %2 and crackling %3 glow surrounds %4 hands.$}
 {
 	play shocking-grasp.ogg
 }
-{5}
+{9}
 
 #ACTION {%1 lightly {touches|touch} %2 hands, and a crackling %3 glow surrounds them.$}
 {
 	play shocking-grasp.ogg
 }
-{5}
+{9}
 
 #ACTION {%1 lightly {touches|touch} %2, and {pale|a pale} red glow {surrounds|surround} %3.$}
 {
 	play burning-hands.ogg
 }
-{5}
+{9}
 
 #ACTION {%1 shield bash %2{!|.}$}
 {
 	play bash.ogg
 }
-{5}
+{9}
 
 #ACTION {%1 takes the full force of %2 bodyslam bash!$}
 {
 	play bash.ogg
 }
-{5}
+{9}
 
 #ACTION {%1 takes the full force of %2's beautiful full circle kick!$}
 {
 	play kick.ogg
 }
-{5}
+{9}
 
 #ACTION {%1 whip %2 %3{.|!}$}
 {
@@ -254,19 +265,19 @@
 		play whip.ogg
 	}
 }
-{5}
+{9}
 
 #ACTION {%1 wield%2.$}
 {
 	play wield.ogg
 }
-{5}
+{9}
 
 #ACTION {%1 {parry|parries} %2 attack.$}
 {
 	play parry.ogg
 }
-{5}
+{9}
 
 #ACTION {%1 {punch|pound} %2 %3{.|!}$}
 {
@@ -275,7 +286,7 @@
 		play punch.ogg
 	}
 }
-{5}
+{9}
 
 #ACTION {%1 {slash|slice|chop|hack} %2 %3{.|!}$}
 {
@@ -284,7 +295,7 @@
 		play slash.ogg
 	}
 }
-{5}
+{9}
 
 #ACTION {%1 {stab|pierce|bite|peck} %2 %3{.|!}$}
 {
@@ -293,7 +304,7 @@
 		play stab.ogg
 	}
 }
-{5}
+{9}
 
 #ACTION {%1's flail %2 %3{.|!}$}
 {
@@ -302,7 +313,7 @@
 		play flail.ogg
 	}
 }
-{5}
+{9}
 
 #ACTION {Your flail %1 %2{.|!}$}
 {
@@ -311,7 +322,7 @@
 		play flail.ogg
 	}
 }
-{5}
+{9}
 
 #ACTION {^                          YOU GAIN A LEVEL!$}
 {
@@ -791,7 +802,7 @@
 }
 {8}
 
-#ACTION {^You try to disarm %1, but fail.}
+#ACTION {^You try to disarm %1 fail.}
 {
 	#if {"$disarm" == "true"}
 	{
@@ -922,7 +933,7 @@
 }
 {9}
 
-#ACTION {^(You can use waypoint %1 to bridge the distance.)$}
+#ACTION {^(You {may be able to|can} use waypoint %1 {to|to more easily} bridge the distance.)$}
 {
 	#send {waypoint %1};
 	waypoint $waypoint
@@ -990,6 +1001,18 @@
 {9}
 
 #ACTION {^Logging in character '%1'$}
+{
+	#line {gag}set ctrigger on
+}
+{9}
+
+#ACTION {^You have no url set for this character (use 'set url' if wanted)$}
+{
+	#line {gag}set ctrigger on
+}
+{9}
+
+#ACTION {^Url for this character is:  %1}
 {
 	#line {gag}set ctrigger on
 }
