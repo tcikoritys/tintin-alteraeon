@@ -494,6 +494,12 @@
 }
 {5}
 
+#ACTION {^You are %1, and currently %2 tall.$}
+{
+	#variable {sex} {%1}
+}
+{5}
+
 #ACTION {^You bash full tilt into %1!$}
 {
 	play bash.ogg
@@ -1142,6 +1148,20 @@
 }
 {9}
 
+#ACTION {^You cry victory over your fallen enemy!$}
+{
+	#math {victory} {1d6};
+	#if {"$sex" == "female"}
+	{
+		play female-victory$victory.ogg
+	};
+	#else
+	{
+		play male-victory$victory.ogg
+	}
+}
+{9}
+
 #ACTION {^You end up with a stinky, nasty mess, but no magic potion.}
 {
 	empty $brewContainer
@@ -1443,6 +1463,7 @@
 	#cr;
 	#cr;
 	experience | grep -i you have lost;
+	whoami | grep -i tall.;
 	skills;
 	#cr;
 	#cr;
@@ -1954,6 +1975,66 @@
 #GAG              {^You haven't had a recent victory worth shouting about.$}
 #GAG              {^Your collected {dragon teeth|teeth} grow restless.  It would be unwise to collect any more.$}
 #GAG              {^kxwt_%*}
+#MACRO {\e0}
+{
+	#line {gag};
+	replay 10 | head -2
+}
+
+#MACRO {\e1}
+{
+	#line {gag};
+	replay 1 | head -2
+}
+
+#MACRO {\e2}
+{
+	#line {gag};
+	replay 2 | head -2
+}
+
+#MACRO {\e3}
+{
+	#line {gag};
+	replay 3 | head -2
+}
+
+#MACRO {\e4}
+{
+	#line {gag};
+	replay 4 | head -2
+}
+
+#MACRO {\e5}
+{
+	#line {gag};
+	replay 5 | head -2
+}
+
+#MACRO {\e6}
+{
+	#line {gag};
+	replay 6 | head -2
+}
+
+#MACRO {\e7}
+{
+	#line {gag};
+	replay 7 | head -2
+}
+
+#MACRO {\e8}
+{
+	#line {gag};
+	replay 8 | head -2
+}
+
+#MACRO {\e9}
+{
+	#line {gag};
+	replay 9 | head -2
+}
+
 #PATHDIR          {d}  {u}  {32}
 #PATHDIR          {e}  {w}  {2}
 #PATHDIR          {n}  {s}  {1}
