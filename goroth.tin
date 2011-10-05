@@ -1,0 +1,2054 @@
+#ACTION {%1 tells the group, ':help'$}
+{
+	#if {"$grbot" == "true"}
+	{
+		gt For any of this to work group botting must be enabled.;
+		gt All of my commands start with :. e.g. :/ or :recall will make me recall.;
+		gt You can do :c or :cast spell and I will try to cast the spell, you can include a target as well or use the keyword me to have to spell cast on yourself.
+	}
+}
+{1}
+
+#ACTION {%1 tells the group, ':{/|r|re|rec|reca|recal|recall}'$}
+{
+	#if {"$grbot" == "true"}
+	{
+		/
+	}
+}
+{1}
+
+#ACTION {%1 tells the group, ':{c|ca|cas|cast}%2me'$}
+{
+	#if {"$grbot" == "true"}
+	{
+		c %2 %1
+	}
+}
+{1}
+
+#ACTION {%1's %2 $rescue{!\.}$}
+{
+	r $rescue
+}
+{1}
+
+#ACTION {^A clay man forms from nearby dirt and clay to serve you.$}
+{
+	play clay-man-rises.ogg;
+	#unvariable {lastSpell}
+}
+{1}
+
+#ACTION {^PANIC!!  You couldn't escape!$}
+{
+	run
+}
+{1}
+
+#ACTION {^You are drowning!$}
+{
+	#if {"$waterBreathing" == "true"}
+	{
+		c water breathing
+	}
+}
+{1}
+
+#ACTION {^You are in an awful condition!$}
+{
+	#if {"$bot" == "true"}
+	{
+		nobot;
+		flee;
+		#if {"$wordOfRecall" == "true"}
+		{
+			c word of recall;
+			/
+		};
+		#else
+		{
+			/
+		}
+	}
+}
+{1}
+
+#ACTION {^You are rescued from certain death by %1!}
+{
+	a
+}
+{1}
+
+#ACTION {^You fail the rescue!}
+{
+	r $rescue
+}
+{1}
+
+#ACTION {^You have lost %1 experience points so far due to deaths.$}
+{
+	#variable {lostExp} {%1}
+}
+{1}
+
+#ACTION {^You run away from the battle like a yellow bellied coward!!$}
+{
+	#if {"$bot" == "true"}
+	{
+		nobot;
+		/
+	}
+}
+{1}
+
+#ACTION {^You scramble to retrieve%1!}
+{
+	wield $weapon;
+	#if {"$disarm" == "true"}
+	{
+		disarm
+	}
+}
+{1}
+
+#ACTION {^You struggle desparately for air to breathe!$}
+{
+	#if {"$waterBreathing" == "true"}
+	{
+		c water breathing
+	}
+}
+{1}
+
+#ACTION {^You struggle for air but find none!$}
+{
+	#if {"$waterBreathing" == "true"}
+	{
+		c water breathing
+	}
+}
+{1}
+
+#ACTION {%1 tells the group, ':{c|ca|cas|cast}%2'$}
+{
+	#if {"$grbot" == "true"}
+	{
+		c %2
+	}
+}
+{2}
+
+#ACTION {^A {clay man|flesh beast|wood woad} stops following you.$}
+{
+	#if {"$autoclay" == "true"}
+	{
+		c clay man
+	}
+}
+{2}
+
+#ACTION {^You fail to cast the spell %1.}
+{
+	cast $lastSpell
+}
+{2}
+
+#ACTION {^You fail to cast the spell.}
+{
+	cast $lastSpell
+}
+{2}
+
+#ACTION {%1is mortally wounded, and will die soon if not aided.$}
+{
+	#if {"$soulSteal" == "true"}
+	{
+		c soulsteal
+	}
+}
+{5}
+
+#ACTION {^                          YOU GAIN A LEVEL!$}
+{
+	play levelup.ogg
+}
+{5}
+
+#ACTION {^ %1 cry of victory %2}
+{
+	#variable {cryOfVictory} {true}
+}
+{5}
+
+#ACTION {^ %1 cure critical wounds%2}
+{
+	#variable {healSpell} {cure critical wounds}
+}
+{5}
+
+#ACTION {^ %1 fireball%2}
+{
+	#variable {fireball} {true}
+}
+{5}
+
+#ACTION {^ %1 fly  %2}
+{
+	#variable {fly} {true}
+}
+{5}
+
+#ACTION {^ %1 icebolt%2}
+{
+	#variable {icebolt} {true}
+}
+{5}
+
+#ACTION {^ %1 taunt%2}
+{
+	#variable {taunt} {true}
+}
+{5}
+
+#ACTION {^ %1armor%2}
+{
+	#variable {armor} {true}
+}
+{5}
+
+#ACTION {^ %1bless%2}
+{
+	#variable {bless} {true}
+}
+{5}
+
+#ACTION {^ %1blood sacrifice%2}
+{
+	#variable {bloodSacrifice} {true}
+}
+{5}
+
+#ACTION {^ %1bone blade%2}
+{
+	#variable {boneBlade} {true}
+}
+{5}
+
+#ACTION {^ %1bone shield%2}
+{
+	#variable {boneShield} {true}
+}
+{5}
+
+#ACTION {^ %1burning hands%2}
+{
+	#variable {burningHands} {true}
+}
+{5}
+
+#ACTION {^ %1consume%2}
+{
+	#variable {consume} {true};
+	#alias {{fe|fee|feed}} {control all consume corpse}
+}
+{5}
+
+#ACTION {^ %1corpsecutter%2}
+{
+	#variable {corpseCutter} {true}
+}
+{5}
+
+#ACTION {^ %1cure light wounds%2}
+{
+	#variable {healSpell} {cure light wounds}
+}
+{5}
+
+#ACTION {^ %1cure serious wounds%2}
+{
+	#variable {healSpell} {cure serious wounds}
+}
+{5}
+
+#ACTION {^ %1dexterity%2}
+{
+	#variable {dexterity} {true}
+}
+{5}
+
+#ACTION {^ %1disarm%2}
+{
+	#variable {disarm} {true}
+}
+{5}
+
+#ACTION {^ %1displacement%2}
+{
+	#variable {displacement} {true}
+}
+{5}
+
+#ACTION {^ %1faerie fire%2}
+{
+	#variable {faerieFire} {true}
+}
+{5}
+
+#ACTION {^ %1faith shield%2}
+{
+	#variable {faithShield} {true}
+}
+{5}
+
+#ACTION {^ %1foulblood%2}
+{
+	#variable {foulBlood} {true}
+}
+{5}
+
+#ACTION {^ %1group recall%2}
+{
+	#variable {groupRecall} {true};
+	#alias {,} {c group recall} {1}
+}
+{5}
+
+#ACTION {^ %1heal  %2}
+{
+	#variable {healSpell} {heal}
+}
+{5}
+
+#ACTION {^ %1hide%2}
+{
+	#variable {hide} {true}
+}
+{5}
+
+#ACTION {^ %1knife throwing%2}
+{
+	#alias {^{t|th|thr|thro}$}{throw $throwWeapon;get $throwWeapon}
+}
+{5}
+
+#ACTION {^ %1preservation%2}
+{
+	#variable {preservation} {true};
+	#alias {{pres|prese|preser|preserv|preserve}} {c preservation corpse} {9}
+}
+{5}
+
+#ACTION {^ %1shadow fiend%2}
+{
+	#alias {f} {get pale $container;stop;summon demon shadow pale;a} {1}
+}
+{5}
+
+#ACTION {^ %1shield%2}
+{
+	#variable {shield} {true}
+}
+{5}
+
+#ACTION {^ %1shocking grasp%2}
+{
+	#variable {shockingGrasp} {true}
+}
+{5}
+
+#ACTION {^ %1sickening touch%2}
+{
+	#variable {sickeningTouch} {true}
+}
+{5}
+
+#ACTION {^ %1soulsteal%2}
+{
+	#variable {soulSteal} {true}
+}
+{5}
+
+#ACTION {^ %1stone skin%2}
+{
+	#variable {stoneSkin} {true}
+}
+{5}
+
+#ACTION {^ %1strength%2}
+{
+	#variable {strength} {true}
+}
+{5}
+
+#ACTION {^ %1water breathing%2}
+{
+	#variable {waterBreathing} {true}
+}
+{5}
+
+#ACTION {^ %1word of recall%2}
+{
+	#variable {wordOfRecall} {true};
+	#alias {.} {c word of recall} {1}
+}
+{5}
+
+#ACTION {^A %1 claws at and begins eating the corpse of %2!$}
+{
+	play undead-eating.ogg
+}
+{5}
+
+#ACTION {^A %1 rips and tears into the corpse of %2, devouring it!$}
+{
+	play undead-eating.ogg
+}
+{5}
+
+#ACTION {^A clay man cracks and crumbles, becoming a pile of dust and dirt.$}
+{
+	play clay-man-death.ogg
+}
+{5}
+
+#ACTION {^A ghoul bites %1 with diseased, razor sharp teeth!$}
+{
+	play ghoul-attack.ogg
+}
+{5}
+
+#ACTION {^A ghoul jumps at %1 clawing and biting!$}
+{
+	play ghoul-attack.ogg
+}
+{5}
+
+#ACTION {^A ghoul rips and tears into %1 with filthy, diseased claws!$}
+{
+	play ghoul-attack.ogg
+}
+{5}
+
+#ACTION {^A shower of %1 sparks suddenly engulfs %2!$}
+{
+	play shower-of-sparks.ogg
+}
+{5}
+
+#ACTION {^A skele{tal mage|ton} rips a bone from the corpse of %1 as a replacement.$}
+{
+	play bone-rip.ogg
+}
+{5}
+
+#ACTION {^A twisted bone shield fractures, splits, and abruptly crumbles to dust! (worn by you)$}
+{
+	#if {"$boneShield" == "true"}
+	{
+		c bone shield
+	}
+}
+{5}
+
+#ACTION {^A zombie gnaws hungrily on %1 with filthy, rotten teeth.$}
+{
+	play ghoul-attack.ogg
+}
+{5}
+
+#ACTION {^A zombie slams into %1!$}
+{
+	play bash.ogg
+}
+{5}
+
+#ACTION {^An ethereal hand appears and attacks %1 from behind!$}
+{
+	play spectral-hand.ogg
+}
+{5}
+
+#ACTION {^As %1 {hits|hit} %2, a bright fan of lightning bolts leaps from %3 hands to blast %4!$}
+{
+	play shocking-hit.ogg
+}
+{5}
+
+#ACTION {^As you hit %1, a bright flash of %2 fire leaps from your hands to scorch %3!$}
+{
+	play burning-hit.ogg
+}
+{5}
+
+#ACTION {^The clay man crumbles back into the dust and dirt from whence it came.$}
+{
+	play clay-man-death.ogg
+}
+{5}
+
+#ACTION {^The light above the wizard's shop flickers for an instant, looks like it needs maintenance.$}
+{
+	play wizard-shop-light.ogg
+}
+{5}
+
+#ACTION {^You are %1, and currently %2 tall.$}
+{
+	#variable {sex} {%1}
+}
+{5}
+
+#ACTION {^You bash full tilt into %1!$}
+{
+	play bash.ogg
+}
+{5}
+
+#ACTION {^You bash headfirst into %1!$}
+{
+	play bash.ogg
+}
+{5}
+
+#ACTION {^You can't concentrate enough!$}
+{
+	#if {!&{combat}}
+	{
+		#variable {combat} {$lastSpell;}
+	};
+	#else
+	{
+		#variable {combat} {$combat $lastSpell;}
+	}
+}
+{5}
+
+#ACTION {^You catch %1 a little off center with your bash!$}
+{
+	play bash.ogg
+}
+{5}
+
+#ACTION {^You create a thick fog of icy particles from the air.$}
+{
+	play ice-fog.ogg
+}
+{5}
+
+#ACTION {^You disarm %1 and send %2 weapon flying!$}
+{
+	play disarm.ogg
+}
+{5}
+
+#ACTION {^You enter a huge portal.$}
+{
+	play portal.ogg
+}
+{5}
+
+#ACTION {^You find a small bladder of %1 fluid, and carefully tie off the ends before removing it.$}
+{
+	play corpsecutter.ogg
+}
+{5}
+
+#ACTION {^You find an out-of-place dark mass, and carefully cut it from its surroundings.$}
+{
+	play corpsecutter.ogg
+}
+{5}
+
+#ACTION {^You find yourself too weak to use %1.$}
+{
+	#variable {rewield} {true}
+}
+{5}
+
+#ACTION {^You have {quite a few|big nasty} {wounds and scratches|wounds}.$}
+{
+	#if {"$bot" == "true"}
+	{
+		h
+	};
+	play heart.ogg
+}
+{5}
+
+#ACTION {^You hear the loud -clang- *CLANG* of a hammer on anvil to the north.$}
+{
+	play hammer-on-anvil.ogg
+}
+{5}
+
+#ACTION {^You kick %1 in the back of the head, causing critical damage.$}
+{
+	play fatal-kick.ogg
+}
+{5}
+
+#ACTION {^You land your roundhouse kick squarely on%1!$}
+{
+	play kick.ogg
+}
+{5}
+
+#ACTION {^You make a small incision and drain some fluid into a vial of bile.$}
+{
+	play corpsecutter.ogg
+}
+{5}
+
+#ACTION {^You roughly hack out a small bladder of %1 fluid and tie off the ends with string.$}
+{
+	play corpsecutter.ogg
+}
+{5}
+
+#ACTION {^You weep as you think of the %1 experience that you lost.$}
+{
+	#math {lostExp} {$lostExp + %1};
+	#if {"$twitter" == "true"}
+	{
+		tweet $name was defeated in combat and lost %1 exp for a total loss of $lostExp experience points. #AlterAeon
+	};
+	play died.ogg;
+	line {gag};
+	experience | grep -i you have lost
+}
+{5}
+
+#ACTION {^Your full circle kick plants a foot right where it should be.$}
+{
+	play kick.ogg
+}
+{5}
+
+#ACTION {^Your kick to %1 could have been better, but you got the point across.$}
+{
+	play kick.ogg
+}
+{5}
+
+#ACTION {^kxwt_fighting%*}
+{
+	#variable {fighting} {%0}
+}
+{5}
+
+#ACTION {%1 {conjures|conjure} and {throws|throw} a %2 fireball at %3!$}
+{
+	play fireball.ogg
+}
+{8}
+
+#ACTION {%1 {creates|create} and magically {throws|throw} bolts of ice at %2!$}
+{
+	play icebolt.ogg
+}
+{8}
+
+#ACTION {%1 {throws|throw} %2 fireball at %3!$}
+{
+	play fireball.ogg
+}
+{8}
+
+#ACTION {%1 {throws|throw} a ball of freezing unfire at %1!$}
+{
+	play coldfire.ogg
+}
+{8}
+
+#ACTION {%1attracts your attention, fresh meat!  KILLLLLLLL!$}
+{
+	#if {"$disarm" == "true"}
+	{
+		disarm
+	}
+}
+{8}
+
+#ACTION {^Yo%1miss%2{tonberry|moogle}.$}
+{
+	play ff-miss.ogg
+}
+{8}
+
+#ACTION {^You try to disarm %1 fail.}
+{
+	#if {"$disarm" == "true"}
+	{
+		disarm
+	}
+}
+{8}
+
+#ACTION {^Your force shield slowly dissipates.$}
+{
+	#if {"$shield" == "true"}
+	{
+		c shield
+	}
+}
+{8}
+
+#ACTION {^Your muscles deflate as your strength spell wears out.}
+{
+	#if {"$strength" == "true"}
+	{
+		c strength;
+		c strength;
+		c strength;
+		#if {"$rewield" == "true"}
+		{
+			wield $weapon;
+			#unvariable {rewield}
+		}
+	}
+}
+{8}
+
+#ACTION {^{A small tonberry|a small tonberry|the Master Tonberry}'s {hack|tail} %1 %2{!|.}$}
+{
+	#if {"%1" != "misses"}
+	{
+		play ff-hit1.ogg
+	};
+	#else
+	{
+		play ff-miss.ogg
+	}
+}
+{8}
+
+#ACTION {^{Fats the moogle|A warrior moogle|a warrior moogle|The moogle guard|the moogle guard|Stripe the moogle|The librarian moogle|the librarian moogle|A tan moogle|a tan moogle|Bert the moogle|A white moogle|a white moogle|A gray moogle|a gray moogle|A baby moogle|a baby moogle|An injured moogle|an injured moogle|Maria the water faerie|The soul faerie|the soul faerie}'s %1 %2 %3{!|.}$}
+{
+	#if {"%2" != "misses"}
+	{
+		#if {1d2 == 2}
+		{
+			play ff-hit2.ogg
+		};
+		#else
+		{
+			play ff-hit1.ogg
+		}
+	};
+	#else
+	{
+		play ff-miss.ogg
+	}
+}
+{8}
+
+#ACTION {%1 arrives from a huge portal.$}
+{
+	play portal.ogg
+}
+{9}
+
+#ACTION {%1 blue dart singes %2.$}
+{
+	play blue-dart.ogg
+}
+{9}
+
+#ACTION {%1 delivers a powerful kick to%2!$}
+{
+	play kick.ogg
+}
+{9}
+
+#ACTION {%1 disarms %2 and sends %3 weapon flying!$}
+{
+	play disarm.ogg
+}
+{9}
+
+#ACTION {%1 disarms you and sends your weapon flying!$}
+{
+	play disarm.ogg
+}
+{9}
+
+#ACTION {%1 enters a huge portal and disappears.$}
+{
+	play portal.ogg
+}
+{9}
+
+#ACTION {%1 hits, and a bright fan of lightning bolts blasts %2!$}
+{
+	play shocking-hit.ogg
+}
+{9}
+
+#ACTION {%1 hits, and a bright flash of %2 fire scorches %3!$}
+{
+	play burning-hit.ogg
+}
+{9}
+
+#ACTION {%1 is struck by bolts of ice from %2!$}
+{
+	play icebolt.ogg
+}
+{9}
+
+#ACTION {%1 kicks %2 in the back of the head, and you hear a faint crack of something breaking.$}
+{
+	play fatal-kick.ogg
+}
+{9}
+
+#ACTION {%1 leaping attack %2 %3{.|!}$}
+{
+	#if {"%2" != "misses"}
+	{
+		play leap-attack.ogg
+	}
+}
+{9}
+
+#ACTION {%1 lightly touches %2 and crackling %3 glow surrounds %4 hands.$}
+{
+	play shocking-grasp.ogg
+}
+{9}
+
+#ACTION {%1 lightly {touches|touch} %2 hands, and a crackling %3 glow surrounds them.$}
+{
+	play shocking-grasp.ogg
+}
+{9}
+
+#ACTION {%1 lightly {touches|touch} %2, and {pale|a pale} red glow {surrounds|surround} %3.$}
+{
+	play burning-hands.ogg
+}
+{9}
+
+#ACTION {%1 now watches over %2.$}
+{
+	play bless.ogg
+}
+{9}
+
+#ACTION {%1 shield bash %2{!|.}$}
+{
+	play bash.ogg
+}
+{9}
+
+#ACTION {%1 takes the full force of %2 bodyslam bash!$}
+{
+	play bash.ogg
+}
+{9}
+
+#ACTION {%1 takes the full force of %2's beautiful full circle kick!$}
+{
+	play kick.ogg
+}
+{9}
+
+#ACTION {%1 tries to disarm%2.$}
+{
+	play disarm-fail.ogg
+}
+{9}
+
+#ACTION {%1 whip %2 %3{.|!}$}
+{
+	#if {"%2" != "misses"}
+	{
+		play whip.ogg
+	}
+}
+{9}
+
+#ACTION {%1 wield%2.$}
+{
+	play wield.ogg
+}
+{9}
+
+#ACTION {%1 {are|is} engulfed in flames!$}
+{
+	play flame-engulf.ogg
+}
+{9}
+
+#ACTION {%1 {fart|farts uncerimoniously} in %2 direction.$}
+{
+	#math {fart} {1d4};
+	play fart$fart.ogg
+}
+{9}
+
+#ACTION {%1 {parry|parries} %2 attack.$}
+{
+	play parry.ogg
+}
+{9}
+
+#ACTION {%1 {punch|pound} %2 %3{.|!}$}
+{
+	#if {"%2" != "misses"}
+	{
+		play punch.ogg
+	}
+}
+{9}
+
+#ACTION {%1 {slash|slice|chop|hack} %2 %3{.|!}$}
+{
+	#if {"%2" != "misses"}
+	{
+		play slash.ogg
+	}
+}
+{9}
+
+#ACTION {%1 {slowly fade|fades slowly} out of existence.$}
+{
+	play invisibility.ogg
+}
+{9}
+
+#ACTION {%1 {stab|pierce|bite|peck} %2 %3{.|!}$}
+{
+	#if {"%2" != "misses"}
+	{
+		play stab.ogg
+	}
+}
+{9}
+
+#ACTION {%1 {tells you|tells the group|replies to you},%2}
+{
+	play msg.ogg
+}
+{9}
+
+#ACTION {%1 {they|hands} take on a sickly green tint.$}
+{
+	play sickening-touch.ogg
+}
+{9}
+
+#ACTION {%1 {throw|throws} %2 at %3!$}
+{
+	play throw_hit.ogg
+}
+{9}
+
+#ACTION {%1 {throw|throws}%1at%2, but miss.$}
+{
+	play throw_miss.ogg
+}
+{9}
+
+#ACTION {%1's flail %2 %3{.|!}$}
+{
+	#if {"%2" != "misses"}
+	{
+		play flail.ogg
+	}
+}
+{9}
+
+#ACTION {Your flail %1 %2{.|!}$}
+{
+	#if {"%1" != "misses"}
+	{
+		play flail.ogg
+	}
+}
+{9}
+
+#ACTION {^        harvest teeth%1}
+{
+	#variable {harvestTeeth} {true}
+}
+{9}
+
+#ACTION {^ %1You are now level %2 %3, with %4 total levels!$}
+{
+	#if {"$twitter" == "true"}
+	{
+		tweet $name just gained the official rank of level %2 #%3 and now has %4 total levels! #AlterAeon
+	}
+}
+{9}
+
+#ACTION {^ %1kick%2}
+{
+	#alias {k} {kick}
+}
+{9}
+
+#ACTION {^(You {may be able to|can} use waypoint %1 {to|to more easily} bridge the distance.)$}
+{
+	#send {waypoint %1};
+	waypoint $waypoint
+}
+{9}
+
+#ACTION {^(notify) $name%1}
+{
+	#if {"$twitter" == "true"}
+	{
+		tweet $name %1 #AlterAeon
+	}
+}
+{9}
+
+#ACTION {^A ball of light flies idly in circles around your head.}
+{
+	emot flies idly in circles around a ball of light.
+}
+{9}
+
+#ACTION {^A beastly fido has arrived.$}
+{
+	play beastly-fido.ogg
+}
+{9}
+
+#ACTION {^A beastly looking dog growls at you as you pass.$}
+{
+	play beastly-fido.ogg
+}
+{9}
+
+#ACTION {^A blood red winged demon suddenly bursts into a spray of blood and falls to the ground.$}
+{
+	play bloodmist-death.ogg
+}
+{9}
+
+#ACTION {^A blood red winged demon {bites|claws at} %1!$}
+{
+	play bloodmist-attack.ogg
+}
+{9}
+
+#ACTION {^A crackling blue-white glow suddenly surrounds %1 hands.$}
+{
+	play shocking-grasp.ogg
+}
+{9}
+
+#ACTION {^A magical hammer disappears in a blinding flash of light! (worn by you)}
+{
+	#if {"$spiritHammer" == "true"}
+	{
+		c spirit
+	}
+}
+{9}
+
+#ACTION {^A pale red glow suddenly surrounds %1 hands.}
+{
+	play burning-hands.ogg
+}
+{9}
+
+#ACTION {^Logging in character '%1'$}
+{
+	#line {gag}set ctrigger on
+}
+{9}
+
+#ACTION {^REBOOT IMPENDING, EVERYONE PLEASE RECALL AND SAVE.$}
+{
+	play reboot.ogg
+}
+{9}
+
+#ACTION {^REBOOT IN APPROXIMATELY %1 MINUTES, FYI.$}
+{
+	play reboot-%1.ogg
+}
+{9}
+
+#ACTION {^The Master Tonberry is DEAD!$}
+{
+	play ff-boss-death.ogg
+}
+{9}
+
+#ACTION {^The blade splits down the red lines and shatters, leaving behind oddly bloody fragments that seem to vanish when %1 not looking at them. (worn by you)$}
+{
+	#if {"$boneBlade" == "true"}
+	{
+		c bone blade
+	}
+}
+{9}
+
+#ACTION {^The game has been rebooted.  Please try again in about %1 seconds.$}
+{
+	#delay {%1} {aa}
+}
+{9}
+
+#ACTION {^The shadow fiend slowly dissipates and returns to its home plane.$}
+{
+	play shadow-fiend-leave.ogg
+}
+{9}
+
+#ACTION {^Url for this character is:  %1}
+{
+	#line {gag}set ctrigger on
+}
+{9}
+
+#ACTION {^You are asleep... ZZZZZZZZ *snork* ZZZZZ...}
+{
+	wake;
+	cast $lastSpell;
+	sleep
+}
+{9}
+
+#ACTION {^You are pretty hurt.$}
+{
+	play pretty-hurt.ogg
+}
+{9}
+
+#ACTION {^You are surrounded by a strong force shield.$}
+{
+	play shield.ogg
+}
+{9}
+
+#ACTION {^You cast the spell to separate soul from body, and pull %1's essence into a %2 soulstone!$}
+{
+	#if {"$bot" == "true" || "$autostore" == "true"}
+	{
+		#if {"%2" == "pale blue" || "%2" == "deep blue" || "%2" == "green" || "%2" == "purple" || "%2" == "white"}
+		{
+			put stone $container
+		};
+		#else
+		{
+			#if {"$autostore" != "true"}
+			{
+				junk stone
+			}
+		}
+	}
+}
+{9}
+
+#ACTION {^You cry victory over your fallen enemy!$}
+{
+	#math {victory} {1d6};
+	#if {"$sex" == "female"}
+	{
+		play female-victory$victory.ogg
+	};
+	#else
+	{
+		play male-victory$victory.ogg
+	}
+}
+{9}
+
+#ACTION {^You end up with a stinky, nasty mess, but no magic potion.}
+{
+	empty $brewContainer
+}
+{9}
+
+#ACTION {^You end up with a stinky, nasty mess, but nothing useful.}
+{
+	empty $brewContainer
+}
+{9}
+
+#ACTION {^You fart then look around innocently.$}
+{
+	#math {fart} {1d4};
+	play fart$fart.ogg
+}
+{9}
+
+#ACTION {^You feel a slight tingle and you feel somehow abandoned.}
+{
+	#if {"$bless" == "true"}
+	{
+		c bless
+	}
+}
+{9}
+
+#ACTION {^You feel as though %1 is watching over you.$}
+{
+	play bless.ogg
+}
+{9}
+
+#ACTION {^You feel less protected.}
+{
+	#if {"$armor" == "true"}
+	{
+		c armor
+	}
+}
+{9}
+
+#ACTION {^You have completed the achievement:%1}
+{
+	#if {"$twitter" == "true"}
+	{
+		tweet $name has completed the achievement %1! #AlterAeon
+	}
+}
+{9}
+
+#ACTION {^You have no url set for this character (use 'set url' if wanted)$}
+{
+	#line {gag}set ctrigger on
+}
+{9}
+
+#ACTION {^You notice that the foul taste in your mouth seems to be gone.$}
+{
+	#if {"$foulBlood" == "true"}
+	{
+		c foulblood
+	}
+}
+{9}
+
+#ACTION {^You quickly place a hand on the inside of a bone shield to bind it to you.$}
+{
+	wear shield
+}
+{9}
+
+#ACTION {^You receive %1 gold coins for your sacrifice.}
+{
+	split %1
+}
+{9}
+
+#ACTION {^You slowly float to the ground.$}
+{
+	#if {"$fly" == "true"}
+	{
+		c fly
+	}
+}
+{9}
+
+#ACTION {^You smell something foul. Ok, who farted?$}
+{
+	#math {fart} {1d4};
+	play fart$fart.ogg
+}
+{9}
+
+#ACTION {^You tap your life, and {a swarm of|a} blood red {demons|winged demon} {fly|flaps} quickly toward %1!$}
+{
+	play bloodmist.ogg
+}
+{9}
+
+#ACTION {^You try to disarm%1but fail.$}
+{
+	play disarm-fail.ogg
+}
+{9}
+
+#ACTION {^You try to push beyond the boundries of your endurance, but nothing happens!$}
+{
+	second wind
+}
+{9}
+
+#ACTION {^You use your faith in %1 as a shield to protect you.$}
+{
+	play faith-shield.ogg
+}
+{9}
+
+#ACTION {^You {tell|reply}%1,%2'$}
+{
+	play sendmsg.ogg
+}
+{9}
+
+#ACTION {^Your blood freezes as you hear%1death cry!$}
+{
+	get all.$throwWeapon corpse;
+	get coins corpse;
+	#if {"$cryOfVictory" == "true"}
+	{
+		victory
+	};
+	#if {&{combat}}
+	{
+		#foreach {$combat} {spell}
+		{
+			c $spell
+		}
+	};
+	#unvariable {combat};
+	#if {"$corpseCutter" == "true"}
+	{
+		harvest components corpse
+	};
+	#if {"$consume" == "true"}
+	{
+		control all consume corpse
+	};
+	#if {"$harvestTeeth" == "true" && "$bot" != "true"}
+	{
+		harvest teeth corpse
+	};
+	#if {"$bot" == "true"}
+	{
+		x
+	};
+	#if {"$automove" == "true" && "$bot" == "true"}
+	{
+		wander;
+		#if {"$taunt" == "true"}
+		{
+			taunt
+		}
+	}
+}
+{9}
+
+#ACTION {^Your displaced image rejoins your body.$}
+{
+	#if {"$displacement" == "true"}
+	{
+		c displacement
+	}
+}
+{9}
+
+#ACTION {^Your lungs feel funny, kinda dry... water anyone?$}
+{
+	play water-breathing.ogg
+}
+{9}
+
+#ACTION {^Your magically induced dexterity abruptly disappears.}
+{
+	#if {"$dexterity" == "true"}
+	{
+		c dex;
+		c dex;
+		c dex
+	}
+}
+{9}
+
+#ACTION {^Your shield of faith dissipates, and you no longer feel as protected by your god.$}
+{
+	#if {"$faithShield" == "true"}
+	{
+		c faith shield
+	}
+}
+{9}
+
+#ACTION {^Your skin returns to its normal texture.$}
+{
+	#if {"$stoneSkin" == "true"}
+	{
+		c stone
+	}
+}
+{9}
+
+#ACTION {^Your skin tingles as you pass through the magical barrier.$}
+{
+	play ff-barrier.ogg
+}
+{9}
+
+#ACTION {^kxwt_terrain %1}
+{
+	#if {"$bgmusic" == "true"}
+	{
+		#if {"$terrain" != "%1"}
+		{
+			#if {&{terrain}}
+			{
+				#line {gag};
+				#zap {backgroundMusic}
+			};
+			#variable {terrain} {%1};
+			#gts {#run {backgroundMusic} {ogg123 -r -q sounds/terrain-%1.ogg}};
+			#session {1}
+		}
+	}
+}
+{9}
+
+#ACTION {^{Fats the moogle|A warrior moogle|The moogle guard|Stripe the moogle|The librarian moogle|A tan moogle|Bert the moogle|A white moogle|A gray moogle|A baby moogle|An injured moogle|A small tonberry|Maria the water faerie|The soul faerie} is DEAD!$}
+{
+	play ff-death.ogg
+}
+{9}
+
+#ACTION {^{The hideous|One of the|A fisherman's|An old|A small|A large|An obnoxious|A|An|The} %1 has arrived.$}
+{
+	#if {"$bot" == "true"}
+	{
+		#showme {Attacking %1};
+		k %1
+	}
+}
+{9}
+
+#ACTION {{^You gain|%* bestows upon you} the official rank of level %1 %2!$}
+{
+	#if {"$twitter" == "true"}
+	{
+		tweet $name just gained the official rank of level %1 #%2! #AlterAeon
+	}
+}
+{9}
+
+#ALIAS {skill %1}
+{
+	skills | grep -i %1
+}
+{(}
+
+#ALIAS {^{fl|fle|flee}$}
+{
+	run
+}
+{1}
+
+#ALIAS {h}
+{
+	c $healSpell
+}
+{1}
+
+#ALIAS {r}
+{
+	rescue $rescue
+}
+{1}
+
+#ALIAS {{c|ca|cas|cast} %1}
+{
+	#variable {lastSpell} {%1};
+	\cast %1
+}
+{1}
+
+#ALIAS {{loa|load}}
+{
+	spells;
+	#cr;
+	#cr;
+	#cr;
+	#cr;
+	experience | grep -i you have lost;
+	whoami | grep -i tall.;
+	skills;
+	#cr;
+	#cr;
+	#cr;
+	#cr;
+	#cr
+}
+{1}
+
+#ALIAS {{r|re|res|resc|rescu|rescue} %1}
+{
+	#variable {rescue} {%1};
+	\rescue %1
+}
+{1}
+
+#ALIAS {^{d|do|dow|down}$}
+{
+	play footstep.ogg;
+	\d
+}
+{5}
+
+#ALIAS {^{e|ea|eas|east}$}
+{
+	play footstep.ogg;
+	\e
+}
+{5}
+
+#ALIAS {^{ne|northe|northea|northeas|northeast}$}
+{
+	play footstep.ogg;
+	\ne
+}
+{5}
+
+#ALIAS {^{nw|northw|northwe|northwes|northwest}$}
+{
+	play footstep.ogg;
+	\nw
+}
+{5}
+
+#ALIAS {^{n|no|nor|nort|north}$}
+{
+	play footstep.ogg;
+	\n
+}
+{5}
+
+#ALIAS {^{se|southe|southea|southeas|southeast}$}
+{
+	play footstep.ogg;
+	\se
+}
+{5}
+
+#ALIAS {^{sw|southw|southwe|southwes|southwest}$}
+{
+	play footstep.ogg;
+	\sw
+}
+{5}
+
+#ALIAS {^{s|so|sou|sout|south}$}
+{
+	play footstep.ogg;
+	\s
+}
+{5}
+
+#ALIAS {^{t|th|thr|thro|throw} %1 %2}
+{
+	#variable {throwWeapon} {%1};
+	\throw %1 %2;get %1
+}
+{5}
+
+#ALIAS {^{u|up}$}
+{
+	play footstep.ogg;
+	\u
+}
+{5}
+
+#ALIAS {^{w|we|wes|west}$}
+{
+	play footstep.ogg;
+	\w
+}
+{5}
+
+#ALIAS {autoclay}
+{
+	#variable {autoclay} {true};
+	#showme {Clay man will now autocast}
+}
+{5}
+
+#ALIAS {automove}
+{
+	#variable {automove} {true};
+	#showme {You will now automove while botting.}
+}
+{5}
+
+#ALIAS {autostore}
+{
+	#variable {autostore} {true};
+	#showme {You will now put certain items in your container when you get them.}
+}
+{5}
+
+#ALIAS {bot}
+{
+	#variable {bot} {true};
+	#showme {You are now botting.}
+}
+{5}
+
+#ALIAS {grbot}
+{
+	#variable {grbot} {true};
+	warn "Awwwww yih! Group botting is now on! (gt :help for info)
+}
+{5}
+
+#ALIAS {id %1}
+{
+	c id %1
+}
+{5}
+
+#ALIAS {noautoclay}
+{
+	#variable {autoclay} {false};
+	#showme {Clay man will no longer autocast.}
+}
+{5}
+
+#ALIAS {noautomove}
+{
+	#unvariable {automove};
+	#showme {You will not automove while botting.}
+}
+{5}
+
+#ALIAS {noautostore}
+{
+	#unvariable {autostore};
+	#showme {You will no longer autostore anything.}
+}
+{5}
+
+#ALIAS {nobot}
+{
+	#variable {bot} {false};
+	#showme {You are no longer botting.}
+}
+{5}
+
+#ALIAS {nogrbot}
+{
+	#unvariable {grbot};
+	warn "Group botting has been disabled.
+}
+{5}
+
+#ALIAS {{p|pu|put} %1 %2}
+{
+	#variable {container} {%2};
+	\put %1 %2
+}
+{5}
+
+#ALIAS {{swi|swie|swiel|swield} %1}
+{
+	#variable {stabWeapon} {%1};
+	#showme {You will now use the %1 for backstabs.}
+}
+{5}
+
+#ALIAS {{wi|wie|wiel|wield} %1}
+{
+	#if {"%1" != "$stabWeapon"}
+	{
+		#variable {weapon} {%1}
+	};
+	\wield %1
+}
+{5}
+
+#ALIAS {^hands %1}
+{
+	#if {"$burningHands" == "true"}
+	{
+		c burning hands %1
+	};
+	#if {"$shockingGrasp" == "true"}
+	{
+		c shocking grasp %1
+	};
+	#if {"$sickeningTouch" == "true"}
+	{
+		c sickening touch %1
+	}
+}
+{8}
+
+#ALIAS {^{ble|bles|bless} %1}
+{
+	#if {"$bless" == "true"}
+	{
+		c bless %1
+	};
+	#else
+	{
+		#showme {You do not have the spell bless yet.}
+	}
+}
+{8}
+
+#ALIAS {^{way|wayp|waypo|waypoi|waypoin|waypoint} %1}
+{
+	#variable {waypoint} {%1};
+	\waypoint %1
+}
+{8}
+
+#ALIAS {{fb|fireb|fireba|firebal|fireball} %1}
+{
+	#if {"$fireball" == "true"}
+	{
+		c fireball %1
+	};
+	#else
+	{
+		#showme {You do not have the spell fireball yet.}
+	}
+}
+{8}
+
+#ALIAS {{ib|iceb|icebo|icebol|icebolt} %1}
+{
+	#if {"$icebolt" == "true"}
+	{
+		c icebolt %1
+	};
+	#else
+	{
+		#showme {You do not have the spell icebolt yet.}
+	}
+}
+{8}
+
+#ALIAS {^hands$}
+{
+	#if {"$burningHands" == "true"}
+	{
+		c burning hands
+	};
+	#if {"$shockingGrasp" == "true"}
+	{
+		c shocking grasp
+	};
+	#if {"$sickeningTouch" == "true"}
+	{
+		c sickening touch
+	}
+}
+{9}
+
+#ALIAS {^{ble|bles|bless}}
+{
+	#if {"$bless" == "true"}
+	{
+		c bless
+	};
+	#else
+	{
+		#showme {You do not have the spell bless yet.}
+	}
+}
+{9}
+
+#ALIAS {^{di|dis|disa|disar|disarm} %1}
+{
+	#variable {victim} {%1};
+	\disarm %1
+}
+{9}
+
+#ALIAS {^{quit|logoff}$}
+{
+	#line {gag};
+	set ctrigger off;
+	\quit
+}
+{9}
+
+#ALIAS {^{tee|teet|teeth}$}
+{
+	show teeth
+}
+{9}
+
+#ALIAS {aa}
+{
+	#session {Alter Aeon} {dentinmud.org} {3010};
+	$name;
+	$password;
+	#cr
+}
+{9}
+
+#ALIAS {b %1}
+{
+	#if {"$faerieFire" == "true"}
+	{
+		c faerie fire %1
+	};
+	#variable {victim} {%1};
+	remove $weapon;
+	remove shield;
+	wield $stabWeapon;
+	#if {"$hide" == "true"}
+	{
+		hide
+	};
+	backstab %1;
+	remove $stabWeapon;
+	wield $weapon;
+	wear shield
+}
+{9}
+
+#ALIAS {bgmusic}
+{
+	#variable {bgmusic} {true};
+	#showme {Background music is now on.}
+}
+{9}
+
+#ALIAS {g}
+{
+	get all corpse
+}
+{9}
+
+#ALIAS {junk %1}
+{
+	drop %1;
+	sac %1
+}
+{9}
+
+#ALIAS {lic}
+{
+	look in corpse
+}
+{9}
+
+#ALIAS {nobgmusic}
+{
+	#unvariable {bgmusic};
+	#unvariable {terrain};
+	#line {gag};
+	#zap {backgroundMusic};
+	#showme {Background music is now off.}
+}
+{9}
+
+#ALIAS {notwitter}
+{
+	#unvariable {twitter};
+	#showme {Achievements will no longer be posted to Twitter.}
+}
+{9}
+
+#ALIAS {p %1}
+{
+	pickp %1
+}
+{9}
+
+#ALIAS {play %1}
+{
+	#system {$soundCommand "sounds/%1"&}
+}
+{9}
+
+#ALIAS {repeat %1}
+{
+	replay | grep -i %1
+}
+{9}
+
+#ALIAS {slay %1 %2}
+{
+	#variable {victim} {%1};
+	remove $weapon;
+	remove shield;
+	wield $stabWeapon;
+	sneak %2;
+	backstab %1;
+	remove $stabWeapon;
+	wear shield;
+	wield $weapon
+}
+{9}
+
+#ALIAS {spell %1}
+{
+	spells | grep -i %1
+}
+{9}
+
+#ALIAS {tweet %1}
+{
+	#system {ttytter -norc -silent -readline=0 -status="%1"}
+}
+{9}
+
+#ALIAS {twitter}
+{
+	#variable {twitter} {true};
+	#showme {Achievements will now be posted to Twitter.}
+}
+{9}
+
+#ALIAS {x}
+{
+	get gold corpse;
+	#if {"$consume" == "true"}
+	{
+		control all consume corpse
+	};
+	#if {"$bloodSacrifice" == "true"}
+	{
+		bsac corpse
+	};
+	sac corpse
+}
+{9}
+
+#ALIAS {{fb|fireb|fireba|firebal|fireball}}
+{
+	#if {"$fireball" == "true"}
+	{
+		c fireball
+	};
+	#else
+	{
+		#showme {You do not have the spell fireball yet.}
+	}
+}
+{9}
+
+#ALIAS {{ib|iceb|icebo|icebol|icebolt}}
+{
+	#if {"$icebolt" == "true"}
+	{
+		c icebolt
+	};
+	#else
+	{
+		#showme {You do not have the spell icebolt yet.}
+	}
+}
+{9}
+
+#CONFIG           {256 COLORS}  {ON}
+#CONFIG           {AUTO TAB}  {5000}
+#CONFIG           {BUFFER SIZE}  {20000}
+#CONFIG           {CHARSET}  {ASCII}
+#CONFIG           {COMMAND COLOR}  {<078>}
+#CONFIG           {COMMAND ECHO}  {ON}
+#CONFIG           {CONNECT RETRY}  {15}
+#CONFIG           {HISTORY SIZE}  {1000}
+#CONFIG           {LOG}  {RAW}
+#CONFIG           {PACKET PATCH}  {0.01}
+#CONFIG           {REPEAT CHAR}  {!}
+#CONFIG           {REPEAT ENTER}  {OFF}
+#CONFIG           {SCROLL LOCK}  {ON}
+#CONFIG           {SPEEDWALK}  {OFF}
+#CONFIG           {TINTIN CHAR}  {#}
+#CONFIG           {VERBATIM}  {OFF}
+#CONFIG           {VERBATIM CHAR}  {\}
+#CONFIG           {VERBOSE}  {OFF}
+#CONFIG           {WORDWRAP}  {ON}
+#GAG              {A ball of light flies idly in circles around your head.}
+#GAG              {You don't see any of your group members here to split the gold with}
+#GAG              {You don't see anything by that name here.}
+#GAG              {You don't see anything named that in the corpse of %1}
+#GAG              {You emote: %1 flies idly in circles around a ball of light}
+#GAG              {You have %1 mana of %2 Max.}
+#GAG              {You see nothing in it for you to get.}
+#GAG              {^#NO SESSION WITH THAT NAME!$}
+#GAG              {^#SESSION 'aa' ACTIVATED.$}
+#GAG              {^#SESSION 'backgroundMusic' DIED.$}
+#GAG              {^(You can only split gold with players, not minions.)$}
+#GAG              {^Looks like the corpse of %1 is too damaged for you to use.$}
+#GAG              {^None of your minions seem hungry at the moment.$}
+#GAG              {^Stop doing what? You don't seem to be doing anything.$}
+#GAG              {^The {corpse|gutted carcass} of%1is no longer suitable for blood sacrifice.$}
+#GAG              {^You can only blood sacrifice corpses with blood in them.$}
+#GAG              {^You didn't find anything by that name.}
+#GAG              {^You haven't had a recent victory worth shouting about.$}
+#GAG              {^Your collected {dragon teeth|teeth} grow restless.  It would be unwise to collect any more.$}
+#GAG              {^kxwt_%*}
+#MACRO {\e0}
+{
+	#line {gag};
+	replay 10 | head -2
+}
+
+#MACRO {\e1}
+{
+	#line {gag};
+	replay 1 | head -2
+}
+
+#MACRO {\e2}
+{
+	#line {gag};
+	replay 2 | head -2
+}
+
+#MACRO {\e3}
+{
+	#line {gag};
+	replay 3 | head -2
+}
+
+#MACRO {\e4}
+{
+	#line {gag};
+	replay 4 | head -2
+}
+
+#MACRO {\e5}
+{
+	#line {gag};
+	replay 5 | head -2
+}
+
+#MACRO {\e6}
+{
+	#line {gag};
+	replay 6 | head -2
+}
+
+#MACRO {\e7}
+{
+	#line {gag};
+	replay 7 | head -2
+}
+
+#MACRO {\e8}
+{
+	#line {gag};
+	replay 8 | head -2
+}
+
+#MACRO {\e9}
+{
+	#line {gag};
+	replay 9 | head -2
+}
+
+#PATHDIR          {d}  {u}  {32}
+#PATHDIR          {e}  {w}  {2}
+#PATHDIR          {n}  {s}  {1}
+#PATHDIR          {ne}  {sw}  {3}
+#PATHDIR          {nw}  {se}  {9}
+#PATHDIR          {s}  {n}  {4}
+#PATHDIR          {se}  {nw}  {6}
+#PATHDIR          {sw}  {ne}  {12}
+#PATHDIR          {u}  {d}  {16}
+#PATHDIR          {w}  {e}  {8}
+#VARIABLE         {brewContainer}  {bowl}
+#VARIABLE         {container}  {case}
+#VARIABLE         {harmSpell}  {cause light wounds}
+#VARIABLE         {healSpell}  {cure light wounds}
+#VARIABLE         {name}  {name}
+#VARIABLE         {password}  {password}
+#VARIABLE         {soundCommand}  {paplay}
