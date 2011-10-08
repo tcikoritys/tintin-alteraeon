@@ -139,7 +139,7 @@
 }
 {2}
 
-#ACTION {^A {clay man|flesh beast|wood woad} stops following you.$}
+#ACTION {^A {clay man|flesh beast|metal construct|wood woad} stops following you.$}
 {
 	#if {"$autoclay" == "true"}
 	{
@@ -148,15 +148,17 @@
 }
 {2}
 
-#ACTION {^You fail to cast the spell %1.}
+#ACTION {^You fail to cast the spel%1.$}
 {
-	cast $lastSpell
-}
-{2}
-
-#ACTION {^You fail to cast the spell.}
-{
-	cast $lastSpell
+	#if {!&{recast}}
+	{
+		#variable {recast} {$lastSpell;}
+	};
+	#else
+	{
+		#variable {recast} {$recast $lastSpell;}
+	};
+	recast
 }
 {2}
 
@@ -677,6 +679,12 @@
 }
 {8}
 
+#ACTION {^You are awakened by the noise.$}
+{
+	\sleep
+}
+{8}
+
 #ACTION {^You try to disarm %1 fail.}
 {
 	#if {"$disarm" == "true"}
@@ -750,12 +758,6 @@
 }
 {9}
 
-#ACTION {%1 blue dart singes %2.$}
-{
-	play blue-dart.ogg
-}
-{9}
-
 #ACTION {%1 delivers a powerful kick to%2!$}
 {
 	play kick.ogg
@@ -789,6 +791,18 @@
 #ACTION {%1 hits, and a bright flash of %2 fire scorches %3!$}
 {
 	play burning-hit.ogg
+}
+{9}
+
+#ACTION {%1 is ready to go, but you would be left behind!$}
+{
+	stand
+}
+{9}
+
+#ACTION {%1 is singed by a blue dart of flame.$}
+{
+	play blue-dart.ogg
 }
 {9}
 
@@ -1111,9 +1125,14 @@
 
 #ACTION {^You are asleep... ZZZZZZZZ *snork* ZZZZZ...}
 {
-	wake;
-	cast $lastSpell;
-	sleep
+	getup;
+	cast $lastSpell
+}
+{9}
+
+#ACTION {^You are awakened by %1.$}
+{
+	#unvariable {position}
 }
 {9}
 
@@ -1235,6 +1254,12 @@
 }
 {9}
 
+#ACTION {^You raise A prepared %1 corpse into %2!$}
+{
+	play raise-undead.ogg
+}
+{9}
+
 #ACTION {^You receive %1 gold coins for your sacrifice.}
 {
 	split %1
@@ -1327,6 +1352,12 @@
 			taunt
 		}
 	}
+}
+{9}
+
+#ACTION {^Your blue dart singes %2.$}
+{
+	play blue-dart.ogg
 }
 {9}
 
@@ -1720,6 +1751,12 @@
 }
 {8}
 
+#ALIAS {^getup$}
+{
+	\stand
+}
+{9}
+
 #ALIAS {^hands$}
 {
 	#if {"$burningHands" == "true"}
@@ -1733,6 +1770,23 @@
 	#if {"$sickeningTouch" == "true"}
 	{
 		c sickening touch
+	}
+}
+{9}
+
+#ALIAS {^recast}
+{
+	#if {&{recast}}
+	{
+		#foreach {$recast} {spell}
+		{
+			cast $spell
+		};
+		#unvariable {recast}
+	};
+	#if {&{position}}
+	{
+		$position
 	}
 }
 {9}
@@ -1765,9 +1819,30 @@
 }
 {9}
 
+#ALIAS {^{rest|si|sit}}
+{
+	#variable {position} {rest};
+	\rest
+}
+{9}
+
+#ALIAS {^{sl|sle|slee|sleep}}
+{
+	#variable {position} {sleep};
+	\sleep
+}
+{9}
+
 #ALIAS {^{tee|teet|teeth}$}
 {
 	show teeth
+}
+{9}
+
+#ALIAS {^{wa|wak|wake|stan|stand}$}
+{
+	#unvariable {position};
+	#send {%0}
 }
 {9}
 
@@ -2046,9 +2121,9 @@
 #PATHDIR          {u}  {d}  {16}
 #PATHDIR          {w}  {e}  {8}
 #VARIABLE         {brewContainer}  {bowl}
-#VARIABLE         {container}  {case}
 #VARIABLE         {harmSpell}  {cause light wounds}
 #VARIABLE         {healSpell}  {cure light wounds}
 #VARIABLE         {name}  {name}
 #VARIABLE         {password}  {password}
 #VARIABLE         {soundCommand}  {paplay}
+

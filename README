@@ -18,7 +18,8 @@ Some skills and spells can automatically be used while you are playing. OTo make
 Twitter:
 You can have achievements like backstabs, levels, and achievements posted to Twitter. If you have the CLI Twitter client TTYtter installed and configured correctly type twitter and events will be posted. To turn it off type notwitter.
 
-Aliases:
+Commands:
+alt+1 through alt+0 play last 1 through tenth message.
 bgmusic turn background music on
 nobgmusic turn background music off
 bless cast bless n yourself
