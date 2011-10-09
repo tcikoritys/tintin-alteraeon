@@ -1826,7 +1826,7 @@
 }
 {9}
 
-#ALIAS {^{sl|sle|slee|sleep}}
+#ALIAS {^{sl|sle|slee|sleep}$}
 {
 	#variable {position} {sleep};
 	\sleep
