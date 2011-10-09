@@ -2052,61 +2052,101 @@
 #GAG              {^kxwt_%*}
 #MACRO {\e0}
 {
-	#line {gag};
+#act {^Recent channel history}
+{
+#line gag;
+#unact {^Recent channel history}
+};
 	replay 10 | head -2
 }
 
 #MACRO {\e1}
 {
-	#line {gag};
+#act {^Recent channel history}
+{
+#line gag;
+#unact {^Recent channel history}
+};
 	replay 1 | head -2
 }
 
 #MACRO {\e2}
 {
-	#line {gag};
+#act {^Recent channel history}
+{
+#line gag;
+#unact {^Recent channel history}
+};
 	replay 2 | head -2
 }
 
 #MACRO {\e3}
 {
-	#line {gag};
+#act {^Recent channel history}
+{
+#line gag;
+#unact {^Recent channel history}
+};
 	replay 3 | head -2
 }
 
 #MACRO {\e4}
 {
-	#line {gag};
+#act {^Recent channel history}
+{
+#line gag;
+#unact {^Recent channel history}
+};
 	replay 4 | head -2
 }
 
 #MACRO {\e5}
 {
-	#line {gag};
+#act {^Recent channel history}
+{
+#line gag;
+#unact {^Recent channel history}
+};
 	replay 5 | head -2
 }
 
 #MACRO {\e6}
 {
-	#line {gag};
+#act {^Recent channel history}
+{
+#line gag;
+#unact {^Recent channel history}
+};
 	replay 6 | head -2
 }
 
 #MACRO {\e7}
 {
-	#line {gag};
+#act {^Recent channel history}
+{
+#line gag;
+#unact {^Recent channel history}
+};
 	replay 7 | head -2
 }
 
 #MACRO {\e8}
 {
-	#line {gag};
+#act {^Recent channel history}
+{
+#line gag;
+#unact {^Recent channel history}
+};
 	replay 8 | head -2
 }
 
 #MACRO {\e9}
 {
-	#line {gag};
+#act {^Recent channel history}
+{
+#line gag;
+#unact {^Recent channel history}
+};
 	replay 9 | head -2
 }
 
@@ -2126,4 +2166,3 @@
 #VARIABLE         {name}  {name}
 #VARIABLE         {password}  {password}
 #VARIABLE         {soundCommand}  {paplay}
-
