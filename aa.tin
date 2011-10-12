@@ -177,6 +177,12 @@
 }
 {5}
 
+#ACTION {^ %1 bloodmist%2}
+{
+	#variable {bloodmist} {true}
+}
+{5}
+
 #ACTION {^ %1 cry of victory %2}
 {
 	#variable {cryOfVictory} {true}
@@ -617,7 +623,7 @@
 		tweet $name was defeated in combat and lost %1 exp for a total loss of $lostExp experience points. #AlterAeon
 	};
 	play died.ogg;
-	line {gag};
+	#line {gag};
 	experience | grep -i you have lost
 }
 {5}
@@ -1126,7 +1132,7 @@
 #ACTION {^You are asleep... ZZZZZZZZ *snork* ZZZZZ...}
 {
 	getup;
-	cast $lastSpell
+	$lastSpell
 }
 {9}
 
@@ -1324,17 +1330,13 @@
 	{
 		#foreach {$combat} {spell}
 		{
-			c $spell
+			$spell
 		}
 	};
 	#unvariable {combat};
 	#if {"$corpseCutter" == "true"}
 	{
 		harvest components corpse
-	};
-	#if {"$consume" == "true"}
-	{
-		control all consume corpse
 	};
 	#if {"$harvestTeeth" == "true" && "$bot" != "true"}
 	{
@@ -1461,6 +1463,13 @@
 }
 {(}
 
+#ALIAS {^{cc|cca|ccas|ccast|channelc|channelca|channelcas|channelcast} %1}
+{
+	#variable {lastSpell} {%0};
+	\channelcast %1
+}
+{1}
+
 #ALIAS {^{fl|fle|flee}$}
 {
 	run
@@ -1481,8 +1490,13 @@
 
 #ALIAS {{c|ca|cas|cast} %1}
 {
-	#variable {lastSpell} {%1};
-	\cast %1
+	#variable {lastSpell} {%0};
+	#if {&{position}}
+	{
+		getup;
+		#send {cast %1};
+		$position
+	};#else {#send {cast %1}}
 }
 {1}
 
@@ -1718,10 +1732,36 @@
 }
 {8}
 
+#ALIAS {^{bm|bloodm|bloodmi|bloodmis|bloodmist} %1}
+{
+	#if {"$bloodmist" == "true"}
+	{
+		c bloodmist %1
+	};
+	#else
+	{
+		#showme {You do not have the spell bloodmist yet.}
+	}
+}
+{8}
+
 #ALIAS {^{way|wayp|waypo|waypoi|waypoin|waypoint} %1}
 {
 	#variable {waypoint} {%1};
 	\waypoint %1
+}
+{8}
+
+#ALIAS {{cfb|cf|cfi|cfir|cfire|cfireb|cfireba|cfirebal|cfireball} %1}
+{
+	#if {"$fireball" == "true"}
+	{
+		cc fireball %1
+	};
+	#else
+	{
+		#showme {You do not have the spell fireball yet.}
+	}
 }
 {8}
 
@@ -1780,13 +1820,9 @@
 	{
 		#foreach {$recast} {spell}
 		{
-			cast $spell
+			$spell
 		};
 		#unvariable {recast}
-	};
-	#if {&{position}}
-	{
-		$position
 	}
 }
 {9}
@@ -1804,10 +1840,62 @@
 }
 {9}
 
+#ALIAS {^{bm|bloodm|bloodmi|bloodmis|bloodmist}$}
+{
+	#if {"$bloodmist" == "true"}
+	{
+		c bloodmist
+	};
+	#else
+	{
+		#showme {You do not have the spell bloodmist yet.}
+	}
+}
+{9}
+
+#ALIAS {^{cfb|cfi|cfir|cfire|cfireb|cfireba|cfirebal|cfireball}$}
+{
+	#if {"$fireball" == "true"}
+	{
+		cc fireball
+	};
+	#else
+	{
+		#showme {You do not have the spell fireball yet.}
+	}
+}
+{9}
+
 #ALIAS {^{di|dis|disa|disar|disarm} %1}
 {
 	#variable {victim} {%1};
 	\disarm %1
+}
+{9}
+
+#ALIAS {^{fb|fireb|fireba|firebal|fireball}$}
+{
+	#if {"$fireball" == "true"}
+	{
+		c fireball
+	};
+	#else
+	{
+		#showme {You do not have the spell fireball yet.}
+	}
+}
+{9}
+
+#ALIAS {^{ib|iceb|icebo|icebol|icebolt}$}
+{
+	#if {"$icebolt" == "true"}
+	{
+		c icebolt
+	};
+	#else
+	{
+		#showme {You do not have the spell icebolt yet.}
+	}
 }
 {9}
 
@@ -1985,32 +2073,6 @@
 }
 {9}
 
-#ALIAS {{fb|fireb|fireba|firebal|fireball}}
-{
-	#if {"$fireball" == "true"}
-	{
-		c fireball
-	};
-	#else
-	{
-		#showme {You do not have the spell fireball yet.}
-	}
-}
-{9}
-
-#ALIAS {{ib|iceb|icebo|icebol|icebolt}}
-{
-	#if {"$icebolt" == "true"}
-	{
-		c icebolt
-	};
-	#else
-	{
-		#showme {You do not have the spell icebolt yet.}
-	}
-}
-{9}
-
 #CONFIG           {256 COLORS}  {ON}
 #CONFIG           {AUTO TAB}  {5000}
 #CONFIG           {BUFFER SIZE}  {20000}
@@ -2052,101 +2114,61 @@
 #GAG              {^kxwt_%*}
 #MACRO {\e0}
 {
-#act {^Recent channel history}
-{
-#line gag;
-#unact {^Recent channel history}
-};
+	#action {^Recent channel history}{#line gag;#unact {^Recent channel history}};
 	replay 10 | head -2
 }
 
 #MACRO {\e1}
 {
-#act {^Recent channel history}
-{
-#line gag;
-#unact {^Recent channel history}
-};
+	#action {^Recent channel history}{#line gag;#unact {^Recent channel history}};
 	replay 1 | head -2
 }
 
 #MACRO {\e2}
 {
-#act {^Recent channel history}
-{
-#line gag;
-#unact {^Recent channel history}
-};
+	#action {^Recent channel history}{#line gag;#unact {^Recent channel history}};
 	replay 2 | head -2
 }
 
 #MACRO {\e3}
 {
-#act {^Recent channel history}
-{
-#line gag;
-#unact {^Recent channel history}
-};
+	#action {^Recent channel history}{#line gag;#unact {^Recent channel history}};
 	replay 3 | head -2
 }
 
 #MACRO {\e4}
 {
-#act {^Recent channel history}
-{
-#line gag;
-#unact {^Recent channel history}
-};
+	#action {^Recent channel history}{#line gag;#unact {^Recent channel history}};
 	replay 4 | head -2
 }
 
 #MACRO {\e5}
 {
-#act {^Recent channel history}
-{
-#line gag;
-#unact {^Recent channel history}
-};
+	#action {^Recent channel history}{#line gag;#unact {^Recent channel history}};
 	replay 5 | head -2
 }
 
 #MACRO {\e6}
 {
-#act {^Recent channel history}
-{
-#line gag;
-#unact {^Recent channel history}
-};
+	#action {^Recent channel history}{#line gag;#unact {^Recent channel history}};
 	replay 6 | head -2
 }
 
 #MACRO {\e7}
 {
-#act {^Recent channel history}
-{
-#line gag;
-#unact {^Recent channel history}
-};
+	#action {^Recent channel history}{#line gag;#unact {^Recent channel history}};
 	replay 7 | head -2
 }
 
 #MACRO {\e8}
 {
-#act {^Recent channel history}
-{
-#line gag;
-#unact {^Recent channel history}
-};
+	#action {^Recent channel history}{#line gag;#unact {^Recent channel history}};
 	replay 8 | head -2
 }
 
 #MACRO {\e9}
 {
-#act {^Recent channel history}
-{
-#line gag;
-#unact {^Recent channel history}
-};
+	#action {^Recent channel history}{#line gag;#unact {^Recent channel history}};
 	replay 9 | head -2
 }
 

@@ -24,13 +24,19 @@ bgmusic turn background music on
 nobgmusic turn background music off
 bless cast bless n yourself
 bless target cast bless on someone else
+bm or bloodmist cast bloodmist
+bm or bloodmist target cast bloodmist on target
 fireball and fb cast fireball
 fireball and fb target cast fireball on a specific target
+cfb or cfireball channelcast fireball
+cfb or cfireball target channelcast fireball on a specific target
 hands cast all available hand spells on yourself burning hands, shocking grasp, sickening touch
 hands target cast all available hand spells on someone else burning hands, shocking grasp, sickening touch
 icebolt and ib cast icebolt
 icebolt and ib target cast icebolt on a specific target
 id object cast identify on the specified object
+twitter post achievements and deaths to Twitter requires the program TTYtter to be installed and properly configured: http://www.floodgap.com/software/ttytter/
+notwitter turn Twitter posts off
 To sac a corpse type x and press enter. You will use any skills you have like corpsecutter aand/or bloodsacrifice.
 If you have the kick skill k will be aliased to kick.
 b is currently set to backstab. before using it you should set your stab weapon with the swield alias.
