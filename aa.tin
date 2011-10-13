@@ -2249,6 +2249,11 @@
 	west
 }
 
+#MACRO {\ek}
+{
+	enter portal
+}
+
 #MACRO {\el}
 {
 	east
