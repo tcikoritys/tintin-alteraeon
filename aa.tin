@@ -213,6 +213,18 @@
 }
 {5}
 
+#ACTION {^ %1 lightning bolt%2}
+{
+	#variable {lightningBolt} {true}
+}
+{5}
+
+#ACTION {^ %1 protection from evil%2}
+{
+	#variable {protectionFromEvil} {true}
+}
+{5}
+
 #ACTION {^ %1 taunt%2}
 {
 	#variable {taunt} {true}
@@ -1027,6 +1039,12 @@
 }
 {9}
 
+#ACTION {^A %1 bolt of lightning leaps from you to %2!$}
+{
+	play lightningbolt.ogg
+}
+{9}
+
 #ACTION {^A ball of light flies idly in circles around your head.}
 {
 	emot flies idly in circles around a ball of light.
@@ -1218,6 +1236,15 @@
 #ACTION {^You feel as though %1 is watching over you.$}
 {
 	play bless.ogg
+}
+{9}
+
+#ACTION {^You feel less protected from evil.$}
+{
+	#if {"$protectionFromEvil" == "true"}
+	{
+		cast protection from evil
+	}
 }
 {9}
 
@@ -1496,7 +1523,11 @@
 		getup;
 		#send {cast %1};
 		$position
-	};#else {#send {cast %1}}
+	};
+	#else
+	{
+		#send {cast %1}
+	}
 }
 {1}
 
@@ -1741,6 +1772,32 @@
 	#else
 	{
 		#showme {You do not have the spell bloodmist yet.}
+	}
+}
+{8}
+
+#ALIAS {^{lb|lbo|lbol|lbolt|lightn|lightni|lightnin|lightning} %1}
+{
+	#if {"$lightningBolt" == "true"}
+	{
+		c lightning bolt %1
+	};
+	#else
+	{
+		#showme {You do not have the spell lightning bolt yet.}
+	}
+}
+{8}
+
+#ALIAS {^{lb|lbo|lbol|lbolt|lightn|lightni|lightnin|lightning}$}
+{
+	#if {"$lightningBolt" == "true"}
+	{
+		c lightning bolt
+	};
+	#else
+	{
+		#showme {You do not have the spell lightning bolt yet.}
 	}
 }
 {8}

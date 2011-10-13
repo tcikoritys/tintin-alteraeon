@@ -19,6 +19,7 @@ Twitter:
 You can have achievements like backstabs, levels, and achievements posted to Twitter. If you have the CLI Twitter client TTYtter installed and configured correctly type twitter and events will be posted. To turn it off type notwitter.
 
 Commands:
+In most cases for longer words you can type part of the command. You will have to expirement because the  commands start where mud commends end. For example, if you type fire you will connect to the fire channel. If, however, you type fireb all the way through fireball you will cast the spell fireball if you have it.
 alt+1 through alt+0 play last 1 through tenth message.
 bgmusic turn background music on
 nobgmusic turn background music off
@@ -35,6 +36,8 @@ hands target cast all available hand spells on someone else burning hands, shock
 icebolt and ib cast icebolt
 icebolt and ib target cast icebolt on a specific target
 id object cast identify on the specified object
+lb or lightning cast lightning bolt
+lb or lightning target cast lightning bolton specified target
 twitter post achievements and deaths to Twitter requires the program TTYtter to be installed and properly configured: http://www.floodgap.com/software/ttytter/
 notwitter turn Twitter posts off
 To sac a corpse type x and press enter. You will use any skills you have like corpsecutter aand/or bloodsacrifice.
