@@ -2169,6 +2169,16 @@
 #GAG              {^You haven't had a recent victory worth shouting about.$}
 #GAG              {^Your collected {dragon teeth|teeth} grow restless.  It would be unwise to collect any more.$}
 #GAG              {^kxwt_%*}
+#MACRO {\e,}
+{
+	south
+}
+
+#MACRO {\e.}
+{
+	southeast
+}
+
 #MACRO {\e0}
 {
 	#action {^Recent channel history}{#line gag;#unact {^Recent channel history}};
@@ -2227,6 +2237,36 @@
 {
 	#action {^Recent channel history}{#line gag;#unact {^Recent channel history}};
 	replay 9 | head -2
+}
+
+#MACRO {\ei}
+{
+	north
+}
+
+#MACRO {\ej}
+{
+	west
+}
+
+#MACRO {\el}
+{
+	east
+}
+
+#MACRO {\em}
+{
+	southwest
+}
+
+#MACRO {\eo}
+{
+	northeast
+}
+
+#MACRO {\eu}
+{
+	northwest
 }
 
 #PATHDIR          {d}  {u}  {32}

@@ -21,6 +21,14 @@ You can have achievements like backstabs, levels, and achievements posted to Twi
 Commands:
 In most cases for longer words you can type part of the command. You will have to expirement because the  commands start where mud commends end. For example, if you type fire you will connect to the fire channel. If, however, you type fireb all the way through fireball you will cast the spell fireball if you have it.
 alt+1 through alt+0 play last 1 through tenth message.
+alt+u northwest
+alt+i north
+alt+o northeast
+alt+j west
+alt+l east
+alt +, south
+alt+m southwest
+alt_. southeast
 bgmusic turn background music on
 nobgmusic turn background music off
 bless cast bless n yourself
