@@ -30,6 +30,8 @@ alt+l east
 alt +, south
 alt+m southwest
 alt_. southeast
+autoheal automatically someone if you hp them and they have less than a third of their hitpoints
+noautoheal turn off autohealing this is default
 bgmusic turn background music on
 nobgmusic turn background music off
 bless cast bless n yourself

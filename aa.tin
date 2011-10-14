@@ -1,3 +1,22 @@
+#ACTION {%1 has %2 of %3 hitpoints.$}
+{
+	#if {"$autoheal" == "true"}
+	{
+		#if {%2 <= %3 / 3}
+		{
+			#if {"%1" == "You"}
+			{
+				h
+			};
+			#else
+			{
+				h %1
+			}
+		}
+	}
+}
+{1}
+
 #ACTION {%1 tells the group, ':help'$}
 {
 	#if {"$grbot" == "true"}
@@ -30,13 +49,6 @@
 #ACTION {%1's %2 $rescue{!\.}$}
 {
 	r $rescue
-}
-{1}
-
-#ACTION {^A clay man forms from nearby dirt and clay to serve you.$}
-{
-	play clay-man-rises.ogg;
-	#unvariable {lastSpell}
 }
 {1}
 
@@ -139,15 +151,6 @@
 }
 {2}
 
-#ACTION {^A {clay man|flesh beast|metal construct|wood woad} stops following you.$}
-{
-	#if {"$autoclay" == "true"}
-	{
-		c clay man
-	}
-}
-{2}
-
 #ACTION {^You fail to cast the spel%1.$}
 {
 	#if {!&{recast}}
@@ -161,6 +164,28 @@
 	recast
 }
 {2}
+
+#ACTION {^A clay man cracks and crumbles, becoming a pile of dust and dirt.$}
+{
+	play clay-man-death.ogg
+}
+{3}
+
+#ACTION {^A clay man forms from nearby dirt and clay to serve you.$}
+{
+	play clay-man-rises.ogg;
+	#variable {clayMinion} {true}
+}
+{3}
+
+#ACTION {^A {clay man|flesh beast|metal construct|wood woad} stops following you.$}
+{
+	#if {"$autoclay" == "true" && !&{clayMinion}}
+	{
+		c clay man
+	}
+}
+{4}
 
 #ACTION {%1is mortally wounded, and will die soon if not aided.$}
 {
@@ -222,6 +247,12 @@
 #ACTION {^ %1 protection from evil%2}
 {
 	#variable {protectionFromEvil} {true}
+}
+{5}
+
+#ACTION {^ %1 rancid flesh%2}
+{
+	#variable {rancidFlesh} {true}
 }
 {5}
 
@@ -424,12 +455,6 @@
 #ACTION {^A %1 rips and tears into the corpse of %2, devouring it!$}
 {
 	play undead-eating.ogg
-}
-{5}
-
-#ACTION {^A clay man cracks and crumbles, becoming a pile of dust and dirt.$}
-{
-	play clay-man-death.ogg
 }
 {5}
 
@@ -687,6 +712,15 @@
 	#if {"$disarm" == "true"}
 	{
 		disarm
+	}
+}
+{8}
+
+#ACTION {^The air smells cleaner, and you realize your rancid flesh spell has expired.$}
+{
+	#if {"$rancidFlesh" == "true"}
+	{
+		c rancid flesh
 	}
 }
 {8}
@@ -1072,6 +1106,12 @@
 #ACTION {^A blood red winged demon {bites|claws at} %1!$}
 {
 	play bloodmist-attack.ogg
+}
+{9}
+
+#ACTION {^A blue dart of flame singes you!$}
+{
+	play blue-dart.ogg
 }
 {9}
 
@@ -1848,6 +1888,13 @@
 }
 {8}
 
+#ALIAS {^autoheal$}
+{
+	#variable {autoheal} {true};
+	#showme {Autoheal is now on.}
+}
+{9}
+
 #ALIAS {^getup$}
 {
 	\stand
@@ -1868,6 +1915,13 @@
 	{
 		c sickening touch
 	}
+}
+{9}
+
+#ALIAS {^noautoheal$}
+{
+	#unvariable {autoheal};
+	#showme {Autoheal is now off.}
 }
 {9}
 
@@ -2141,7 +2195,7 @@
 #CONFIG           {LOG}  {RAW}
 #CONFIG           {PACKET PATCH}  {0.01}
 #CONFIG           {REPEAT CHAR}  {!}
-#CONFIG           {REPEAT ENTER}  {OFF}
+#CONFIG           {REPEAT ENTER}  {ON}
 #CONFIG           {SCROLL LOCK}  {ON}
 #CONFIG           {SPEEDWALK}  {OFF}
 #CONFIG           {TINTIN CHAR}  {#}
