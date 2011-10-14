@@ -173,14 +173,13 @@
 
 #ACTION {^A clay man forms from nearby dirt and clay to serve you.$}
 {
-	play clay-man-rises.ogg;
-	#variable {clayMinion} {true}
+	play clay-man-rises.ogg
 }
 {3}
 
 #ACTION {^A {clay man|flesh beast|metal construct|wood woad} stops following you.$}
 {
-	#if {"$autoclay" == "true" && !&{clayMinion}}
+	#if {"$autoclay" == "true"}
 	{
 		c clay man
 	}
@@ -659,7 +658,8 @@
 	{
 		tweet $name was defeated in combat and lost %1 exp for a total loss of $lostExp experience points. #AlterAeon
 	};
-	play died.ogg;
+	#math {death} {1d3};
+	play death$death.ogg;
 	#line {gag};
 	experience | grep -i you have lost
 }
