@@ -475,12 +475,6 @@
 }
 {5}
 
-#ACTION {^A shower of %1 sparks suddenly engulfs %2!$}
-{
-	play shower-of-sparks.ogg
-}
-{5}
-
 #ACTION {^A skele{tal mage|ton} rips a bone from the corpse of %1 as a replacement.$}
 {
 	play bone-rip.ogg
@@ -608,6 +602,12 @@
 #ACTION {^You find yourself too weak to use %1.$}
 {
 	#variable {rewield} {true}
+}
+{5}
+
+#ACTION {^You follow %1.$}
+{
+	play footstep.ogg
 }
 {5}
 
@@ -810,6 +810,12 @@
 }
 {9}
 
+#ACTION {%1 complet{es|e} the spell, and hur{ls|l} a ghastly looking ball of nether-energy at %2!$}
+{
+	play rotting-sphere.ogg
+}
+{9}
+
 #ACTION {%1 delivers a powerful kick to%2!$}
 {
 	play kick.ogg
@@ -831,6 +837,13 @@
 #ACTION {%1 enters a huge portal and disappears.$}
 {
 	play portal.ogg
+}
+{9}
+
+#ACTION {%1 farts, and is engulfed in a swirling green stench cloud.$}
+{
+	#math {fart} {1d4};
+	play fart$fart.ogg
 }
 {9}
 
@@ -918,6 +931,12 @@
 #ACTION {%1 takes the full force of %2's beautiful full circle kick!$}
 {
 	play kick.ogg
+}
+{9}
+
+#ACTION {%1 ta{ps|p} {your|his|its|her} life, and {a swarm of|a} blood red {demons|winged demon} {fly|flaps} quickly toward %2!$}
+{
+	play bloodmist.ogg
 }
 {9}
 
@@ -1027,6 +1046,12 @@
 }
 {9}
 
+#ACTION {%1is engulfed in a writhing mass of biting ethereal mouths!$}
+{
+	play rotting-sphere-hit.ogg
+}
+{9}
+
 #ACTION {Your flail %1 %2{.|!}$}
 {
 	#if {"%1" != "misses"}
@@ -1133,6 +1158,12 @@
 #ACTION {^A pale red glow suddenly surrounds %1 hands.}
 {
 	play burning-hands.ogg
+}
+{9}
+
+#ACTION {^A shower of %1 sparks suddenly engulfs %2!$}
+{
+	play shower-of-sparks.ogg
 }
 {9}
 
@@ -1264,6 +1295,13 @@
 }
 {9}
 
+#ACTION {^You fart, and are totally amazed at the resulting smell.$}
+{
+	#math {fart} {1d4};
+	play fart$fart.ogg
+}
+{9}
+
 #ACTION {^You feel a slight tingle and you feel somehow abandoned.}
 {
 	#if {"$bless" == "true"}
@@ -1352,12 +1390,6 @@
 {
 	#math {fart} {1d4};
 	play fart$fart.ogg
-}
-{9}
-
-#ACTION {^You tap your life, and {a swarm of|a} blood red {demons|winged demon} {fly|flaps} quickly toward %1!$}
-{
-	play bloodmist.ogg
 }
 {9}
 
@@ -1895,6 +1927,12 @@
 }
 {9}
 
+#ALIAS {^clev$}
+{
+	eqset wear clev
+}
+{9}
+
 #ALIAS {^getup$}
 {
 	\stand
@@ -1918,6 +1956,12 @@
 }
 {9}
 
+#ALIAS {^hit$}
+{
+	eqset wear hit
+}
+{9}
+
 #ALIAS {^noautoheal$}
 {
 	#unvariable {autoheal};
@@ -1935,6 +1979,18 @@
 		};
 		#unvariable {recast}
 	}
+}
+{9}
+
+#ALIAS {^regen$}
+{
+	eqset wear regen
+}
+{9}
+
+#ALIAS {^tank$}
+{
+	eqset wear tank
 }
 {9}
 
