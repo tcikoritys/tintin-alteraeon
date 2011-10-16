@@ -803,6 +803,12 @@
 }
 {8}
 
+#ACTION {%* is engulfed in a writhing mass of biting ethereal mouths!$}
+{
+	play rotting-sphere-hit.ogg
+}
+{9}
+
 #ACTION {%1 arrives from a huge portal.$}
 {
 	play portal.ogg
@@ -1058,12 +1064,6 @@
 	{
 		play flail.ogg
 	}
-}
-{9}
-
-#ACTION {%1is engulfed in a writhing mass of biting ethereal mouths!$}
-{
-	play rotting-sphere-hit.ogg
 }
 {9}
 
@@ -2430,6 +2430,7 @@
 #PATHDIR          {sw}  {ne}  {12}
 #PATHDIR          {u}  {d}  {16}
 #PATHDIR          {w}  {e}  {8}
+#SUBSTITUTE       {%*}  { %0}  {1}
 #VARIABLE         {brewContainer}  {bowl}
 #VARIABLE         {harmSpell}  {cause light wounds}
 #VARIABLE         {healSpell}  {cure light wounds}

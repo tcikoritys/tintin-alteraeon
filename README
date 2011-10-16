@@ -3,7 +3,9 @@ Storm Dragon
 
 License LGPL
 
-NOTE:
+NOTES:
+To counter the bug in gone-terminal with the Orca screen reader a spacem has been added to the beginning of each line.
+If you don't need this and want to get rid of it, delete the one substitute in the aa.tin file. Do a search for the line starting with #SUBSTITUTE
 Work has started on background music/sound effects. If you happen to notice a lot of blank lines and the screen is hard to read type:
 set ctrigger off
 There are no sound effects for backgrounds yet. If you want to make some read help wxkt_terrain in the game. the terrain files should be terrain-number.ogg where number is the number corrisponding to the terrain type. For example, terain-2.ogg would be for towns. Until work is finished on terrain sounds music will be off by default.
