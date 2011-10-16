@@ -658,8 +658,7 @@
 	{
 		tweet $name was defeated in combat and lost %1 exp for a total loss of $lostExp experience points. #AlterAeon
 	};
-	#math {death} {1d3};
-	play death$death.ogg;
+	rand_play death;
 	#line {gag};
 	experience | grep -i you have lost
 }
@@ -810,6 +809,24 @@
 }
 {9}
 
+#ACTION {%1 burps at %2.$}
+{
+	rand_play burp
+}
+{9}
+
+#ACTION {%1 burps in your general direction.$}
+{
+	rand_play burp
+}
+{9}
+
+#ACTION {%1 bur{ps|p}.$}
+{
+	rand_play burp
+}
+{9}
+
 #ACTION {%1 complet{es|e} the spell, and hur{ls|l} a ghastly looking ball of nether-energy at %2!$}
 {
 	play rotting-sphere.ogg
@@ -842,8 +859,7 @@
 
 #ACTION {%1 farts, and is engulfed in a swirling green stench cloud.$}
 {
-	#math {fart} {1d4};
-	play fart$fart.ogg
+	rand_play fart
 }
 {9}
 
@@ -969,8 +985,7 @@
 
 #ACTION {%1 {fart|farts uncerimoniously} in %2 direction.$}
 {
-	#math {fart} {1d4};
-	play fart$fart.ogg
+	rand_play fart
 }
 {9}
 
@@ -1079,6 +1094,19 @@
 #ACTION {^ %1kick%2}
 {
 	#alias {k} {kick}
+}
+{9}
+
+#ACTION {^%1 cries victory over %2 fallen enemy!$}
+{
+	#if {"%2" == "her"}
+	{
+		rand_play female-victory
+	};
+	#else
+	{
+		rand_play male-victory
+	}
 }
 {9}
 
@@ -1243,6 +1271,12 @@
 }
 {9}
 
+#ACTION {^You burp in the general direction of %1.}
+{
+	rand_play burp
+}
+{9}
+
 #ACTION {^You cast the spell to separate soul from body, and pull %1's essence into a %2 soulstone!$}
 {
 	#if {"$bot" == "true" || "$autostore" == "true"}
@@ -1264,14 +1298,13 @@
 
 #ACTION {^You cry victory over your fallen enemy!$}
 {
-	#math {victory} {1d6};
 	#if {"$sex" == "female"}
 	{
-		play female-victory$victory.ogg
+		rand_play female-victory
 	};
 	#else
 	{
-		play male-victory$victory.ogg
+		rand_play male-victory
 	}
 }
 {9}
@@ -1290,15 +1323,13 @@
 
 #ACTION {^You fart then look around innocently.$}
 {
-	#math {fart} {1d4};
-	play fart$fart.ogg
+	rand_play fart
 }
 {9}
 
 #ACTION {^You fart, and are totally amazed at the resulting smell.$}
 {
-	#math {fart} {1d4};
-	play fart$fart.ogg
+	rand_play fart
 }
 {9}
 
@@ -1388,8 +1419,7 @@
 
 #ACTION {^You smell something foul. Ok, who farted?$}
 {
-	#math {fart} {1d4};
-	play fart$fart.ogg
+	rand_play fart
 }
 {9}
 
@@ -2186,6 +2216,12 @@
 }
 {9}
 
+#ALIAS {rand_play %1}
+{
+	#system {$soundCommand "$(shuf -n 1 -e sounds/%1*.ogg)"&}
+}
+{9}
+
 #ALIAS {repeat %1}
 {
 	replay | grep -i %1
@@ -2397,6 +2433,6 @@
 #VARIABLE         {brewContainer}  {bowl}
 #VARIABLE         {harmSpell}  {cause light wounds}
 #VARIABLE         {healSpell}  {cure light wounds}
-#VARIABLE         {name}  {name}
+#VARIABLE         {name}  {Name}
 #VARIABLE         {password}  {password}
 #VARIABLE         {soundCommand}  {paplay}
