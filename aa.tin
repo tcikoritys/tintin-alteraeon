@@ -1,3 +1,7 @@
+#act {^You taunt %1, and {she|he|it} attacks you!$} {rand_play taunt} {9}
+#act {^You attempt to goad %1 into attacking you.$} {rand_play taunt} {9}
+#act {%1 {shouts|shout} a challenge {to|trying to draw} everyone near{by.|by into a fight!}$} {rand_play taunt} {9}
+#act {%1 taunts %2, who suddenly attacks!$} {rand_play taunt} {9}
 #ACTION {%1 has %2 of %3 hitpoints.$}
 {
 	#if {"$autoheal" == "true"}
@@ -995,6 +999,12 @@
 }
 {9}
 
+#ACTION {%1 {goes|go} berserk in battle!$}
+{
+	rand_play berserk
+}
+{9}
+
 #ACTION {%1 {parry|parries} %2 attack.$}
 {
 	play parry.ogg
@@ -1378,6 +1388,12 @@
 #ACTION {^You have no url set for this character (use 'set url' if wanted)$}
 {
 	#line {gag}set ctrigger on
+}
+{9}
+
+#ACTION {^You let out a mighty roar as the blood fever takes hold of you!$}
+{
+	rand_play berserk
 }
 {9}
 
