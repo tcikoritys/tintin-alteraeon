@@ -809,6 +809,12 @@
 }
 {9}
 
+#ACTION {%1 (unique)$}
+{
+	play unique.ogg
+}
+{9}
+
 #ACTION {%1 arrives from a huge portal.$}
 {
 	play portal.ogg
