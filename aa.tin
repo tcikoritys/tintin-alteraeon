@@ -1,5 +1,3 @@
-#act {^{Dentin|Kenai|Wyvren|Heart|Fikh|Xael|Reorx|Talos|Squeak|Cygnii|Tarrant|Shadowfax|Draak|Vember|Islaine|Bobcat|Byung|Xandar|Grolantor|Coolbeans|Slamin|Schlyne|Morpheus|Gandor|Glorida|Shift|Mutt|The pantheon of gods} has restored you to full health!$} {play restore.ogg} {9}
-#act {^Someone steps on you, and you awake to see warriors locked in mortal combat!$} {#unvariable {position}} {9}
 #ACTION {%1 has %2 of %3 hitpoints.$}
 {
 	#if {"$autoheal" == "true"}
@@ -607,15 +605,9 @@
 }
 {5}
 
-#ACTION {^You follow %1.$}
-{
-	play footstep.ogg
-}
-{5}
-
 #ACTION {^You have {quite a few|big nasty} {wounds and scratches|wounds}.$}
 {
-	#if {"$bot" == "true"}
+	#if {"$bot" == "true" || "$autoheal" == "true"}
 	{
 		h
 	};
@@ -1129,6 +1121,12 @@
 }
 {9}
 
+#ACTION {^!!SOUND(move/step%1.wav)$}
+{
+	play footstep.ogg
+}
+{9}
+
 #ACTION {^%1 cries victory over %2 fallen enemy!$}
 {
 	#if {"%2" == "her"}
@@ -1221,6 +1219,12 @@
 }
 {9}
 
+#ACTION {^A searing white lightning bolt leaps from %1 to %2!$}
+{
+	play lightningbolt.ogg
+}
+{9}
+
 #ACTION {^A shower of %1 sparks suddenly engulfs %2!$}
 {
 	play shower-of-sparks.ogg
@@ -1242,6 +1246,12 @@
 #ACTION {^REBOOT IN APPROXIMATELY %1 MINUTES, FYI.$}
 {
 	play reboot-%1.ogg
+}
+{9}
+
+#ACTION {^Someone steps on you, and you awake to see warriors locked in mortal combat!$}
+{
+	#unvariable {position}
 }
 {9}
 
@@ -1401,6 +1411,12 @@
 	{
 		c armor
 	}
+}
+{9}
+
+#ACTION {^You follow %1 {northeast|northwest|north|southeast|southwest|south|east|west|up|down|out}.$}
+{
+	play footstep.ogg
 }
 {9}
 
@@ -1611,6 +1627,12 @@
 }
 {9}
 
+#ACTION {^{Dentin|Kenai|Wyvren|Heart|Fikh|Xael|Reorx|Talos|Squeak|Cygnii|Tarrant|Shadowfax|Draak|Vember|Islaine|Bobcat|Byung|Xandar|Grolantor|Coolbeans|Slamin|Schlyne|Morpheus|Gandor|Glorida|Shift|Mutt|The pantheon of gods} has restored you to full health!$}
+{
+	play restore.ogg
+}
+{9}
+
 #ACTION {^{Fats the moogle|A warrior moogle|The moogle guard|Stripe the moogle|The librarian moogle|A tan moogle|Bert the moogle|A white moogle|A gray moogle|A baby moogle|An injured moogle|A small tonberry|Maria the water faerie|The soul faerie} is DEAD!$}
 {
 	play ff-death.ogg
@@ -1708,59 +1730,11 @@
 }
 {1}
 
-#ALIAS {^{d|do|dow|down}$}
+#ALIAS {^1$}
 {
-	play footstep.ogg;
-	\d
-}
-{5}
-
-#ALIAS {^{e|ea|eas|east}$}
-{
-	play footstep.ogg;
-	\e
-}
-{5}
-
-#ALIAS {^{ne|northe|northea|northeas|northeast}$}
-{
-	play footstep.ogg;
-	\ne
-}
-{5}
-
-#ALIAS {^{nw|northw|northwe|northwes|northwest}$}
-{
-	play footstep.ogg;
-	\nw
-}
-{5}
-
-#ALIAS {^{n|no|nor|nort|north}$}
-{
-	play footstep.ogg;
-	\n
-}
-{5}
-
-#ALIAS {^{se|southe|southea|southeas|southeast}$}
-{
-	play footstep.ogg;
-	\se
-}
-{5}
-
-#ALIAS {^{sw|southw|southwe|southwes|southwest}$}
-{
-	play footstep.ogg;
-	\sw
-}
-{5}
-
-#ALIAS {^{s|so|sou|sout|south}$}
-{
-	play footstep.ogg;
-	\s
+	#send {1};
+	#gag {line};
+	set msp on
 }
 {5}
 
@@ -1768,20 +1742,6 @@
 {
 	#variable {throwWeapon} {%1};
 	\throw %1 %2;get %1
-}
-{5}
-
-#ALIAS {^{u|up}$}
-{
-	play footstep.ogg;
-	\u
-}
-{5}
-
-#ALIAS {^{w|we|wes|west}$}
-{
-	play footstep.ogg;
-	\w
 }
 {5}
 
@@ -2352,6 +2312,7 @@
 #GAG              {You emote: %1 flies idly in circles around a ball of light}
 #GAG              {You have %1 mana of %2 Max.}
 #GAG              {You see nothing in it for you to get.}
+#GAG              {^!!SOUND%*}
 #GAG              {^#NO SESSION WITH THAT NAME!$}
 #GAG              {^#SESSION 'aa' ACTIVATED.$}
 #GAG              {^#SESSION 'backgroundMusic' DIED.$}
