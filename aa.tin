@@ -190,7 +190,11 @@
 {
 	#if {"$soulSteal" == "true"}
 	{
-		c soulsteal
+		#if {"$lastSoulSteal" != "%1"}
+		{
+			c soulsteal;
+			#variable {lastSoulSteal} {%1}
+		}
 	}
 }
 {5}
@@ -1121,7 +1125,7 @@
 }
 {9}
 
-#ACTION {^!!SOUND(move/step%1.wav)$}
+#ACTION {^!!SOUND(move/%1)$}
 {
 	play footstep.ogg
 }
@@ -1627,7 +1631,7 @@
 }
 {9}
 
-#ACTION {^{Dentin|Kenai|Wyvren|Heart|Fikh|Xael|Reorx|Talos|Squeak|Cygnii|Tarrant|Shadowfax|Draak|Vember|Islaine|Bobcat|Byung|Xandar|Grolantor|Coolbeans|Slamin|Schlyne|Morpheus|Gandor|Glorida|Shift|Mutt|The pantheon of gods} has restored you to full health!$}
+#ACTION {^{Dentin|Kenai|Wyvren|Heart|Fikh|Xael|Reorx|Talos|Squeak|Cygnii|Tarrant|Shadowfax|Draak|Vember|Islaine|Bobcat|Byung|Xandar|Grolantor|Coolbeans|Slamin|Schlyne|Morpheus|Gandor|Glorida|Shift|Mutt|The Lag Monster|The pantheon of gods} has restored you to full health!$}
 {
 	play restore.ogg
 }
