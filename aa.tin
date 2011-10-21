@@ -1125,6 +1125,46 @@
 }
 {9}
 
+#ACTION {^!!SOUND(combat/mobdeath%1)$}
+{
+	get all.$throwWeapon corpse;
+	get coins corpse;
+	#if {&{lastSoulSteal}} {#unvariable {lastSoulSteal}};
+	#if {"$cryOfVictory" == "true"}
+	{
+		victory
+	};
+	#if {&{combat}}
+	{
+		#foreach {$combat} {spell}
+		{
+			$spell
+		}
+	};
+	#unvariable {combat};
+	#if {"$corpseCutter" == "true"}
+	{
+		harvest components corpse
+	};
+	#if {"$harvestTeeth" == "true" && "$bot" != "true"}
+	{
+		harvest teeth corpse
+	};
+	#if {"$bot" == "true"}
+	{
+		x
+	};
+	#if {"$automove" == "true" && "$bot" == "true"}
+	{
+		wander;
+		#if {"$taunt" == "true"}
+		{
+			taunt
+		}
+	}
+}
+{9}
+
 #ACTION {^!!SOUND(move/%1)$}
 {
 	play footstep.ogg
@@ -1517,45 +1557,6 @@
 }
 {9}
 
-#ACTION {^Your blood freezes as you hear%1death cry!$}
-{
-	get all.$throwWeapon corpse;
-	get coins corpse;
-	#if {"$cryOfVictory" == "true"}
-	{
-		victory
-	};
-	#if {&{combat}}
-	{
-		#foreach {$combat} {spell}
-		{
-			$spell
-		}
-	};
-	#unvariable {combat};
-	#if {"$corpseCutter" == "true"}
-	{
-		harvest components corpse
-	};
-	#if {"$harvestTeeth" == "true" && "$bot" != "true"}
-	{
-		harvest teeth corpse
-	};
-	#if {"$bot" == "true"}
-	{
-		x
-	};
-	#if {"$automove" == "true" && "$bot" == "true"}
-	{
-		wander;
-		#if {"$taunt" == "true"}
-		{
-			taunt
-		}
-	}
-}
-{9}
-
 #ACTION {^Your blue dart singes %2.$}
 {
 	play blue-dart.ogg
@@ -1568,6 +1569,12 @@
 	{
 		c displacement
 	}
+}
+{9}
+
+#ACTION {^Your experience cap is %1 exp.$}
+{
+	#variable {cap} {%1}
 }
 {9}
 
@@ -1631,7 +1638,7 @@
 }
 {9}
 
-#ACTION {^{Dentin|Kenai|Wyvren|Heart|Fikh|Xael|Reorx|Talos|Squeak|Cygnii|Tarrant|Shadowfax|Draak|Vember|Islaine|Bobcat|Byung|Xandar|Grolantor|Coolbeans|Slamin|Schlyne|Morpheus|Gandor|Glorida|Shift|Mutt|The Lag Monster|The pantheon of gods} has restored you to full health!$}
+#ACTION {^{Dentin|Kenai|Wyvren|Heart|Fikh|Xael|Reorx|Talos|Squeak|Cygnii|Tarrant|Shadowfax|Draak|Vember|Islaine|Bobcat|Byung|Xandar|Grolantor|Coolbeans|Slamin|Schlyne|Morpheus|Gandor|Glorida|Shift|Mutt|The Lag Monster|The pantheon of gods} {has restored|restores} you to full health!$}
 {
 	play restore.ogg
 }
@@ -1968,6 +1975,28 @@
 {
 	#variable {autoheal} {true};
 	#showme {Autoheal is now on.}
+}
+{9}
+
+#ALIAS {^brag cap$}
+{
+	#line {gag};
+	cap;
+	say My experience cap is $cap exp.
+}
+{9}
+
+#ALIAS {^brag gt cap$}
+{
+	#line {gag};
+	cap;
+	gt My experience cap is $cap exp.
+}
+{9}
+
+#ALIAS {^cap$}
+{
+	level | tail -1
 }
 {9}
 
