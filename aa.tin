@@ -1129,7 +1129,10 @@
 {
 	get all.$throwWeapon corpse;
 	get coins corpse;
-	#if {&{lastSoulSteal}} {#unvariable {lastSoulSteal}};
+	#if {&{lastSoulSteal}}
+	{
+		#unvariable {lastSoulSteal}
+	};
 	#if {"$cryOfVictory" == "true"}
 	{
 		victory
@@ -1208,7 +1211,20 @@
 
 #ACTION {^A ball of light flies idly in circles around your head.}
 {
-	emot flies idly in circles around a ball of light.
+	#if {1d10 == "10"}
+	{
+		#line {gag};
+		emot grabs a ball of light and quickly stuffs it down their pants.;
+		#line {gag};
+		say Check it out, they glow!
+	};
+	#else
+	{
+		#else
+		{
+			emot flies idly in circles around a ball of light.
+		}
+	}
 }
 {9}
 
@@ -1524,6 +1540,12 @@
 #ACTION {^You smell something foul. Ok, who farted?$}
 {
 	rand_play fart
+}
+{9}
+
+#ACTION {^You stand in the center of a raging blizzard created by your own magic.$}
+{
+	play blizard.ogg
 }
 {9}
 
@@ -2113,6 +2135,12 @@
 }
 {9}
 
+#ALIAS {^{fam|fame}$}
+{
+	show fame
+}
+{9}
+
 #ALIAS {^{fb|fireb|fireba|firebal|fireball}$}
 {
 	#if {"$fireball" == "true"}
@@ -2480,4 +2508,4 @@
 #VARIABLE         {healSpell}  {cure light wounds}
 #VARIABLE         {name}  {Name}
 #VARIABLE         {password}  {password}
-#VARIABLE         {soundCommand}  {paplay}
+#VARIABLE         {soundCommand}  {ogg123 -q}
