@@ -1211,19 +1211,16 @@
 
 #ACTION {^A ball of light flies idly in circles around your head.}
 {
-	#if {1d10 == "10"}
+	#if {1d10 == "10" && "$sex" == "male"}
 	{
 		#line {gag};
-		emot grabs a ball of light and quickly stuffs it down their pants.;
+		emot grabs a ball of light and quickly stuffs it down his pants.;
 		#line {gag};
-		say Check it out, they glow!
+		say Hey check it out, they glow!
 	};
 	#else
 	{
-		#else
-		{
-			emot flies idly in circles around a ball of light.
-		}
+		emot flies idly in circles around a ball of light.
 	}
 }
 {9}
@@ -1306,6 +1303,12 @@
 #ACTION {^REBOOT IN APPROXIMATELY %1 MINUTES, FYI.$}
 {
 	play reboot-%1.ogg
+}
+{9}
+
+#ACTION {^Reconnecting.$}
+{
+	set msp on
 }
 {9}
 
@@ -1660,7 +1663,7 @@
 }
 {9}
 
-#ACTION {^{Dentin|Kenai|Wyvren|Heart|Fikh|Xael|Reorx|Talos|Squeak|Cygnii|Tarrant|Shadowfax|Draak|Vember|Islaine|Bobcat|Byung|Xandar|Grolantor|Coolbeans|Slamin|Schlyne|Morpheus|Gandor|Glorida|Shift|Mutt|The Lag Monster|The pantheon of gods} {has restored|restores} you to full health!$}
+#ACTION {^{Dentin|Kenai|Wyvren|Heart|Fikh|Xael|Reorx|Talos|Squeak|Cygnii|Taran|Tarrant|Shadowfax|Draak|Vember|Islaine|Bobcat|Byung|Xandar|Grolantor|Coolbeans|Slamin|Schlyne|Morpheus|Gandor|Glorida|Shift|Mutt|The Lag Monster|The pantheon of gods} {has restored|restores} you to full health!$}
 {
 	play restore.ogg
 }
@@ -2182,6 +2185,30 @@
 }
 {9}
 
+#ALIAS {^{scan|sca} {e|ea|eas|east}$}
+{
+	\scan | grep -i east
+}
+{9}
+
+#ALIAS {^{scan|sca} {n|no|nor|north}$}
+{
+	\scan | grep -i north
+}
+{9}
+
+#ALIAS {^{scan|sca} {s|so|sou|sout|south}$}
+{
+	\scan | grep -i south
+}
+{9}
+
+#ALIAS {^{scan|sca} {w|we|wes|west}$}
+{
+	\scan | grep -i west
+}
+{9}
+
 #ALIAS {^{sl|sle|slee|sleep}$}
 {
 	#variable {position} {sleep};
@@ -2350,7 +2377,7 @@
 #CONFIG           {256 COLORS}  {ON}
 #CONFIG           {AUTO TAB}  {5000}
 #CONFIG           {BUFFER SIZE}  {20000}
-#CONFIG           {CHARSET}  {ASCII}
+#CONFIG           {CHARSET}  {UTF-8}
 #CONFIG           {COMMAND COLOR}  {<078>}
 #CONFIG           {COMMAND ECHO}  {ON}
 #CONFIG           {CONNECT RETRY}  {15}
