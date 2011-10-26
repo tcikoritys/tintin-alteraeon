@@ -1,3 +1,5 @@
+#alias {{ge|get|tak|take} %1} {tweetQuest;\get %1} {5}
+#alias {{ta|tal|talk} %1} {#send {talk %1};#delay {10} {tweetQuest}} {5}
 #ACTION {%1 has %2 of %3 hitpoints.$}
 {
 	#if {"$autoheal" == "true"}
@@ -46,7 +48,7 @@
 }
 {1}
 
-#ACTION {%1's %2 $rescue{!\.}$}
+#ACTION {%1's %2 $rescue{!|.}$}
 {
 	r $rescue
 }
@@ -204,6 +206,18 @@
 	play levelup.ogg
 }
 {5}
+
+#ACTION {^   {1|2|3|4|5|6|7|8|9}     { 1| 2| 3| 4| 5| 6| 7| 8| 9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35}  %1}
+{
+	#if {"$getLastQuest" == "true"}
+	{
+		#line {gag};
+		#variable {lastQuest} {%1};
+		#unvariable {getLastQuest};
+		#if {!&{lastTweet}} {#variable {lastTweet} {%1}}
+	}
+}
+{1}
 
 #ACTION {^ %1 bloodmist%2}
 {
@@ -1127,8 +1141,8 @@
 
 #ACTION {^!!SOUND(combat/mobdeath%1)$}
 {
-	get all.$throwWeapon corpse;
-	get coins corpse;
+	#send {get all.$throwWeapon corpse;
+	get coins corpse};
 	#if {&{lastSoulSteal}}
 	{
 		#unvariable {lastSoulSteal}
@@ -1164,7 +1178,8 @@
 		{
 			taunt
 		}
-	}
+	};
+	tweetQuest
 }
 {9}
 
@@ -1741,13 +1756,16 @@
 }
 {1}
 
-#ALIAS {{loa|load}}
+#ALIAS {^{loa|load}$}
 {
+	#variable {getLastQuest} {true};
+	cap;
 	spells;
 	#cr;
 	#cr;
 	#cr;
 	#cr;
+	deed | head -3 | grep -v deed;
 	experience | grep -i you have lost;
 	whoami | grep -i tall.;
 	skills;
@@ -1757,7 +1775,7 @@
 	#cr;
 	#cr
 }
-{1}
+{9}
 
 #ALIAS {{r|re|res|resc|rescu|rescue} %1}
 {
@@ -2092,6 +2110,19 @@
 }
 {9}
 
+#ALIAS {tweetQuest}
+{
+	#variable {getLastQuest} {true};
+	#line {gag};
+	deed | head -3 | grep -v deed;
+	#if {"$lastQuest" != "$lastTweet" && "$twitter" == "true"}
+	{
+		tweet $name completed quest: $lastQuest #AlterAeon
+	};
+	#variable {lastTweet} {$lastQuest}
+}
+{9}
+
 #ALIAS {^{ble|bles|bless}}
 {
 	#if {"$bless" == "true"}
@@ -2188,6 +2219,18 @@
 #ALIAS {^{scan|sca} {e|ea|eas|east}$}
 {
 	\scan | grep -i east
+}
+{9}
+
+#ALIAS {^{scan|sca} {d|do|dow|down}$}
+{
+	\scan | grep -i down
+}
+{9}
+
+#ALIAS {^{scan|sca} {u|up}$}
+{
+	\scan | grep -i up
 }
 {9}
 
