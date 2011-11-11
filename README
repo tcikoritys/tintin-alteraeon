@@ -27,7 +27,7 @@ Twitter:
 You can have achievements like backstabs, levels, and achievements posted to Twitter. If you have the CLI Twitter client TTYtter installed and configured correctly type twitter and events will be posted. To turn it off type notwitter.
 
 Commands:
-In most cases for longer words you can type part of the command. You will have to expirement because the  commands start where mud commends end. For example, if you type fire you will connect to the fire channel. If, however, you type fireb all the way through fireball you will cast the spell fireball if you have it.
+In most cases for longer words you can type part of the command. You will have to experiment because the  commands start where mud commends end. For example, if you type fire you will connect to the fire channel. If, however, you type fireb all the way through fireball you will cast the spell fireball if you have it.
 alt+1 through alt+0 play last 1 through tenth message.
 alt+u northwest
 alt+i north
@@ -46,6 +46,7 @@ bless cast bless n yourself
 bless target cast bless on someone else
 bm or bloodmist cast bloodmist
 bm or bloodmist target cast bloodmist on target
+brag cap or brag gt cap will brag your experience cap. this is not availalbe in normatl brag commands.
 fireball and fb cast fireball
 fireball and fb target cast fireball on a specific target
 cfb or cfireball channelcast fireball
@@ -64,6 +65,7 @@ If you have the kick skill k will be aliased to kick.
 b is currently set to backstab. before using it you should set your stab weapon with the swield alias.
 swield set your backstab weapon. e.g. swield dagger
 load will show all your skills and spells and set the variables necessary for their automatic use.
+scan direction scans in a specific direction where direction is up, down, north, east, west, south. When scanning north or south the subdirections like northeast or southwest wil be included for that direction.
 t will throw a weapon.
 Some of thee will work  even if you don't have the skill, this will change as work progresses.
 autostore put certain items in your container. For now just soulstones.
