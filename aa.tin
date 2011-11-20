@@ -182,13 +182,13 @@
 
 #ACTION {^A clay man cracks and crumbles, becoming a pile of dust and dirt.$}
 {
-	play clay-man-death.ogg
+	play clay-man-death
 }
 {3}
 
 #ACTION {^A clay man forms from nearby dirt and clay to serve you.$}
 {
-	play clay-man-rises.ogg
+	play clay-man-rises
 }
 {3}
 
@@ -216,7 +216,7 @@
 
 #ACTION {^                          YOU GAIN A LEVEL!$}
 {
-	play levelup.ogg
+	play levelup
 }
 {5}
 
@@ -466,37 +466,37 @@
 
 #ACTION {^A %1 claws at and begins eating the corpse of %2!$}
 {
-	play undead-eating.ogg
+	play undead-eating
 }
 {5}
 
 #ACTION {^A %1 rips and tears into the corpse of %2, devouring it!$}
 {
-	play undead-eating.ogg
+	play undead-eating
 }
 {5}
 
 #ACTION {^A ghoul bites %1 with diseased, razor sharp teeth!$}
 {
-	play ghoul-attack.ogg
+	play ghoul-attack
 }
 {5}
 
 #ACTION {^A ghoul jumps at %1 clawing and biting!$}
 {
-	play ghoul-attack.ogg
+	play ghoul-attack
 }
 {5}
 
 #ACTION {^A ghoul rips and tears into %1 with filthy, diseased claws!$}
 {
-	play ghoul-attack.ogg
+	play ghoul-attack
 }
 {5}
 
 #ACTION {^A skele{tal mage|ton} rips a bone from the corpse of %1 as a replacement.$}
 {
-	play bone-rip.ogg
+	play bone-rip
 }
 {5}
 
@@ -511,43 +511,43 @@
 
 #ACTION {^A zombie gnaws hungrily on %1 with filthy, rotten teeth.$}
 {
-	play ghoul-attack.ogg
+	play ghoul-attack
 }
 {5}
 
 #ACTION {^A zombie slams into %1!$}
 {
-	play bash.ogg
+	play bash
 }
 {5}
 
 #ACTION {^An ethereal hand appears and attacks %1 from behind!$}
 {
-	play spectral-hand.ogg
+	play spectral-hand
 }
 {5}
 
 #ACTION {^As %1 {hits|hit} %2, a bright fan of lightning bolts leaps from %3 hands to blast %4!$}
 {
-	play shocking-hit.ogg
+	play shocking-hit
 }
 {5}
 
 #ACTION {^As you hit %1, a bright flash of %2 fire leaps from your hands to scorch %3!$}
 {
-	play burning-hit.ogg
+	play burning-hit
 }
 {5}
 
 #ACTION {^The clay man crumbles back into the dust and dirt from whence it came.$}
 {
-	play clay-man-death.ogg
+	play clay-man-death
 }
 {5}
 
 #ACTION {^The light above the wizard's shop flickers for an instant, looks like it needs maintenance.$}
 {
-	play wizard-shop-light.ogg
+	play wizard-shop-light
 }
 {5}
 
@@ -559,13 +559,13 @@
 
 #ACTION {^You bash full tilt into %1!$}
 {
-	play bash.ogg
+	play bash
 }
 {5}
 
 #ACTION {^You bash headfirst into %1!$}
 {
-	play bash.ogg
+	play bash
 }
 {5}
 
@@ -590,37 +590,37 @@
 
 #ACTION {^You catch %1 a little off center with your bash!$}
 {
-	play bash.ogg
+	play bash
 }
 {5}
 
 #ACTION {^You create a thick fog of icy particles from the air.$}
 {
-	play ice-fog.ogg
+	play ice-fog
 }
 {5}
 
 #ACTION {^You disarm %1 and send %2 weapon flying!$}
 {
-	play disarm.ogg
+	play disarm
 }
 {5}
 
 #ACTION {^You enter a huge portal.$}
 {
-	play portal.ogg
+	play portal
 }
 {5}
 
 #ACTION {^You find a small bladder of %1 fluid, and carefully tie off the ends before removing it.$}
 {
-	play corpsecutter.ogg
+	play corpsecutter
 }
 {5}
 
 #ACTION {^You find an out-of-place dark mass, and carefully cut it from its surroundings.$}
 {
-	play corpsecutter.ogg
+	play corpsecutter
 }
 {5}
 
@@ -636,37 +636,37 @@
 	{
 		h
 	};
-	play heart.ogg
+	play heart
 }
 {5}
 
 #ACTION {^You hear the loud -clang- *CLANG* of a hammer on anvil to the north.$}
 {
-	play hammer-on-anvil.ogg
+	play hammer-on-anvil
 }
 {5}
 
 #ACTION {^You kick %1 in the back of the head, causing critical damage.$}
 {
-	play fatal-kick.ogg
+	play fatal-kick
 }
 {5}
 
 #ACTION {^You land your roundhouse kick squarely on%1!$}
 {
-	play kick.ogg
+	play kick
 }
 {5}
 
 #ACTION {^You make a small incision and drain some fluid into a vial of bile.$}
 {
-	play corpsecutter.ogg
+	play corpsecutter
 }
 {5}
 
 #ACTION {^You roughly hack out a small bladder of %1 fluid and tie off the ends with string.$}
 {
-	play corpsecutter.ogg
+	play corpsecutter
 }
 {5}
 
@@ -677,7 +677,7 @@
 	{
 		tweet $name was defeated in combat and lost %1 exp for a total loss of $lostExp experience points. #AlterAeon
 	};
-	rand_play death;
+	play death;
 	#line {gag};
 	experience lost | grep -i you have lost
 }
@@ -685,13 +685,13 @@
 
 #ACTION {^Your full circle kick plants a foot right where it should be.$}
 {
-	play kick.ogg
+	play kick
 }
 {5}
 
 #ACTION {^Your kick to %1 could have been better, but you got the point across.$}
 {
-	play kick.ogg
+	play kick
 }
 {5}
 
@@ -703,25 +703,25 @@
 
 #ACTION {%1 {conjures|conjure} and {throws|throw} a %2 fireball at %3!$}
 {
-	play fireball.ogg
+	play fireball
 }
 {8}
 
 #ACTION {%1 {creates|create} and magically {throws|throw} bolts of ice at %2!$}
 {
-	play icebolt.ogg
+	play icebolt
 }
 {8}
 
 #ACTION {%1 {throws|throw} %2 fireball at %3!$}
 {
-	play fireball.ogg
+	play fireball
 }
 {8}
 
 #ACTION {%1 {throws|throw} a ball of freezing unfire at %1!$}
 {
-	play coldfire.ogg
+	play coldfire
 }
 {8}
 
@@ -745,7 +745,7 @@
 
 #ACTION {^Yo%1miss%2{tonberry|moogle}.$}
 {
-	play ff-miss.ogg
+	play ff-miss
 }
 {8}
 
@@ -793,11 +793,11 @@
 {
 	#if {"%1" != "misses"}
 	{
-		play ff-hit1.ogg
+		play ff-hit1
 	};
 	#else
 	{
-		play ff-miss.ogg
+		play ff-miss
 	}
 }
 {8}
@@ -808,101 +808,101 @@
 	{
 		#if {1d2 == 2}
 		{
-			play ff-hit2.ogg
+			play ff-hit2
 		};
 		#else
 		{
-			play ff-hit1.ogg
+			play ff-hit1
 		}
 	};
 	#else
 	{
-		play ff-miss.ogg
+		play ff-miss
 	}
 }
 {8}
 
 #ACTION {%* is engulfed in a writhing mass of biting ethereal mouths!$}
 {
-	play rotting-sphere-hit.ogg
+	play rotting-sphere-hit
 }
 {9}
 
 #ACTION {%1 (unique)$}
 {
-	play unique.ogg
+	play unique
 }
 {9}
 
 #ACTION {%1 arrives from a huge portal.$}
 {
-	play portal.ogg
+	play portal
 }
 {9}
 
 #ACTION {%1 burps at %2.$}
 {
-	rand_play burp
+	play burp
 }
 {9}
 
 #ACTION {%1 burps in your general direction.$}
 {
-	rand_play burp
+	play burp
 }
 {9}
 
 #ACTION {%1 bur{ps|p}.$}
 {
-	rand_play burp
+	play burp
 }
 {9}
 
 #ACTION {%1 complet{es|e} the spell, and hur{ls|l} a ghastly looking ball of nether-energy at %2!$}
 {
-	play rotting-sphere.ogg
+	play rotting-sphere-launch
 }
 {9}
 
 #ACTION {%1 delivers a powerful kick to%2!$}
 {
-	play kick.ogg
+	play kick
 }
 {9}
 
 #ACTION {%1 disarms %2 and sends %3 weapon flying!$}
 {
-	play disarm.ogg
+	play disarm
 }
 {9}
 
 #ACTION {%1 disarms you and sends your weapon flying!$}
 {
-	play disarm.ogg
+	play disarm
 }
 {9}
 
 #ACTION {%1 enters a huge portal and disappears.$}
 {
-	play portal.ogg
+	play portal
 }
 {9}
 
 #ACTION {%1 farts, and is engulfed in a swirling green stench cloud.$}
 {
-	rand_play fart
+	play fart
 }
 {9}
 
 #ACTION {%1 hits, and a bright fan of lightning bolts blasts %2!$}
 {
-	play shocking-hit.ogg
+	play shocking-hit
 }
 {9}
 
 #ACTION {%1 hits, and a bright flash of %2 fire scorches %3!$}
 {
-	play burning-hit.ogg
+	play burning-hit
 }
 {9}
 
@@ -914,19 +914,19 @@
 
 #ACTION {%1 is singed by a blue dart of flame.$}
 {
-	play blue-dart.ogg
+	play blue-dart
 }
 {9}
 
 #ACTION {%1 is struck by bolts of ice from %2!$}
 {
-	play icebolt.ogg
+	play icebolt
 }
 {9}
 
 #ACTION {%1 kicks %2 in the back of the head, and you hear a faint crack of something breaking.$}
 {
-	play fatal-kick.ogg
+	play fatal-kick
 }
 {9}
 
@@ -934,74 +934,74 @@
 {
 	#if {"%2" != "misses"}
 	{
-		play leap-attack.ogg
+		play leap-attack
 	}
 }
 {9}
 
 #ACTION {%1 lightly touches %2 and crackling %3 glow surrounds %4 hands.$}
 {
-	play shocking-grasp.ogg
+	play shocking-grasp
 }
 {9}
 
 #ACTION {%1 lightly {touches|touch} %2 hands, and a crackling %3 glow surrounds them.$}
 {
-	play shocking-grasp.ogg
+	play shocking-grasp
 }
 {9}
 
 #ACTION {%1 lightly {touches|touch} %2, and {pale|a pale} red glow {surrounds|surround} %3.$}
 {
-	play burning-hands.ogg
+	play burning-hands
 }
 {9}
 
 #ACTION {%1 now watches over %2.$}
 {
-	play bless.ogg
+	play bless
 }
 {9}
 
 #ACTION {%1 raises A prepared %2 corpse into %3.$}
 {
-	play raise-undead.ogg
+	play raise-undead
 }
 {9}
 
 #ACTION {%1 shield bash %2{!|.}$}
 {
-	play bash.ogg
+	play bash
 }
 {9}
 
 #ACTION {%1 takes the full force of %2 bodyslam bash!$}
 {
-	play bash.ogg
+	play bash
 }
 {9}
 
 #ACTION {%1 takes the full force of %2's beautiful full circle kick!$}
 {
-	play kick.ogg
+	play kick
 }
 {9}
 
 #ACTION {%1 taunts %2, who suddenly attacks!$}
 {
-	rand_play taunt
+	play taunt
 }
 {9}
 
 #ACTION {%1 ta{ps|p} {your|his|its|her} life, and {a swarm of|a} blood red {demons|winged demon} {fly|flaps} quickly toward %2!$}
 {
-	play bloodmist.ogg
+	play bloodmist-launch
 }
 {9}
 
 #ACTION {%1 tries to disarm%2.$}
 {
-	play disarm-fail.ogg
+	play disarm-fail
 }
 {9}
 
@@ -1009,38 +1009,38 @@
 {
 	#if {"%2" != "misses"}
 	{
-		play whip.ogg
+		play whip
 	}
 }
 {9}
 
 #ACTION {%1 wield%2.$}
 {
-	play wield.ogg
+	play wield
 }
 {9}
 
 #ACTION {%1 {are|is} engulfed in flames!$}
 {
-	play flame-engulf.ogg
+	play flame-engulf
 }
 {9}
 
 #ACTION {%1 {fart|farts uncerimoniously} in %2 direction.$}
 {
-	rand_play fart
+	play fart
 }
 {9}
 
 #ACTION {%1 {goes|go} berserk in battle!$}
 {
-	rand_play berserk
+	play berserk
 }
 {9}
 
 #ACTION {%1 {parry|parries} %2 attack.$}
 {
-	play parry.ogg
+	play parry
 }
 {9}
 
@@ -1048,14 +1048,14 @@
 {
 	#if {"%2" != "misses"}
 	{
-		play punch.ogg
+		play punch
 	}
 }
 {9}
 
 #ACTION {%1 {shouts|shout} a challenge {to|trying to draw} everyone near{by.|by into a fight!}$}
 {
-	rand_play taunt
+	play taunt
 }
 {9}
 
@@ -1063,14 +1063,14 @@
 {
 	#if {"%2" != "misses"}
 	{
-		play slash.ogg
+		play slash
 	}
 }
 {9}
 
 #ACTION {%1 {slowly fade|fades slowly} out of existence.$}
 {
-	play invisibility.ogg
+	play invisibility
 }
 {9}
 
@@ -1078,32 +1078,32 @@
 {
 	#if {"%2" != "misses"}
 	{
-		play stab.ogg
+		play stab
 	}
 }
 {9}
 
 #ACTION {%1 {tells the clan|tells you|tells the group|replies to you},%2'$}
 {
-	play msg.ogg
+	play msg
 }
 {9}
 
 #ACTION {%1 {they|hands} take on a sickly green tint.$}
 {
-	play sickening-touch.ogg
+	play sickening-touch
 }
 {9}
 
 #ACTION {%1 {throw|throws} %2 at %3!$}
 {
-	play throw_hit.ogg
+	play throw_hit
 }
 {9}
 
 #ACTION {%1 {throw|throws}%1at%2, but miss.$}
 {
-	play throw_miss.ogg
+	play throw_miss
 }
 {9}
 
@@ -1111,7 +1111,7 @@
 {
 	#if {"%2" != "misses"}
 	{
-		play flail.ogg
+		play flail
 	}
 }
 {9}
@@ -1120,7 +1120,7 @@
 {
 	#if {"%1" != "misses"}
 	{
-		play flail.ogg
+		play flail
 	}
 }
 {9}
@@ -1191,7 +1191,7 @@
 
 #ACTION {^!!SOUND(move/%1)$}
 {
-	play footstep.ogg
+	play footstep
 }
 {9}
 
@@ -1199,11 +1199,11 @@
 {
 	#if {"%2" == "her"}
 	{
-		rand_play female-victory
+		play female-victory
 	};
 	#else
 	{
-		rand_play male-victory
+		play male-victory
 	}
 }
 {9}
@@ -1226,18 +1226,18 @@
 
 #ACTION {^A %1 bolt of lightning leaps from you to %2!$}
 {
-	play lightningbolt.ogg
+	play lightningbolt
 }
 {9}
 
 #ACTION {^A ball of light flies idly in circles around your head.}
 {
-	#if {1d10 == "10" && "$sex" == "male"}
+	#if {1d10 > "8" && "$sex" == "male"}
 	{
 		#line {gag};
 		emot grabs a ball of light and quickly stuffs it down his pants.;
 		#line {gag};
-		say Hey check it out, they glow!
+		emot says, 'Dude check it out, they glow!'
 	};
 	#else
 	{
@@ -1248,37 +1248,37 @@
 
 #ACTION {^A beastly fido has arrived.$}
 {
-	play beastly-fido.ogg
+	play beastly-fido
 }
 {9}
 
 #ACTION {^A beastly looking dog growls at you as you pass.$}
 {
-	play beastly-fido.ogg
+	play beastly-fido
 }
 {9}
 
 #ACTION {^A blood red winged demon suddenly bursts into a spray of blood and falls to the ground.$}
 {
-	play bloodmist-death.ogg
+	play bloodmist-death
 }
 {9}
 
 #ACTION {^A blood red winged demon {bites|claws at} %1!$}
 {
-	play bloodmist-attack.ogg
+	play bloodmist-attack
 }
 {9}
 
 #ACTION {^A blue dart of flame singes you!$}
 {
-	play blue-dart.ogg
+	play blue-dart
 }
 {9}
 
 #ACTION {^A crackling blue-white glow suddenly surrounds %1 hands.$}
 {
-	play shocking-grasp.ogg
+	play shocking-grasp
 }
 {9}
 
@@ -1293,19 +1293,19 @@
 
 #ACTION {^A pale red glow suddenly surrounds %1 hands.}
 {
-	play burning-hands.ogg
+	play burning-hands
 }
 {9}
 
 #ACTION {^A searing white lightning bolt leaps from %1 to %2!$}
 {
-	play lightningbolt.ogg
+	play lightningbolt
 }
 {9}
 
 #ACTION {^A shower of %1 sparks suddenly engulfs %2!$}
 {
-	play shower-of-sparks.ogg
+	play shower-of-sparks
 }
 {9}
 
@@ -1330,13 +1330,13 @@
 
 #ACTION {^REBOOT IMPENDING, EVERYONE PLEASE RECALL AND SAVE.$}
 {
-	play reboot.ogg
+	play reboot
 }
 {9}
 
 #ACTION {^REBOOT IN APPROXIMATELY %1 MINUTES, FYI.$}
 {
-	play reboot-%1.ogg
+	play reboot-%1
 }
 {9}
 
@@ -1354,7 +1354,7 @@
 
 #ACTION {^The Master Tonberry is DEAD!$}
 {
-	play ff-boss-death.ogg
+	play ff-boss-death
 }
 {9}
 
@@ -1375,7 +1375,7 @@
 
 #ACTION {^The shadow fiend slowly dissipates and returns to its home plane.$}
 {
-	play shadow-fiend-leave.ogg
+	play shadow-fiend-leave
 }
 {9}
 
@@ -1400,25 +1400,25 @@
 
 #ACTION {^You are pretty hurt.$}
 {
-	play pretty-hurt.ogg
+	play pretty-hurt
 }
 {9}
 
 #ACTION {^You are surrounded by a strong force shield.$}
 {
-	play shield.ogg
+	play shield
 }
 {9}
 
 #ACTION {^You attempt to goad %1 into attacking you.$}
 {
-	rand_play taunt
+	play taunt
 }
 {9}
 
 #ACTION {^You burp in the general direction of %1.}
 {
-	rand_play burp
+	play burp
 }
 {9}
 
@@ -1445,11 +1445,11 @@
 {
 	#if {"$sex" == "female"}
 	{
-		rand_play female-victory
+		play female-victory
 	};
 	#else
 	{
-		rand_play male-victory
+		play male-victory
 	}
 }
 {9}
@@ -1468,13 +1468,13 @@
 
 #ACTION {^You fart then look around innocently.$}
 {
-	rand_play fart
+	play fart
 }
 {9}
 
 #ACTION {^You fart, and are totally amazed at the resulting smell.$}
 {
-	rand_play fart
+	play fart
 }
 {9}
 
@@ -1489,7 +1489,7 @@
 
 #ACTION {^You feel as though %1 is watching over you.$}
 {
-	play bless.ogg
+	play bless
 }
 {9}
 
@@ -1513,7 +1513,7 @@
 
 #ACTION {^You follow %1 {northeast|northwest|north|southeast|southwest|south|east|west|up|down|out}.$}
 {
-	play footstep.ogg
+	play footstep
 }
 {9}
 
@@ -1534,7 +1534,7 @@
 
 #ACTION {^You let out a mighty roar as the blood fever takes hold of you!$}
 {
-	rand_play berserk
+	play berserk
 }
 {9}
 
@@ -1555,7 +1555,7 @@
 
 #ACTION {^You raise A prepared %1 corpse into %2!$}
 {
-	play raise-undead.ogg
+	play raise-undead
 }
 {9}
 
@@ -1576,25 +1576,25 @@
 
 #ACTION {^You smell something foul. Ok, who farted?$}
 {
-	rand_play fart
+	play fart
 }
 {9}
 
 #ACTION {^You stand in the center of a raging blizzard created by your own magic.$}
 {
-	play blizard.ogg
+	play blizard
 }
 {9}
 
 #ACTION {^You taunt %1, and {she|he|it} attacks you!$}
 {
-	rand_play taunt
+	play taunt
 }
 {9}
 
 #ACTION {^You try to disarm%1but fail.$}
 {
-	play disarm-fail.ogg
+	play disarm-fail
 }
 {9}
 
@@ -1606,19 +1606,19 @@
 
 #ACTION {^You use your faith in %1 as a shield to protect you.$}
 {
-	play faith-shield.ogg
+	play faith-shield
 }
 {9}
 
 #ACTION {^You {tell|reply}%1,%2'$}
 {
-	play sendmsg.ogg
+	play sendmsg
 }
 {9}
 
 #ACTION {^Your blue dart singes %2.$}
 {
-	play blue-dart.ogg
+	play blue-dart
 }
 {9}
 
@@ -1639,7 +1639,7 @@
 
 #ACTION {^Your lungs feel funny, kinda dry... water anyone?$}
 {
-	play water-breathing.ogg
+	play water-breathing
 }
 {9}
 
@@ -1674,7 +1674,7 @@
 
 #ACTION {^Your skin tingles as you pass through the magical barrier.$}
 {
-	play ff-barrier.ogg
+	play ff-barrier
 }
 {9}
 
@@ -1699,13 +1699,13 @@
 
 #ACTION {^{Dentin|Dowart|Kenai|Wyvren|Heart|Fikh|Xael|Reorx|Talos|Squeak|Cygnii|Taran|Tarrant|Shadowfax|Draak|Vember|Islaine|Bobcat|Byung|Xandar|Grolantor|Coolbeans|Slamin|Schlyne|Morpheus|Gandor|Glorida|Shift|Mutt|The Lag Monster|The pantheon of gods} {has restored|restores} you to full health!$}
 {
-	play restore.ogg
+	play restore
 }
 {9}
 
 #ACTION {^{Fats the moogle|A warrior moogle|The moogle guard|Stripe the moogle|The librarian moogle|A tan moogle|Bert the moogle|A white moogle|A gray moogle|A baby moogle|An injured moogle|A small tonberry|Maria the water faerie|The soul faerie} is DEAD!$}
 {
-	play ff-death.ogg
+	play ff-death
 }
 {9}
 
@@ -2380,13 +2380,7 @@
 
 #ALIAS {play %1}
 {
-	#system {$soundCommand "sounds/%1"&}
-}
-{9}
-
-#ALIAS {rand_play %1}
-{
-	#system {$soundCommand "$(shuf -n 1 -e sounds/%1*.ogg)"&}
+	#system {$soundCommand "$(shuf -n 1 -e sounds/%1*ogg)"&}
 }
 {9}
 
@@ -2617,6 +2611,6 @@
 #VARIABLE         {brewContainer}  {bowl}
 #VARIABLE         {harmSpell}  {cause light wounds}
 #VARIABLE         {healSpell}  {cure light wounds}
-#VARIABLE         {name}  {name}
+#VARIABLE         {name}  {Name}
 #VARIABLE         {password}  {password}
 #VARIABLE         {soundCommand}  {ogg123 -q}
