@@ -1,4 +1,3 @@
-#act {^You summon A shadow fiend, and your offering of %1 is accepted.$} {play summon-shadow-fiend} {9}
 #ACTION {%1 has %2 of %3 hitpoints.$}
 {
 	#if {"$autoheal" == "true"}
@@ -1257,7 +1256,7 @@
 
 #ACTION {^A ball of light flies idly in circles around your head.}
 {
-	#if {1d100 > "99"}
+	#if {1d1000 > "999"}
 	{
 		#line {gag};
 		#if {"$sex" == "female"}
@@ -1335,6 +1334,12 @@
 }
 {9}
 
+#ACTION {^A shadow fiend {has left the group|stops following you}.$}
+{
+	play shadow-fiend-leave
+}
+{9}
+
 #ACTION {^A shower of %1 sparks suddenly engulfs %2!$}
 {
 	play shower-of-sparks
@@ -1408,12 +1413,6 @@
 #ACTION {^The game has been rebooted.  Please try again in about %1 seconds.$}
 {
 	#delay {%1} {aa}
-}
-{9}
-
-#ACTION {^A shadow fiend has left the group.$}
-{
-	play shadow-fiend-leave
 }
 {9}
 
@@ -1639,6 +1638,12 @@
 	{
 		put soulstone $container
 	}
+}
+{9}
+
+#ACTION {^You summon A shadow fiend, and your offering of %1 is accepted.$}
+{
+	play summon-shadow-fiend
 }
 {9}
 
@@ -2552,6 +2557,8 @@
 #GAG              {^The {corpse|gutted carcass} of%1is no longer suitable for blood sacrifice.$}
 #GAG              {^You can only blood sacrifice corpses with blood in them.$}
 #GAG              {^You didn't find anything by that name.}
+#GAG              {^You emote: %1 grabs a ball of light and quickly stuffs it down {his pants|her shirt}.$}
+#GAG              {^You emote: %1 says, 'Dude check it out, they glow!'$}
 #GAG              {^You haven't had a recent victory worth shouting about.$}
 #GAG              {^Your collected {dragon teeth|teeth} grow restless.  It would be unwise to collect any more.$}
 #GAG              {^kxwt_%*}
