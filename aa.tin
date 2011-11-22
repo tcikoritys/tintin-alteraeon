@@ -1,3 +1,4 @@
+#act {^You summon A shadow fiend, and your offering of %1 is accepted.$} {play summon-shadow-fiend} {9}
 #ACTION {%1 has %2 of %3 hitpoints.$}
 {
 	#if {"$autoheal" == "true"}
@@ -238,6 +239,12 @@
 }
 {5}
 
+#ACTION {^ %1 dying breath%2}
+{
+	#variable {dyingBreath} {true}
+}
+{5}
+
 #ACTION {^ %1 fireball%2}
 {
 	#variable {fireball} {true}
@@ -271,6 +278,12 @@
 #ACTION {^ %1 rancid flesh%2}
 {
 	#variable {rancidFlesh} {true}
+}
+{5}
+
+#ACTION {^ %1 sacred touch%2}
+{
+	#variable {sacredTouch} {true}
 }
 {5}
 
@@ -840,6 +853,12 @@
 }
 {9}
 
+#ACTION {%1 begins casting a dark and profane spell...$}
+{
+	play rotting-sphere-launch
+}
+{9}
+
 #ACTION {%1 burps at %2.$}
 {
 	play burp
@@ -1230,12 +1249,25 @@
 }
 {9}
 
+#ACTION {^A %1 soulstone disappears in a puff of smoke, and you hear demonic laughter all around you.$}
+{
+	play demonic-laughter
+}
+{9}
+
 #ACTION {^A ball of light flies idly in circles around your head.}
 {
-	#if {1d10 > "8" && "$sex" == "male"}
+	#if {1d100 > "99"}
 	{
 		#line {gag};
-		emot grabs a ball of light and quickly stuffs it down his pants.;
+		#if {"$sex" == "female"}
+		{
+			emot grabs a ball of light and quickly stuffs it down her shirt.
+		};
+		#else
+		{
+			emot grabs a ball of light and quickly stuffs it down his pants.
+		};
 		#line {gag};
 		emot says, 'Dude check it out, they glow!'
 	};
@@ -1309,6 +1341,12 @@
 }
 {9}
 
+#ACTION {^A small clawed hand reaches up through the ground, grabs a %1 soulstone, and vanishes.$}
+{
+	play demonic-laughter
+}
+{9}
+
 #ACTION {^Logging in character '%1'$}
 {
 	#line {gag}set ctrigger on
@@ -1373,7 +1411,7 @@
 }
 {9}
 
-#ACTION {^The shadow fiend slowly dissipates and returns to its home plane.$}
+#ACTION {^A shadow fiend has left the group.$}
 {
 	play shadow-fiend-leave
 }
@@ -1428,7 +1466,7 @@
 	{
 		#if {"%2" == "pale blue" || "%2" == "deep blue" || "%2" == "green" || "%2" == "purple" || "%2" == "white"}
 		{
-			put stone $container
+			put soulstone $container
 		};
 		#else
 		{
@@ -1511,6 +1549,15 @@
 }
 {9}
 
+#ACTION {^You feel the pent up vengeance in your blood dissipate.$}
+{
+	#if {"$dyingBreath" == "true"}
+	{
+		c dying breath
+	}
+}
+{9}
+
 #ACTION {^You follow %1 {northeast|northwest|north|southeast|southwest|south|east|west|up|down|out}.$}
 {
 	play footstep
@@ -1583,6 +1630,15 @@
 #ACTION {^You stand in the center of a raging blizzard created by your own magic.$}
 {
 	play blizard
+}
+{9}
+
+#ACTION {^You struggle to pull %1 essence into a %2 soulstone!$}
+{
+	#if {"$bot" == "true" || "$autostore" == "true"}
+	{
+		put soulstone $container
+	}
 }
 {9}
 
@@ -1921,6 +1977,10 @@
 	{
 		c shocking grasp %1
 	};
+	#if {"$sacredTouch" == "true"}
+	{
+		c sacred touch %1
+	};
 	#if {"$sickeningTouch" == "true"}
 	{
 		c sickening touch %1
@@ -2076,6 +2136,10 @@
 	#if {"$shockingGrasp" == "true"}
 	{
 		c shocking grasp
+	};
+	#if {"$sacredTouch" == "true"}
+	{
+		c sacred touch
 	};
 	#if {"$sickeningTouch" == "true"}
 	{
