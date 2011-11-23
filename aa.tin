@@ -767,6 +767,12 @@
 }
 {8}
 
+#ACTION {^You reel in your line and recast it.$}
+{
+	play fishing-cast
+}
+{8}
+
 #ACTION {^You try to disarm %1 fail.}
 {
 	#if {"$disarm" == "true"}
@@ -1576,6 +1582,12 @@
 }
 {9}
 
+#ACTION {^You get a bite, and after a little effort you manage to reel in %1.$}
+{
+	play catch-fish
+}
+{9}
+
 #ACTION {^You have completed the achievement:%1}
 {
 	#if {"$twitter" == "true"}
@@ -1624,6 +1636,12 @@
 }
 {9}
 
+#ACTION {^You reel in %1.$}
+{
+	play catch-fish
+}
+{9}
+
 #ACTION {^You slowly float to the ground.$}
 {
 	#if {"$fly" == "true"}
@@ -1642,6 +1660,12 @@
 #ACTION {^You stand in the center of a raging blizzard created by your own magic.$}
 {
 	play blizard
+}
+{9}
+
+#ACTION {^You start fishing.$}
+{
+	play fishing-cast
 }
 {9}
 
@@ -1682,6 +1706,12 @@
 #ACTION {^You use your faith in %1 as a shield to protect you.$}
 {
 	play faith-shield
+}
+{9}
+
+#ACTION {^You {decide to reel in your line and take a break for a while|finish reeling in your line and stop fishing|are no longer fishing}.$}
+{
+	play stop-fishing
 }
 {9}
 
