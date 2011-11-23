@@ -423,7 +423,7 @@
 
 #ACTION {^ %1shadow fiend%2}
 {
-	#alias {f} {get pale $container;stop;summon demon shadow pale;a} {1}
+	#alias {f} {get pale $container;stop;summon demon fiend pale;a} {1}
 }
 {5}
 
@@ -1313,6 +1313,12 @@
 }
 {9}
 
+#ACTION {^A fissure opens up in the ground beneath a %1 soulstone and swallows it up!$}
+{
+	play demonic-laughter
+}
+{9}
+
 #ACTION {^A magical hammer disappears in a blinding flash of light! (worn by you)}
 {
 	#if {"$spiritHammer" == "true"}
@@ -1349,6 +1355,12 @@
 #ACTION {^A small clawed hand reaches up through the ground, grabs a %1 soulstone, and vanishes.$}
 {
 	play demonic-laughter
+}
+{9}
+
+#ACTION {^It {starts|is} raining.$}
+{
+	play rain
 }
 {9}
 
@@ -1461,6 +1473,7 @@
 
 #ACTION {^You cast the spell to separate soul from body, and pull %1's essence into a %2 soulstone!$}
 {
+	play soulsteal;
 	#if {"$bot" == "true" || "$autostore" == "true"}
 	{
 		#if {"%2" == "pale blue" || "%2" == "deep blue" || "%2" == "green" || "%2" == "purple" || "%2" == "white"}
@@ -1634,6 +1647,7 @@
 
 #ACTION {^You struggle to pull %1 essence into a %2 soulstone!$}
 {
+	play soulsteal;
 	#if {"$bot" == "true" || "$autostore" == "true"}
 	{
 		put soulstone $container

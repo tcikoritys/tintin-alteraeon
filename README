@@ -4,6 +4,7 @@ Storm Dragon
 License LGPL
 
 NOTES:
+If you turn off line invertion tintin++ seems to work better, fewer blank lines etc. To do so, in the game type invert and you should get the message that line invertion mode has been disabled.
 A first attempt at tweeting quest completion has been added. It is likely to be buggy, so please let me know. This is a particularly difficult bit of code to write because there is no uniform quest completion message. So, if you have completed a quest and you have twitter enabled, don't fret if the quest isn't posted right away. There are several actions that trigger it, getting/taking stuff, talking to mobs, killing mobs all cause a check to see if your last completed quest has changed, if so it wil tweet the quest.
 Finally switched over to ogg12 for sounds, so now the requirement of vorbis-tools is more necessary. If for some reason you can not use vorbis toos though just change the soundCommand variable in aa.tin.
 To counter the bug in gone-terminal with the Orca screen reader a spacem has been added to the beginning of each line.
