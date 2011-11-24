@@ -1364,6 +1364,12 @@
 }
 {9}
 
+#ACTION {^After a big fight, you reel in %1.$}
+{
+	play catch-fish
+}
+{9}
+
 #ACTION {^It {starts|is} raining.$}
 {
 	play rain
@@ -1811,6 +1817,12 @@
 #ACTION {^{Fats the moogle|A warrior moogle|The moogle guard|Stripe the moogle|The librarian moogle|A tan moogle|Bert the moogle|A white moogle|A gray moogle|A baby moogle|An injured moogle|A small tonberry|Maria the water faerie|The soul faerie} is DEAD!$}
 {
 	play ff-death
+}
+{9}
+
+#ACTION {^{Something REALLY big catches your line, and breaks it!|Your hook gets stuck on something, and you have to break the line.}$}
+{
+	play fish-line-break
 }
 {9}
 
