@@ -429,7 +429,7 @@
 
 #ACTION {^ %1shadow fiend%2}
 {
-	#alias {f} {get pale $container;stop;summon demon fiend pale;a} {1}
+	#alias {^f$} {#if {&{position}} {getup};get blue soulstone $container;stop;summon demon fiend soulstone;a;#if {&{position}} {$position}} {1}
 }
 {5}
 
@@ -1105,6 +1105,12 @@
 }
 {9}
 
+#ACTION {%1 {puts|put} one end of %1 to the ground and {begins|begin} the spell.$}
+{
+	play frost-byte-launch
+}
+{9}
+
 #ACTION {%1 {shouts|shout} a challenge {to|trying to draw} everyone near{by.|by into a fight!}$}
 {
 	play taunt
@@ -1132,6 +1138,12 @@
 	{
 		play stab
 	}
+}
+{9}
+
+#ACTION {%1 {struggles|struggle} with the spell, and the line of frost zips randomly across the ground...$}
+{
+	play frost-byte-random
 }
 {9}
 
@@ -1392,9 +1404,21 @@
 }
 {9}
 
+#ACTION {^A white line of frost zips across the ground away from %1 staff...$}
+{
+	play frost-byte-zip
+}
+{9}
+
 #ACTION {^After a big fight, you reel in %1.$}
 {
 	play catch-fish
+}
+{9}
+
+#ACTION {^Huge spikes of ice spring out of the ground directly beneath %1!$}
+{
+	play frost-byte-hit
 }
 {9}
 
