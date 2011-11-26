@@ -201,6 +201,12 @@
 }
 {4}
 
+#ACTION {^Gender:  %1}
+{
+	#variable {playerSex} {%1}
+}
+{4}
+
 #ACTION {%1is mortally wounded, and will die soon if not aided.$}
 {
 	#if {"$soulSteal" == "true"}
@@ -695,6 +701,22 @@
 }
 {5}
 
+#ACTION {^Your blood curdles as you hear %1's dying scream!$}
+{
+	#gag {^Gender:  {Female|Male}$};
+	finger %1 | grep Gender;
+	#if {"$playerSex" == "Female"}
+	{
+		play player-female-death
+	};
+	#else
+	{
+		play player-male-death
+	};
+	#ungag {^Gender:  {Female|Male}$}
+}
+{5}
+
 #ACTION {^Your full circle kick plants a foot right where it should be.$}
 {
 	play kick
@@ -879,6 +901,12 @@
 #ACTION {%1 bur{ps|p}.$}
 {
 	play burp
+}
+{9}
+
+#ACTION {%1 casts a spell, and a dim white glow flows out of %2 into a %3 soulstone!$}
+{
+	play soulsteal
 }
 {9}
 
