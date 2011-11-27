@@ -1090,6 +1090,12 @@
 }
 {9}
 
+#ACTION {%1 {is|are} on fire!$}
+{
+	play on-fire
+}
+{9}
+
 #ACTION {%1 {parry|parries} %2 attack.$}
 {
 	play parry
@@ -1105,9 +1111,9 @@
 }
 {9}
 
-#ACTION {%1 {puts|put} one end of %1 to the ground and {begins|begin} the spell.$}
+#ACTION {%1 {puts|put} one end of %1 to the ground and {begins casting|begin the spell}.$}
 {
-	play frost-byte-launch
+	play frostbite-launch
 }
 {9}
 
@@ -1143,7 +1149,7 @@
 
 #ACTION {%1 {struggles|struggle} with the spell, and the line of frost zips randomly across the ground...$}
 {
-	play frost-byte-random
+	play frostbite-random
 }
 {9}
 
@@ -1335,6 +1341,12 @@
 }
 {9}
 
+#ACTION {^A beautiful web of blazing %1 fire bursts forth from %2 hands and hits %3, setting {him|her|it} on fire!$}
+{
+	play fireweb
+}
+{9}
+
 #ACTION {^A blood red winged demon suddenly bursts into a spray of blood and falls to the ground.$}
 {
 	play bloodmist-death
@@ -1406,7 +1418,7 @@
 
 #ACTION {^A white line of frost zips across the ground away from %1 staff...$}
 {
-	play frost-byte-zip
+	play frostbite-zip
 }
 {9}
 
@@ -1418,7 +1430,7 @@
 
 #ACTION {^Huge spikes of ice spring out of the ground directly beneath %1!$}
 {
-	play frost-byte-hit
+	play frostbite-hit
 }
 {9}
 
