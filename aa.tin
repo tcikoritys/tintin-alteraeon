@@ -52,7 +52,7 @@
 }
 {1}
 
-#ACTION {^   {1|2|3|4|5|6|7|8|9}     { 1| 2| 3| 4| 5| 6| 7| 8| 9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36|37|38|39|40|41|42|43|44|45|46|47|48|49|50|51|52|53|54|55|56|57|58|59|60}  %1}
+#ACTION {^   {0|1|2|3|4|5|6|7|8|9}     { 0| 1| 2| 3| 4| 5| 6| 7| 8| 9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36|37|38|39|40|41|42|43|44|45|46|47|48|49|50|51|52|53|54|55|56|57|58|59|60}  %1}
 {
 	#if {"$getLastQuest" == "true"}
 	{
@@ -166,7 +166,7 @@
 }
 {2}
 
-#ACTION {^You fail to cast the spel%1.$}
+#ACTION {^You fail to {channel|cast} the spel%1.$}
 {
 	#if {!&{recast}}
 	{
@@ -197,6 +197,15 @@
 	#if {"$autoclay" == "true"}
 	{
 		c clay man
+	};
+	#else
+	{
+		#if {"$autowoad" == "true"}
+		{
+			#send {get $woadMaterial $container};
+			drop $woadMaterial;
+			c wood $woadMaterial
+		}
 	}
 }
 {4}
@@ -295,6 +304,12 @@
 #ACTION {^ %1 taunt%2}
 {
 	#variable {taunt} {true}
+}
+{5}
+
+#ACTION {^ %1 wood woad%2}
+{
+	#macro {\ew} {#send {get $woadMaterial $container};drop $woadMaterial;c wood $woadMaterial}
 }
 {5}
 
@@ -1078,6 +1093,12 @@
 }
 {9}
 
+#ACTION {%1 {enchants|enchant}, then quickly {twists|twist} and {molds|mold} %2 into {A|a} wood woad.$}
+{
+	play wood-woad-rises
+}
+{9}
+
 #ACTION {%1 {fart|farts uncerimoniously} in %2 direction.$}
 {
 	play fart
@@ -1177,6 +1198,18 @@
 }
 {9}
 
+#ACTION {%1 {traces|trace} fiery glowing symbols in the {air before you|air}...$}
+{
+	play fire-focus
+}
+{9}
+
+#ACTION {%1 {traces|trace} symbols in the air, which briefly spark and crackle...$}
+{
+	play lightning-focus
+}
+{9}
+
 #ACTION {%1's flail %2 %3{.|!}$}
 {
 	#if {"%2" != "misses"}
@@ -1198,6 +1231,12 @@
 #ACTION {^        harvest teeth%1}
 {
 	#variable {harvestTeeth} {true}
+}
+{9}
+
+#ACTION {^       You receive a combat point!$}
+{
+	gt I am Cornholio! I got CP for my bunghole!
 }
 {9}
 
@@ -1347,6 +1386,12 @@
 }
 {9}
 
+#ACTION {^A beautiful web of blazing %1 fire suddenly appears and wraps around you, setting you on fire!$}
+{
+	play fireweb
+}
+{9}
+
 #ACTION {^A blood red winged demon suddenly bursts into a spray of blood and falls to the ground.$}
 {
 	play bloodmist-death
@@ -1419,6 +1464,12 @@
 #ACTION {^A white line of frost zips across the ground away from %1 staff...$}
 {
 	play frostbite-zip
+}
+{9}
+
+#ACTION {^A wood woad has left the group.$}
+{
+	play wood-woad-death
 }
 {9}
 
@@ -1501,6 +1552,12 @@
 #ACTION {^The game has been rebooted.  Please try again in about %1 seconds.$}
 {
 	#delay {%1} {aa}
+}
+{9}
+
+#ACTION {^The spell rips up out of the ground and explodes in a harmless shower of frost.$}
+{
+	play frostbite-harmless
 }
 {9}
 
@@ -1658,6 +1715,12 @@
 }
 {9}
 
+#ACTION {^You guide the spell directly toward %1!$}
+{
+	play frostbite-zip
+}
+{9}
+
 #ACTION {^You have completed the achievement:%1}
 {
 	#if {"$twitter" == "true"}
@@ -1746,6 +1809,12 @@
 	{
 		put soulstone $container
 	}
+}
+{9}
+
+#ACTION {^You suddenly see your mistake, reverse the incantation and sacrifice a %1 soulstone.$}
+{
+	play demonic-laugh
 }
 {9}
 
@@ -1890,7 +1959,7 @@
 }
 {9}
 
-#ACTION {^{The hideous|One of the|A fisherman's|An old|A small|A large|An obnoxious|A|An|The} %1 has arrived.$}
+#ACTION {^{The hideous|One of the|A fisherman's|An old|A strange|A small|A large|An obnoxious|A|An|The} %1 has arrived.$}
 {
 	#if {"$bot" == "true"}
 	{
@@ -1981,6 +2050,7 @@
 #ALIAS {autoclay}
 {
 	#variable {autoclay} {true};
+	#variable {autowoad} {false};
 	#showme {Clay man will now autocast}
 }
 {5}
@@ -1996,6 +2066,14 @@
 {
 	#variable {autostore} {true};
 	#showme {You will now put certain items in your container when you get them.}
+}
+{5}
+
+#ALIAS {autowoad}
+{
+	#variable {autowoad} {true};
+	#variable {autoclay} {false};
+	#showme {You will now attempt to make a new wood woad automatically.}
 }
 {5}
 
@@ -2037,6 +2115,13 @@
 {
 	#unvariable {autostore};
 	#showme {You will no longer autostore anything.}
+}
+{5}
+
+#ALIAS {noautowoad}
+{
+	#variable {autowoad} {false};
+	#showme {Wood Woad will no longer autocast.}
 }
 {5}
 
@@ -2135,6 +2220,32 @@
 	#else
 	{
 		#showme {You do not have the spell bloodmist yet.}
+	}
+}
+{8}
+
+#ALIAS {^{clb|clbo|clbol|clbolt|clightn|clightni|clightnin|clightning} %1}
+{
+	#if {"$lightningBolt" == "true"}
+	{
+		cc lightning bolt %1
+	};
+	#else
+	{
+		#showme {You do not have the spell lightning bolt yet.}
+	}
+}
+{8}
+
+#ALIAS {^{clb|clbo|clbol|clbolt|clightn|clightni|clightnin|clightning}$}
+{
+	#if {"$lightningBolt" == "true"}
+	{
+		cc lightning bolt
+	};
+	#else
+	{
+		#showme {You do not have the spell lightning bolt yet.}
 	}
 }
 {8}
@@ -2640,6 +2751,14 @@
 }
 {9}
 
+#ALIAS {{invi|invit|invite} %1}
+{
+	#math {invite} {10d10};
+	tell %1 Wanna run some exp? I promise I won't get you killed more than $invite times.;
+	#unvariable {invite}
+}
+{9}
+
 #CONFIG           {256 COLORS}  {ON}
 #CONFIG           {AUTO TAB}  {5000}
 #CONFIG           {BUFFER SIZE}  {20000}
@@ -2695,61 +2814,71 @@
 #MACRO {\e0}
 {
 	#action {^Recent channel history}{#line gag;#unact {^Recent channel history}};
-	replay 10 | head -2
+	replay 10 | head -2;
+	#variable {replaying} {true}
 }
 
 #MACRO {\e1}
 {
 	#action {^Recent channel history}{#line gag;#unact {^Recent channel history}};
-	replay 1 | head -2
+	replay 1 | head -2;
+	#variable {replaying} {true}
 }
 
 #MACRO {\e2}
 {
 	#action {^Recent channel history}{#line gag;#unact {^Recent channel history}};
-	replay 2 | head -2
+	replay 2 | head -2;
+	#variable {replaying} {true}
 }
 
 #MACRO {\e3}
 {
 	#action {^Recent channel history}{#line gag;#unact {^Recent channel history}};
-	replay 3 | head -2
+	replay 3 | head -2;
+	#variable {replaying} {true}
 }
 
 #MACRO {\e4}
 {
 	#action {^Recent channel history}{#line gag;#unact {^Recent channel history}};
-	replay 4 | head -2
+	replay 4 | head -2;
+	#variable {replaying} {true}
 }
 
 #MACRO {\e5}
 {
 	#action {^Recent channel history}{#line gag;#unact {^Recent channel history}};
-	replay 5 | head -2
+	replay 5 | head -2;
+	#variable {replaying} {true}
 }
 
 #MACRO {\e6}
 {
 	#action {^Recent channel history}{#line gag;#unact {^Recent channel history}};
-	replay 6 | head -2
+	replay 6 | head -2;
+	#variable {replaying} {true}
 }
 
 #MACRO {\e7}
 {
 	#action {^Recent channel history}{#line gag;#unact {^Recent channel history}};
-	replay 7 | head -2
+	replay 7 | head -2;
+	#variable {replaying} {true}
 }
 
 #MACRO {\e8}
 {
 	#action {^Recent channel history}{#line gag;#unact {^Recent channel history}};
-	replay 8 | head -2
+	replay 8 | head -2;
+	#variable {replaying} {true}
 }
 
 #MACRO {\e9}
 {
 	#action {^Recent channel history}{#line gag;#unact {^Recent channel history}};
-	replay 9 | head -2
+	replay 9 | head -2;
+	#variable {replaying} {true}
 }
 
 #MACRO {\ei}
@@ -2805,3 +2934,4 @@
 #VARIABLE         {name}  {Name}
 #VARIABLE         {password}  {password}
 #VARIABLE         {soundCommand}  {ogg123 -q}
+#VARIABLE         {woadMaterial}  {gondola}

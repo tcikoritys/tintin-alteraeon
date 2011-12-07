@@ -39,6 +39,10 @@ alt+l east
 alt +, south
 alt+m southwest
 alt_. southeast
+autoclay cast clay man automatically if your current clay man dies
+autowoad automatically try to create a new wood woad of the current woad dies.
+(NOTES: turn off the autocast with noautoclay or noautowoad. These should not be used together and turningon one should disable the other.
+the variable woadMaterial should be set to the material you want to use to create the woad. The material for creating the woad should be located in your container. The container variable needs to be set for this to work as well. Anytime you put something somewhere the destination is set as your container. So, put gondola sack will set your container as sack)
 autoheal automatically someone if you hp them and they have less than a third of their hitpoints
 noautoheal turn off autohealing this is default
 bgmusic turn background music on
@@ -52,13 +56,15 @@ fireball and fb cast fireball
 fireball and fb target cast fireball on a specific target
 cfb or cfireball channelcast fireball
 cfb or cfireball target channelcast fireball on a specific target
-hands cast all available hand spells on yourself burning hands, shocking grasp, sickening touch
-hands target cast all available hand spells on someone else burning hands, shocking grasp, sickening touch
+hands cast all available hand spells on yourself burning hands, shocking grasp, sacred and sickening touch
+hands target cast all available hand spells on someone else burning hands, shocking grasp, sacred and sickening touch
 icebolt and ib cast icebolt
 icebolt and ib target cast icebolt on a specific target
 id object cast identify on the specified object
 lb or lightning cast lightning bolt
 lb or lightning target cast lightning bolton specified target
+clb or clightning channel cast lightning bolt
+clb or clightning target channel cast lightning bolton specified target
 twitter post achievements and deaths to Twitter requires the program TTYtter to be installed and properly configured: http://www.floodgap.com/software/ttytter/
 notwitter turn Twitter posts off
 To sac a corpse type x and press enter. You will use any skills you have like corpsecutter aand/or bloodsacrifice.
