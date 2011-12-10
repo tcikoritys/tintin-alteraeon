@@ -1,3 +1,52 @@
+#act {^You turn %1 years old today!$}
+{
+	tweet $name turned %1 years old today! Happy birthday! #AlterAeon
+}
+#act {^You add A %1 to your group.$} {#if {"%1" == "zombie" || "%1" == "ghoul" || "%1" == "mummy" || "%1" == "vampire"} {#macro {\eOQ} {control %1 protect};#macro {\eOR} {control %1 assist};#macro {\eOS} {control all consume corpse}}} {9}
+#act {^A skeleton stops following you.$} {#if {"$autoskeleton" == "true"} {c skeletal warrior}} {9}
+#act {^A skeletal mage stops following you.$} {#if {"$autoskeleton" == "true"} {c skeletal mage}} {9}
+#ALIAS {autoskeleton}
+{
+	#variable {autoskeleton} {true};
+	#showme {skeletons will now autocast}
+}
+{5}
+
+#ALIAS {noautoskeleton}
+{
+	#variable {autoskeleton} {false};
+	#showme {skeletons will no longer autocast}
+}
+{5}
+
+#ALIAS {^{ff|firef|firefi|firefiel|firefield}$}
+{
+	#if {"$firefield" == "true"}
+	{
+		c firefield
+	};
+	#else
+	{
+		#showme {You do not have the spell firefield yet.}
+	}
+}
+{9}
+
+#ALIAS {^{cff|cfiref|cfirefi|cfirefiel|cfirefield}$}
+{
+	#if {"$firefield" == "true"}
+	{
+		cc firefield
+	};
+	#else
+	{
+		#showme {You do not have the spell firefield yet.}
+	}
+}
+{9}
+
+#act {^(friend) %1 has entered the game.$} {#if {!&{replaying}} {play friend-enter};#else {#unvar {replaying}}} {9}
+#act {^(friend) %1 has left the game.$} {#if {!&{replaying}} {play friend-leave};#else {#unvar {replaying}}} {9}
 #ACTION {%1 has %2 of %3 hitpoints.$}
 {
 	#if {"$autoheal" == "true"}
@@ -262,6 +311,12 @@
 #ACTION {^ %1 fireball%2}
 {
 	#variable {fireball} {true}
+}
+{5}
+
+#ACTION {^ %1 firefield%2}
+{
+	#variable {firefield} {true}
 }
 {5}
 
@@ -706,10 +761,7 @@
 #ACTION {^You weep as you think of the %1 experience that you lost.$}
 {
 	#math {lostExp} {$lostExp + %1};
-	#if {"$twitter" == "true"}
-	{
-		tweet $name was defeated in combat and lost %1 exp for a total loss of $lostExp experience points. #AlterAeon
-	};
+	tweet $name was defeated in combat and lost %1 exp for a total loss of $lostExp experience points. #AlterAeon;
 	play death;
 	#line {gag};
 	experience lost | grep -i you have lost
@@ -1242,10 +1294,7 @@
 
 #ACTION {^ %1You are now level %2 %3, with %4 total levels!$}
 {
-	#if {"$twitter" == "true"}
-	{
-		tweet $name just gained the official rank of level %2 #%3 and now has %4 total levels! #AlterAeon
-	}
+	tweet $name just gained the official rank of level %2 #%3 and now has %4 total levels! #AlterAeon
 }
 {9}
 
@@ -1326,10 +1375,7 @@
 
 #ACTION {^(notify) $name%1}
 {
-	#if {"$twitter" == "true"}
-	{
-		tweet $name %1 #AlterAeon
-	}
+	tweet $name %1 #AlterAeon
 }
 {9}
 
@@ -1723,10 +1769,7 @@
 
 #ACTION {^You have completed the achievement:%1}
 {
-	#if {"$twitter" == "true"}
-	{
 		tweet $name has completed the achievement %1! #AlterAeon
-	}
 }
 {9}
 
@@ -1965,15 +2008,6 @@
 	{
 		#showme {Attacking %1};
 		k %1
-	}
-}
-{9}
-
-#ACTION {{^You gain|%* bestows upon you} the official rank of level %1 %2!$}
-{
-	#if {"$twitter" == "true"}
-	{
-		tweet $name just gained the official rank of level %1 #%2! #AlterAeon
 	}
 }
 {9}
@@ -2712,7 +2746,7 @@
 
 #ALIAS {tweet %1}
 {
-	#system {ttytter -norc -silent -readline=0 -status="%1"}
+	#if {"$twitter" == "true"} {#system {ttytter -norc -silent -readline=0 -status="%1"}}
 }
 {9}
 
@@ -2931,7 +2965,7 @@
 #VARIABLE         {brewContainer}  {bowl}
 #VARIABLE         {harmSpell}  {cause light wounds}
 #VARIABLE         {healSpell}  {cure light wounds}
-#VARIABLE         {name}  {Name}
+#VARIABLE         {name}  {name}
 #VARIABLE         {password}  {password}
 #VARIABLE         {soundCommand}  {ogg123 -q}
 #VARIABLE         {woadMaterial}  {gondola}
