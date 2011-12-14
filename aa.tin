@@ -1,52 +1,6 @@
-#act {^You turn %1 years old today!$}
-{
-	tweet $name turned %1 years old today! Happy birthday! #AlterAeon
-}
-#act {^You add A %1 to your group.$} {#if {"%1" == "zombie" || "%1" == "ghoul" || "%1" == "mummy" || "%1" == "vampire"} {#macro {\eOQ} {control %1 protect};#macro {\eOR} {control %1 assist};#macro {\eOS} {control all consume corpse}}} {9}
-#act {^A skeleton stops following you.$} {#if {"$autoskeleton" == "true"} {c skeletal warrior}} {9}
-#act {^A skeletal mage stops following you.$} {#if {"$autoskeleton" == "true"} {c skeletal mage}} {9}
-#ALIAS {autoskeleton}
-{
-	#variable {autoskeleton} {true};
-	#showme {skeletons will now autocast}
-}
-{5}
-
-#ALIAS {noautoskeleton}
-{
-	#variable {autoskeleton} {false};
-	#showme {skeletons will no longer autocast}
-}
-{5}
-
-#ALIAS {^{ff|firef|firefi|firefiel|firefield}$}
-{
-	#if {"$firefield" == "true"}
-	{
-		c firefield
-	};
-	#else
-	{
-		#showme {You do not have the spell firefield yet.}
-	}
-}
-{9}
-
-#ALIAS {^{cff|cfiref|cfirefi|cfirefiel|cfirefield}$}
-{
-	#if {"$firefield" == "true"}
-	{
-		cc firefield
-	};
-	#else
-	{
-		#showme {You do not have the spell firefield yet.}
-	}
-}
-{9}
-
-#act {^(friend) %1 has entered the game.$} {#if {!&{replaying}} {play friend-enter};#else {#unvar {replaying}}} {9}
-#act {^(friend) %1 has left the game.$} {#if {!&{replaying}} {play friend-leave};#else {#unvar {replaying}}} {9}
+#alias {buildwoa{ds|d} %1} {#class {woadbot} {read} {woadbot.tin};makewoad %1} {9}
+#act {^The bones splinter and shatter, leaving behind only broken pieces.$} {play bone-guardian-death} {9}
+#act {%1 {reanimates|reanimate} and {unpacks|unpack} a ball of twisted bones, {then reassembles|forming} it into A bone guardian.$} {play bone-guardian-rises} {9}
 #ACTION {%1 has %2 of %3 hitpoints.$}
 {
 	#if {"$autoheal" == "true"}
@@ -241,20 +195,23 @@
 }
 {3}
 
-#ACTION {^A {clay man|flesh beast|metal construct|wood woad} stops following you.$}
+#ACTION {^A {clay man|bone guardian|flesh beast|metal construct|wood woad} stops following you.$}
 {
 	#if {"$autoclay" == "true"}
 	{
 		c clay man
 	};
-	#else
+	#if {"$autowoad" == "true"}
 	{
-		#if {"$autowoad" == "true"}
-		{
-			#send {get $woadMaterial $container};
-			drop $woadMaterial;
-			c wood $woadMaterial
-		}
+		#send {get $woadMaterial $container};
+		drop $woadMaterial;
+		c wood $woadMaterial
+	};
+	#if {"$autobone" == "true"}
+	{
+		#send {get $boneMaterial $container};
+		drop $boneMaterial;
+		c bone guardian $boneMaterial
 	}
 }
 {4}
@@ -359,6 +316,12 @@
 #ACTION {^ %1 taunt%2}
 {
 	#variable {taunt} {true}
+}
+{5}
+
+#ACTION {^ %1 bone guardian%2}
+{
+	#macro {\eb} {#send {get $boneMaterial $container};drop $boneMaterial;c bone guardian $boneMaterial}
 }
 {5}
 
@@ -758,6 +721,12 @@
 }
 {5}
 
+#ACTION {^You turn %1 years old today!$}
+{
+	tweet $name turned %1 years old today! Happy birthday! #AlterAeon
+}
+{5}
+
 #ACTION {^You weep as you think of the %1 experience that you lost.$}
 {
 	#math {lostExp} {$lostExp + %1};
@@ -799,6 +768,17 @@
 #ACTION {^kxwt_fighting%*}
 {
 	#variable {fighting} {%0}
+}
+{5}
+
+#ACTION {^kxwt_prompt %1 %2 %3 %4 %5 %6}
+{
+	#variable {currentHp} {%1};
+	#variable {maxHp} {%2};
+	#variable {currentMv} {%3};
+	#variable {maxMv} {%4};
+	#variable {currentMana} {%5};
+	#variable {maxMana} {%6}
 }
 {5}
 
@@ -852,11 +832,11 @@
 
 #ACTION {^You are awakened by the noise.$}
 {
-	\sleep
+	#delay {3} {\sleep}
 }
 {8}
 
-#ACTION {^You reel in your line and recast it.$}
+#ACTION {%1 {reels|reel} in %2 line and {recasts|recast} it.$}
 {
 	play fishing-cast
 }
@@ -1262,6 +1242,12 @@
 }
 {9}
 
+#ACTION {%1 {use|uses} magic to rip the bones and cartilage from the corpse of %2, then {reassembles|reassemble} them into A bone guardian.$}
+{
+	play bone-guardian-rises
+}
+{9}
+
 #ACTION {%1's flail %2 %3{.|!}$}
 {
 	#if {"%2" != "misses"}
@@ -1304,49 +1290,6 @@
 }
 {9}
 
-#ACTION {^!!SOUND(combat/mobdeath%1)$}
-{
-	#send {get all.$throwWeapon corpse;get coins corpse};
-	#if {&{lastSoulSteal}}
-	{
-		#unvariable {lastSoulSteal}
-	};
-	#if {"$cryOfVictory" == "true"}
-	{
-		victory
-	};
-	#if {&{combat}}
-	{
-		#foreach {$combat} {spell}
-		{
-			$spell
-		}
-	};
-	#unvariable {combat};
-	#if {"$corpseCutter" == "true"}
-	{
-		harvest components corpse
-	};
-	#if {"$harvestTeeth" == "true" && "$bot" != "true"}
-	{
-		harvest teeth corpse
-	};
-	#if {"$bot" == "true"}
-	{
-		x
-	};
-	#if {"$automove" == "true" && "$bot" == "true"}
-	{
-		wander;
-		#if {"$taunt" == "true"}
-		{
-			taunt
-		}
-	};
-	tweetQuest
-}
-{9}
-
 #ACTION {^!!SOUND(move/%1)$}
 {
 	play footstep
@@ -1366,10 +1309,42 @@
 }
 {9}
 
+#ACTION {^(%1 is trying to get your attention)$}
+{
+	#delay {0.5} {play attention}
+}
+{9}
+
 #ACTION {^(You {may be able to|can} use waypoint %1 {to|to more easily} bridge the distance.)$}
 {
 	#send {waypoint %1};
 	waypoint $waypoint
+}
+{9}
+
+#ACTION {^(friend) %1 has entered the game.$}
+{
+	#if {!&{replaying}}
+	{
+		play friend-enter
+	};
+	#else
+	{
+		#unvariable {replaying}
+	}
+}
+{9}
+
+#ACTION {^(friend) %1 has left the game.$}
+{
+	#if {!&{replaying}}
+	{
+		play friend-leave
+	};
+	#else
+	{
+		#unvariable {replaying}
+	}
 }
 {9}
 
@@ -1489,15 +1464,39 @@
 }
 {9}
 
-#ACTION {^A shadow fiend {has left the group|stops following you}.$}
+#ACTION {^A shadow fiend has left the group.$}
 {
 	play shadow-fiend-leave
+}
+{9}
+
+#ACTION {^A shadow fiend stops following you.$}
+{
+	#if {"$autofiend" == "true"} {f}
 }
 {9}
 
 #ACTION {^A shower of %1 sparks suddenly engulfs %2!$}
 {
 	play shower-of-sparks
+}
+{9}
+
+#ACTION {^A skeletal mage stops following you.$}
+{
+	#if {"$autoskeleton" == "true"}
+	{
+		c skeletal mage
+	}
+}
+{9}
+
+#ACTION {^A skeleton stops following you.$}
+{
+	#if {"$autoskeleton" == "true"}
+	{
+		c skeletal warrior
+	}
 }
 {9}
 
@@ -1519,7 +1518,7 @@
 }
 {9}
 
-#ACTION {^After a big fight, you reel in %1.$}
+#ACTION {^After a big fight, %1 {reels|reel} in %2.$}
 {
 	play catch-fish
 }
@@ -1570,7 +1569,10 @@
 
 #ACTION {^Reconnecting.$}
 {
-	set msp on
+	#line {gag};
+	set msp on;
+	#line {gag};
+	set ctrigger on
 }
 {9}
 
@@ -1610,6 +1612,17 @@
 #ACTION {^Url for this character is:  %1}
 {
 	#line {gag}set ctrigger on
+}
+{9}
+
+#ACTION {^You add A %1 to your group.$}
+{
+	#if {"%1" == "zombie" || "%1" == "ghoul" || "%1" == "mummy" || "%1" == "vampire"}
+	{
+		#macro {\eOQ} {control %1 protect};
+		#macro {\eOR} {control %1 assist};
+		#macro {\eOS} {control all consume corpse}
+	}
 }
 {9}
 
@@ -1755,7 +1768,7 @@
 }
 {9}
 
-#ACTION {^You get a bite, and after a little effort you manage to reel in %1.$}
+#ACTION {%1 {gets|get} a bite, and after a little effort {you manage|manages} to reel in %2.$}
 {
 	play catch-fish
 }
@@ -1769,7 +1782,7 @@
 
 #ACTION {^You have completed the achievement:%1}
 {
-		tweet $name has completed the achievement %1! #AlterAeon
+	tweet $name has completed the achievement %1! #AlterAeon
 }
 {9}
 
@@ -1812,7 +1825,7 @@
 }
 {9}
 
-#ACTION {^You reel in %1.$}
+#ACTION {%1 {reels|reel} in %2.$}
 {
 	play catch-fish
 }
@@ -1839,7 +1852,7 @@
 }
 {9}
 
-#ACTION {^You start fishing.$}
+#ACTION {%1 {throws out a line and starts|start} fishing.$}
 {
 	play fishing-cast
 }
@@ -1965,6 +1978,50 @@
 }
 {9}
 
+#ACTION {^kxwt_mdeath$}
+{
+	#send {get all.$throwWeapon corpse;get coins corpse};
+	#if {&{lastSoulSteal}}
+	{
+		#unvariable {lastSoulSteal}
+	};
+	#if {"$cryOfVictory" == "true"}
+	{
+		victory
+	};
+	#if {&{combat}}
+	{
+		#foreach {$combat} {spell}
+		{
+			$spell
+		}
+	};
+	#unvariable {combat};
+	#if {"$corpseCutter" == "true"}
+	{
+		harvest components corpse
+	};
+	#if {"$harvestTeeth" == "true" && "$bot" != "true"}
+	{
+		harvest teeth corpse
+	};
+	#if {"$bot" == "true"}
+	{
+		x
+	};
+	#if {"$automove" == "true" && "$bot" == "true"}
+	{
+		wander;
+		#if {"$taunt" == "true"}
+		{
+			taunt
+		}
+	};
+	tweetQuest;
+	#if {&{position}} {$position}
+}
+{9}
+
 #ACTION {^kxwt_terrain %1}
 {
 	#if {"$bgmusic" == "true"}
@@ -1993,6 +2050,12 @@
 #ACTION {^{Fats the moogle|A warrior moogle|The moogle guard|Stripe the moogle|The librarian moogle|A tan moogle|Bert the moogle|A white moogle|A gray moogle|A baby moogle|An injured moogle|A small tonberry|Maria the water faerie|The soul faerie} is DEAD!$}
 {
 	play ff-death
+}
+{9}
+
+#ACTION {%1 hook gets caught, forcing {him|her|it} to break the line.$}
+{
+	play fish-line-break
 }
 {9}
 
@@ -2069,8 +2132,10 @@
 #ALIAS {^1$}
 {
 	#send {1};
-	#gag {line};
-	set msp on
+	#line {gag};
+	set msp on;
+	#line {gag};
+	set ctrigger on
 }
 {5}
 
@@ -2081,10 +2146,27 @@
 }
 {5}
 
+#ALIAS {autofiend}
+{
+	#variable {autofiend} {true};
+	#showme {You will now make a new shadow fiend automatically.}
+}
+{5}
+
+#ALIAS {autobone}
+{
+	#variable {autowoad} {false};
+	#variable {autoclay} {false};
+	#variable {autobone} {true};
+	#showme {You will now attempt to make a new bone guardian automatically.}
+}
+{5}
+
 #ALIAS {autoclay}
 {
 	#variable {autoclay} {true};
 	#variable {autowoad} {false};
+	#variable {autobone} {false};
 	#showme {Clay man will now autocast}
 }
 {5}
@@ -2093,6 +2175,13 @@
 {
 	#variable {automove} {true};
 	#showme {You will now automove while botting.}
+}
+{5}
+
+#ALIAS {autoskeleton}
+{
+	#variable {autoskeleton} {true};
+	#showme {skeletons will now autocast}
 }
 {5}
 
@@ -2107,6 +2196,7 @@
 {
 	#variable {autowoad} {true};
 	#variable {autoclay} {false};
+	#variable {autobone} {false};
 	#showme {You will now attempt to make a new wood woad automatically.}
 }
 {5}
@@ -2131,6 +2221,20 @@
 }
 {5}
 
+#ALIAS {noautobone}
+{
+	#variable {autobone} {false};
+	#showme {Bone guardian will no longer autocast.}
+}
+{5}
+
+#ALIAS {noautofiend}
+{
+	#variable {autofiend} {false};
+	#showme {You will no longer automatically make shadow fiends.}
+}
+{5}
+
 #ALIAS {noautoclay}
 {
 	#variable {autoclay} {false};
@@ -2142,6 +2246,13 @@
 {
 	#unvariable {automove};
 	#showme {You will not automove while botting.}
+}
+{5}
+
+#ALIAS {noautoskeleton}
+{
+	#variable {autoskeleton} {false};
+	#showme {skeletons will no longer autocast}
 }
 {5}
 
@@ -2496,6 +2607,19 @@
 }
 {9}
 
+#ALIAS {^{cff|cfiref|cfirefi|cfirefiel|cfirefield}$}
+{
+	#if {"$firefield" == "true"}
+	{
+		cc firefield
+	};
+	#else
+	{
+		#showme {You do not have the spell firefield yet.}
+	}
+}
+{9}
+
 #ALIAS {^{di|dis|disa|disar|disarm} %1}
 {
 	#variable {victim} {%1};
@@ -2518,6 +2642,19 @@
 	#else
 	{
 		#showme {You do not have the spell fireball yet.}
+	}
+}
+{9}
+
+#ALIAS {^{ff|firef|firefi|firefiel|firefield}$}
+{
+	#if {"$firefield" == "true"}
+	{
+		c firefield
+	};
+	#else
+	{
+		#showme {You do not have the spell firefield yet.}
 	}
 }
 {9}
@@ -2746,7 +2883,10 @@
 
 #ALIAS {tweet %1}
 {
-	#if {"$twitter" == "true"} {#system {ttytter -norc -silent -readline=0 -status="%1"}}
+	#if {"$twitter" == "true"}
+	{
+		#system {ttytter -norc -silent -readline=0 -status="%1"}
+	}
 }
 {9}
 
@@ -2823,6 +2963,7 @@
 #GAG              {^#NO SESSION WITH THAT NAME!$}
 #GAG              {^#SESSION 'aa' ACTIVATED.$}
 #GAG              {^#SESSION 'backgroundMusic' DIED.$}
+#GAG              {^$}
 #GAG              {^(You can only split gold with players, not minions.)$}
 #GAG              {^Looks like the corpse of %1 is too damaged for you to use.$}
 #GAG              {^None of your minions seem hungry at the moment.$}
@@ -2962,10 +3103,11 @@
 #PATHDIR          {w}  {e}  {8}
 #SUBSTITUTE       {%*}  { %0}  {1}
 #SUBSTITUTE       {MOV_REGEN}  {MOVE_REGEN}  {5}
+#VARIABLE         {boneMaterial}  {boneguardian}
 #VARIABLE         {brewContainer}  {bowl}
 #VARIABLE         {harmSpell}  {cause light wounds}
 #VARIABLE         {healSpell}  {cure light wounds}
-#VARIABLE         {name}  {name}
+#VARIABLE         {name}  {Name}
 #VARIABLE         {password}  {password}
 #VARIABLE         {soundCommand}  {ogg123 -q}
-#VARIABLE         {woadMaterial}  {gondola}
+#VARIABLE         {woadMaterial}  {deanimate}

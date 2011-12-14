@@ -28,7 +28,7 @@ Twitter:
 You can have achievements like backstabs, levels, and achievements posted to Twitter. If you have the CLI Twitter client TTYtter installed and configured correctly type twitter and events will be posted. To turn it off type notwitter.
 
 Commands:
-In most cases for longer words you can type part of the command. You will have to experiment because the  commands start where mud commends end. For example, if you type fire you will connect to the fire channel. If, however, you type fireb all the way through fireball you will cast the spell fireball if you have it.
+In most cases for longer words you can type part of the command. the exception to this is auto stuff like autocflay, autobone, autofiend, autostore, etc You will have to experiment because the  commands start where mud commends end. For example, if you type fire you will connect to the fire channel. If, however, you type fireb all the way through fireball you will cast the spell fireball if you have it.
 alt+1 through alt+0 play last 1 through tenth message.
 alt+u northwest
 alt+i north
@@ -43,6 +43,8 @@ autoclay cast clay man automatically if your current clay man dies
 autowoad automatically try to create a new wood woad of the current woad dies.
 (NOTES: turn off the autocast with noautoclay or noautowoad. These should not be used together and turningon one should disable the other.
 the variable woadMaterial should be set to the material you want to use to create the woad. The material for creating the woad should be located in your container. The container variable needs to be set for this to work as well. Anytime you put something somewhere the destination is set as your container. So, put gondola sack will set your container as sack)
+autobone tries to make a bone guardian automatically. You need container set and some deanimated bones in your container for this to work. Of course the container variable has to be set.
+autofiend Automatically make a new shadow fiend if the current one leaves or dies. You need soulstones of pale bluee or deep blue in your container for this to work.
 autoheal automatically someone if you hp them and they have less than a third of their hitpoints
 noautoheal turn off autohealing this is default
 bgmusic turn background music on
@@ -85,6 +87,12 @@ F If you have the skill shadow fiend you will try to stop battling long enough t
 Botting:
 To start botting type bot. To turn it off type nobot. To move while botting type automove, to stop moving type noautomove. If you have the taunt skill you will use it each time you enter a new room. Botting will try and autouse the best heal spell you have. Botting will try to not get you killed and try to recall you out if things get too bad. You can, of course, still die while botting.
 If you trust the people you are grouping with type grbot to turn on group botting. nogrbot will turn it off. In game help is available while grbot is on by telling the group gt :help.
+Woadbot
+If you have deanimate and wood woad spells you can create woads automatically and deanimate them for future use. To do this, go to the boat shop in Zin, n from wp, e to the bridge, s, s, e, s, s, s, w, n and then type:
+buildwoads number
+where number is the amount of woads you want to create for example:
+buildwoads 20
+will make 20 wood woads, deanimate them, and store them in your container. Each woad currently costs 12 gold. It is best to do this while afk, because there is a 30 second regen time between each woad. You will get a message when the process starts and completes.
 
 Contributing
 If you make triggers or edit the aa.tin file in any way please load it with tintin++ and save it with #write it aa.tin before committing it so that everything will be in the standard tintin++ format. Please test your code before submitting.
