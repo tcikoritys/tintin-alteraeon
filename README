@@ -30,6 +30,8 @@ You can have achievements like backstabs, levels, and achievements posted to Twi
 Commands:
 In most cases for longer words you can type part of the command. the exception to this is auto stuff like autocflay, autobone, autofiend, autostore, etc You will have to experiment because the  commands start where mud commends end. For example, if you type fire you will connect to the fire channel. If, however, you type fireb all the way through fireball you will cast the spell fireball if you have it.
 alt+1 through alt+0 play last 1 through tenth message.
+alt+w makes a wood woad if you have the spell and woad material is in your container.
+alt+b makes a bone guardian if the requirements are met.
 alt+u northwest
 alt+i north
 alt+o northeast
@@ -44,9 +46,12 @@ autowoad automatically try to create a new wood woad of the current woad dies.
 (NOTES: turn off the autocast with noautoclay or noautowoad. These should not be used together and turningon one should disable the other.
 the variable woadMaterial should be set to the material you want to use to create the woad. The material for creating the woad should be located in your container. The container variable needs to be set for this to work as well. Anytime you put something somewhere the destination is set as your container. So, put gondola sack will set your container as sack)
 autobone tries to make a bone guardian automatically. You need container set and some deanimated bones in your container for this to work. Of course the container variable has to be set.
+autometal Makes a metal construct, same requirements aas bone guardian and wood woad except the material has to be metal.
 autofiend Automatically make a new shadow fiend if the current one leaves or dies. You need soulstones of pale bluee or deep blue in your container for this to work.
 autoheal automatically someone if you hp them and they have less than a third of their hitpoints
 noautoheal turn off autohealing this is default
+autorefresh will refresh you automatically if your mv is below a fifth. Requires ctrigger to be set to on. This is the default now.
+noautorefresh turns off autorefresh.
 bgmusic turn background music on
 nobgmusic turn background music off
 bless cast bless n yourself

@@ -1,6 +1,3 @@
-#alias {buildwoa{ds|d} %1} {#class {woadbot} {read} {woadbot.tin};makewoad %1} {9}
-#act {^The bones splinter and shatter, leaving behind only broken pieces.$} {play bone-guardian-death} {9}
-#act {%1 {reanimates|reanimate} and {unpacks|unpack} a ball of twisted bones, {then reassembles|forming} it into A bone guardian.$} {play bone-guardian-rises} {9}
 #ACTION {%1 has %2 of %3 hitpoints.$}
 {
 	#if {"$autoheal" == "true"}
@@ -212,6 +209,12 @@
 		#send {get $boneMaterial $container};
 		drop $boneMaterial;
 		c bone guardian $boneMaterial
+	};
+	#if {"$autometal" == "true"}
+	{
+		#send {get $metalMaterial $container};
+		drop $metalMaterial;
+		c metal construct $metalMaterial
 	}
 }
 {4}
@@ -224,7 +227,7 @@
 
 #ACTION {%1is mortally wounded, and will die soon if not aided.$}
 {
-	#if {"$soulSteal" == "true"}
+	#if {"$soulsteal" == "true"}
 	{
 		#if {"$lastSoulSteal" != "%1"}
 		{
@@ -241,9 +244,27 @@
 }
 {5}
 
+#ACTION {^ %1  refresh%2}
+{
+	#variable {refresh} {true}
+}
+{5}
+
+#ACTION {^ %1 area refresh%2}
+{
+	#variable {areaRefresh} {true}
+}
+{5}
+
 #ACTION {^ %1 bloodmist%2}
 {
 	#variable {bloodmist} {true}
+}
+{5}
+
+#ACTION {^ %1 bone guardian%2}
+{
+	#macro {\eb} {#send {get $boneMaterial $container};drop $boneMaterial;c bone guardian $boneMaterial}
 }
 {5}
 
@@ -319,12 +340,6 @@
 }
 {5}
 
-#ACTION {^ %1 bone guardian%2}
-{
-	#macro {\eb} {#send {get $boneMaterial $container};drop $boneMaterial;c bone guardian $boneMaterial}
-}
-{5}
-
 #ACTION {^ %1 wood woad%2}
 {
 	#macro {\ew} {#send {get $woadMaterial $container};drop $woadMaterial;c wood $woadMaterial}
@@ -376,7 +391,7 @@
 
 #ACTION {^ %1corpsecutter%2}
 {
-	#variable {corpseCutter} {true}
+	#variable {corpsecutter} {true}
 }
 {5}
 
@@ -486,7 +501,7 @@
 
 #ACTION {^ %1soulsteal%2}
 {
-	#variable {soulSteal} {true}
+	#variable {soulsteal} {true}
 }
 {5}
 
@@ -775,10 +790,24 @@
 {
 	#variable {currentHp} {%1};
 	#variable {maxHp} {%2};
-	#variable {currentMv} {%3};
-	#variable {maxMv} {%4};
-	#variable {currentMana} {%5};
-	#variable {maxMana} {%6}
+	#variable {currentMana} {%3};
+	#variable {maxMana} {%4};
+	#variable {currentMv} {%5};
+	#variable {maxMv} {%6};
+	#if {"$autorefresh" == "true" && $currentMv < $maxMv / 5}
+	{
+		#if {"$areaRefresh" == "true"}
+		{
+			c area
+		};
+		#else
+		{
+			#if {"$refresh" == "true"}
+			{
+				c refresh
+			}
+		}
+	}
 }
 {5}
 
@@ -791,6 +820,12 @@
 #ACTION {%1 {creates|create} and magically {throws|throw} bolts of ice at %2!$}
 {
 	play icebolt
+}
+{8}
+
+#ACTION {%1 {reels|reel} in %2 line and {recasts|recast} it.$}
+{
+	play fishing-cast
 }
 {8}
 
@@ -833,12 +868,6 @@
 #ACTION {^You are awakened by the noise.$}
 {
 	#delay {3} {\sleep}
-}
-{8}
-
-#ACTION {%1 {reels|reel} in %2 line and {recasts|recast} it.$}
-{
-	play fishing-cast
 }
 {8}
 
@@ -1005,6 +1034,12 @@
 }
 {9}
 
+#ACTION {%1 hook gets caught, forcing {him|her|it} to break the line.$}
+{
+	play fish-line-break
+}
+{9}
+
 #ACTION {%1 is ready to go, but you would be left behind!$}
 {
 	stand
@@ -1125,6 +1160,12 @@
 }
 {9}
 
+#ACTION {%1 {enchants|enchant}, then brutally {twists|twist} and {molds|mold} %2 into A metal construct.$}
+{
+	play metal-construct-rises
+}
+{9}
+
 #ACTION {%1 {enchants|enchant}, then quickly {twists|twist} and {molds|mold} %2 into {A|a} wood woad.$}
 {
 	play wood-woad-rises
@@ -1134,6 +1175,12 @@
 #ACTION {%1 {fart|farts uncerimoniously} in %2 direction.$}
 {
 	play fart
+}
+{9}
+
+#ACTION {%1 {gets|get} a bite, and after a little effort {you manage|manages} to reel in %2.$}
+{
+	play catch-fish
 }
 {9}
 
@@ -1167,6 +1214,18 @@
 #ACTION {%1 {puts|put} one end of %1 to the ground and {begins casting|begin the spell}.$}
 {
 	play frostbite-launch
+}
+{9}
+
+#ACTION {%1 {reanimates|reanimate} and {unpacks|unpack} a ball of twisted bones, {then reassembles|forming} it into A bone guardian.$}
+{
+	play bone-guardian-rises
+}
+{9}
+
+#ACTION {%1 {reels|reel} in %2.$}
+{
+	play catch-fish
 }
 {9}
 
@@ -1215,6 +1274,12 @@
 #ACTION {%1 {they|hands} take on a sickly green tint.$}
 {
 	play sickening-touch
+}
+{9}
+
+#ACTION {%1 {throws out a line and starts|start} fishing.$}
+{
+	play fishing-cast
 }
 {9}
 
@@ -1327,10 +1392,6 @@
 	#if {!&{replaying}}
 	{
 		play friend-enter
-	};
-	#else
-	{
-		#unvariable {replaying}
 	}
 }
 {9}
@@ -1340,10 +1401,6 @@
 	#if {!&{replaying}}
 	{
 		play friend-leave
-	};
-	#else
-	{
-		#unvariable {replaying}
 	}
 }
 {9}
@@ -1472,7 +1529,10 @@
 
 #ACTION {^A shadow fiend stops following you.$}
 {
-	#if {"$autofiend" == "true"} {f}
+	#if {"$autofiend" == "true"}
+	{
+		f
+	}
 }
 {9}
 
@@ -1594,6 +1654,12 @@
 	{
 		c bone blade
 	}
+}
+{9}
+
+#ACTION {^The bones splinter and shatter, leaving behind only broken pieces.$}
+{
+	play bone-guardian-death
 }
 {9}
 
@@ -1768,12 +1834,6 @@
 }
 {9}
 
-#ACTION {%1 {gets|get} a bite, and after a little effort {you manage|manages} to reel in %2.$}
-{
-	play catch-fish
-}
-{9}
-
 #ACTION {^You guide the spell directly toward %1!$}
 {
 	play frostbite-zip
@@ -1825,12 +1885,6 @@
 }
 {9}
 
-#ACTION {%1 {reels|reel} in %2.$}
-{
-	play catch-fish
-}
-{9}
-
 #ACTION {^You slowly float to the ground.$}
 {
 	#if {"$fly" == "true"}
@@ -1849,12 +1903,6 @@
 #ACTION {^You stand in the center of a raging blizzard created by your own magic.$}
 {
 	play blizard
-}
-{9}
-
-#ACTION {%1 {throws out a line and starts|start} fishing.$}
-{
-	play fishing-cast
 }
 {9}
 
@@ -1997,7 +2045,7 @@
 		}
 	};
 	#unvariable {combat};
-	#if {"$corpseCutter" == "true"}
+	#if {"$corpsecutter" == "true"}
 	{
 		harvest components corpse
 	};
@@ -2018,7 +2066,10 @@
 		}
 	};
 	tweetQuest;
-	#if {&{position}} {$position}
+	#if {&{position}}
+	{
+		$position
+	}
 }
 {9}
 
@@ -2050,12 +2101,6 @@
 #ACTION {^{Fats the moogle|A warrior moogle|The moogle guard|Stripe the moogle|The librarian moogle|A tan moogle|Bert the moogle|A white moogle|A gray moogle|A baby moogle|An injured moogle|A small tonberry|Maria the water faerie|The soul faerie} is DEAD!$}
 {
 	play ff-death
-}
-{9}
-
-#ACTION {%1 hook gets caught, forcing {him|her|it} to break the line.$}
-{
-	play fish-line-break
 }
 {9}
 
@@ -2146,13 +2191,6 @@
 }
 {5}
 
-#ALIAS {autofiend}
-{
-	#variable {autofiend} {true};
-	#showme {You will now make a new shadow fiend automatically.}
-}
-{5}
-
 #ALIAS {autobone}
 {
 	#variable {autowoad} {false};
@@ -2171,10 +2209,34 @@
 }
 {5}
 
+#ALIAS {autofiend}
+{
+	#variable {autofiend} {true};
+	#showme {You will now make a new shadow fiend automatically.}
+}
+{5}
+
+#ALIAS {autometal}
+{
+	#variable {autowoad} {false};
+	#variable {autoclay} {false};
+	#variable {autobone} {false};
+	#variable {autometal} {true};
+	#showme {You will now attempt to make a new metal construct automatically.}
+}
+{5}
+
 #ALIAS {automove}
 {
 	#variable {automove} {true};
 	#showme {You will now automove while botting.}
+}
+{5}
+
+#ALIAS {autorefresh}
+{
+	#variable {autorefresh} {true};
+	#showme {You will automaticaly cast refresh spells if your MV is low.}
 }
 {5}
 
@@ -2228,13 +2290,6 @@
 }
 {5}
 
-#ALIAS {noautofiend}
-{
-	#variable {autofiend} {false};
-	#showme {You will no longer automatically make shadow fiends.}
-}
-{5}
-
 #ALIAS {noautoclay}
 {
 	#variable {autoclay} {false};
@@ -2242,10 +2297,31 @@
 }
 {5}
 
+#ALIAS {noautofiend}
+{
+	#variable {autofiend} {false};
+	#showme {You will no longer automatically make shadow fiends.}
+}
+{5}
+
+#ALIAS {noautometal}
+{
+	#variable {autometal} {false};
+	#showme {Metal construct will no longer autocast.}
+}
+{5}
+
 #ALIAS {noautomove}
 {
 	#unvariable {automove};
 	#showme {You will not automove while botting.}
+}
+{5}
+
+#ALIAS {noautorefresh}
+{
+	#variable {autorefresh} {false};
+	#showme {You will no longer automaticaly cast refresh spells.}
 }
 {5}
 
@@ -2807,6 +2883,17 @@
 }
 {9}
 
+#ALIAS {buildwoa{ds|d} %1}
+{
+	noautobone;
+	noautoclay;
+	noautowoad;
+	noautometal;
+	#class {woadbot} {read} {woadbot.tin};
+	makewoad %1
+}
+{9}
+
 #ALIAS {g}
 {
 	get all corpse
@@ -2990,70 +3077,80 @@
 {
 	#action {^Recent channel history}{#line gag;#unact {^Recent channel history}};
 	replay 10 | head -2;
-	#variable {replaying} {true}
+	#variable {replaying} {true};
+	#delay {2} {#unvariable {replaying}}
 }
 
 #MACRO {\e1}
 {
 	#action {^Recent channel history}{#line gag;#unact {^Recent channel history}};
 	replay 1 | head -2;
-	#variable {replaying} {true}
+	#variable {replaying} {true};
+	#delay {2} {#unvariable {replaying}}
 }
 
 #MACRO {\e2}
 {
 	#action {^Recent channel history}{#line gag;#unact {^Recent channel history}};
 	replay 2 | head -2;
-	#variable {replaying} {true}
+	#variable {replaying} {true};
+	#delay {2} {#unvariable {replaying}}
 }
 
 #MACRO {\e3}
 {
 	#action {^Recent channel history}{#line gag;#unact {^Recent channel history}};
 	replay 3 | head -2;
-	#variable {replaying} {true}
+	#variable {replaying} {true};
+	#delay {2} {#unvariable {replaying}}
 }
 
 #MACRO {\e4}
 {
 	#action {^Recent channel history}{#line gag;#unact {^Recent channel history}};
 	replay 4 | head -2;
-	#variable {replaying} {true}
+	#variable {replaying} {true};
+	#delay {2} {#unvariable {replaying}}
 }
 
 #MACRO {\e5}
 {
 	#action {^Recent channel history}{#line gag;#unact {^Recent channel history}};
 	replay 5 | head -2;
-	#variable {replaying} {true}
+	#variable {replaying} {true};
+	#delay {2} {#unvariable {replaying}}
 }
 
 #MACRO {\e6}
 {
 	#action {^Recent channel history}{#line gag;#unact {^Recent channel history}};
 	replay 6 | head -2;
-	#variable {replaying} {true}
+	#variable {replaying} {true};
+	#delay {2} {#unvariable {replaying}}
 }
 
 #MACRO {\e7}
 {
 	#action {^Recent channel history}{#line gag;#unact {^Recent channel history}};
 	replay 7 | head -2;
-	#variable {replaying} {true}
+	#variable {replaying} {true};
+	#delay {2} {#unvariable {replaying}}
 }
 
 #MACRO {\e8}
 {
 	#action {^Recent channel history}{#line gag;#unact {^Recent channel history}};
 	replay 8 | head -2;
-	#variable {replaying} {true}
+	#variable {replaying} {true};
+	#delay {2} {#unvariable {replaying}}
 }
 
 #MACRO {\e9}
 {
 	#action {^Recent channel history}{#line gag;#unact {^Recent channel history}};
 	replay 9 | head -2;
-	#variable {replaying} {true}
+	#variable {replaying} {true};
+	#delay {2} {#unvariable {replaying}}
 }
 
 #MACRO {\ei}
@@ -3105,8 +3202,15 @@
 #SUBSTITUTE       {MOV_REGEN}  {MOVE_REGEN}  {5}
 #VARIABLE         {boneMaterial}  {boneguardian}
 #VARIABLE         {brewContainer}  {bowl}
+#VARIABLE         {currentHp}  {569}
+#VARIABLE         {currentMana}  {249}
+#VARIABLE         {currentMv}  {286}
 #VARIABLE         {harmSpell}  {cause light wounds}
 #VARIABLE         {healSpell}  {cure light wounds}
+#VARIABLE         {maxHp}  {569}
+#VARIABLE         {maxMana}  {249}
+#VARIABLE         {maxMv}  {492}
+#VARIABLE         {metalMaterial}  {metalconstruct}
 #VARIABLE         {name}  {Name}
 #VARIABLE         {password}  {password}
 #VARIABLE         {soundCommand}  {ogg123 -q}
