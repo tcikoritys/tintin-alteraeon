@@ -1425,19 +1425,17 @@
 
 #ACTION {^A ball of light flies idly in circles around your head.}
 {
-	#if {1d1000 > "999"}
+	#if {1d1000 > 995}
 	{
 		#line {gag};
 		#if {"$sex" == "female"}
 		{
-			emot grabs a ball of light and quickly stuffs it down her shirt.
+			emot grabs a ball of light, quickly stuffs it down her shirt, and says, 'Dude check it out! They glow!'
 		};
 		#else
 		{
-			emot grabs a ball of light and quickly stuffs it down his pants.
-		};
-		#line {gag};
-		emot says, 'Dude check it out, they glow!'
+			emot grabs a ball of light, quickly stuffs it down his pants, and says, 'Dude, check it out! They glow!'
+		}
 	};
 	#else
 	{
@@ -3202,14 +3200,8 @@
 #SUBSTITUTE       {MOV_REGEN}  {MOVE_REGEN}  {5}
 #VARIABLE         {boneMaterial}  {boneguardian}
 #VARIABLE         {brewContainer}  {bowl}
-#VARIABLE         {currentHp}  {569}
-#VARIABLE         {currentMana}  {249}
-#VARIABLE         {currentMv}  {286}
 #VARIABLE         {harmSpell}  {cause light wounds}
 #VARIABLE         {healSpell}  {cure light wounds}
-#VARIABLE         {maxHp}  {569}
-#VARIABLE         {maxMana}  {249}
-#VARIABLE         {maxMv}  {492}
 #VARIABLE         {metalMaterial}  {metalconstruct}
 #VARIABLE         {name}  {Name}
 #VARIABLE         {password}  {password}
