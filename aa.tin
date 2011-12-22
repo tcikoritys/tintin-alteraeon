@@ -129,16 +129,6 @@
 }
 {1}
 
-#ACTION {^You scramble to retrieve%1!}
-{
-	wield $weapon;
-	#if {"$disarm" == "true"}
-	{
-		disarm
-	}
-}
-{1}
-
 #ACTION {^You struggle desparately for air to breathe!$}
 {
 	#if {"$waterBreathing" == "true"}
@@ -415,7 +405,8 @@
 
 #ACTION {^ %1disarm%2}
 {
-	#variable {disarm} {true}
+	#variable {disarm} {true};
+	#macro {\ed} {disarm}
 }
 {5}
 
@@ -464,7 +455,7 @@
 
 #ACTION {^ %1knife throwing%2}
 {
-	#alias {^{t|th|thr|thro|throw}$}{#send {throw $throwWeapon};get $throwWeapon}
+	#alias {^{t|th|thr|thro|throw}$}{#send {throw $throwWeapon;get $throwWeapon}}
 }
 {5}
 
@@ -868,15 +859,6 @@
 #ACTION {^You are awakened by the noise.$}
 {
 	#delay {3} {\sleep}
-}
-{8}
-
-#ACTION {^You try to disarm %1 fail.}
-{
-	#if {"$disarm" == "true"}
-	{
-		disarm
-	}
 }
 {8}
 
@@ -1376,7 +1358,7 @@
 
 #ACTION {^(%1 is trying to get your attention)$}
 {
-	#delay {0.5} {play attention}
+	#if {!&{replaying}} {#delay {0.5} {play attention}}
 }
 {9}
 
