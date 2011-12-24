@@ -1358,7 +1358,10 @@
 
 #ACTION {^(%1 is trying to get your attention)$}
 {
-	#if {!&{replaying}} {#delay {0.5} {play attention}}
+	#if {!&{replaying}}
+	{
+		#delay {0.5} {play attention}
+	}
 }
 {9}
 
@@ -2344,6 +2347,19 @@
 {
 	tweetQuest;
 	\get %1
+}
+{5}
+
+#ALIAS {{muh|muha|muhah|muhaha|muhahah|muhahahaha}}
+{
+	#if {"$sex" == "female"}
+	{
+		emot is surrounded by flickering red flames as her eyes glow a demonic red and she levitates into the air. Poison tipped fangs sprout from her mouth as she issues a maniacal laugh, 'MUHAHAHAHAHAHAHAHA!'
+	};
+	#else
+	{
+		emot is surrounded by flickering red flames as his eyes glow a demonic red and he levitates into the air. Poison tipped fangs sprout from his mouth as he issues a maniacal laugh, 'MUHAHAHAHAHAHAHAHA!'
+	}
 }
 {5}
 
