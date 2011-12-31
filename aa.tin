@@ -521,6 +521,12 @@
 }
 {5}
 
+#ACTION {^%1 {lands|land} a textbook roundhouse kick squarely on %2!$}
+{
+	play kick
+}
+{5}
+
 #ACTION {^A %1 claws at and begins eating the corpse of %2!$}
 {
 	play undead-eating
@@ -703,18 +709,6 @@
 }
 {5}
 
-#ACTION {^You kick %1 in the back of the head, causing critical damage.$}
-{
-	play fatal-kick
-}
-{5}
-
-#ACTION {^You land your roundhouse kick squarely on%1!$}
-{
-	play kick
-}
-{5}
-
 #ACTION {^You make a small incision and drain some fluid into a vial of bile.$}
 {
 	play corpsecutter
@@ -755,7 +749,8 @@
 	{
 		play player-male-death
 	};
-	#ungag {^Gender:  {Female|Male}$}
+	#ungag {^Gender:  {Female|Male}$};
+	#unvariable {playerSex}
 }
 {5}
 
@@ -811,6 +806,12 @@
 #ACTION {%1 {creates|create} and magically {throws|throw} bolts of ice at %2!$}
 {
 	play icebolt
+}
+{8}
+
+#ACTION {%1 {kicks|kick} %2 in the back of the head while {she|he|it}'s down!$}
+{
+	play fatal-kick
 }
 {8}
 
@@ -1097,12 +1098,6 @@
 }
 {9}
 
-#ACTION {%1 takes the full force of %2's beautiful full circle kick!$}
-{
-	play kick
-}
-{9}
-
 #ACTION {%1 taunts %2, who suddenly attacks!$}
 {
 	play taunt
@@ -1118,15 +1113,6 @@
 #ACTION {%1 tries to disarm%2.$}
 {
 	play disarm-fail
-}
-{9}
-
-#ACTION {%1 whip %2 %3{.|!}$}
-{
-	#if {"%2" != "misses"}
-	{
-		play whip
-	}
 }
 {9}
 
@@ -1178,6 +1164,12 @@
 }
 {9}
 
+#ACTION {%1 {kicks|kick} %2 while {she|he|it}'s down!$}
+{
+	play kick
+}
+{9}
+
 #ACTION {%1 {parry|parries} %2 attack.$}
 {
 	play parry
@@ -1217,33 +1209,21 @@
 }
 {9}
 
-#ACTION {%1 {slash|slice|chop|hack} %2 %3{.|!}$}
-{
-	#if {"%2" != "misses"}
-	{
-		play slash
-	}
-}
-{9}
-
 #ACTION {%1 {slowly fade|fades slowly} out of existence.$}
 {
 	play invisibility
 }
 {9}
 
-#ACTION {%1 {stab|pierce|bite|peck} %2 %3{.|!}$}
-{
-	#if {"%2" != "misses"}
-	{
-		play stab
-	}
-}
-{9}
-
 #ACTION {%1 {struggles|struggle} with the spell, and the line of frost zips randomly across the ground...$}
 {
 	play frostbite-random
+}
+{9}
+
+#ACTION {%1 {takes|take} the full force of %2's {beautiful full circle|sudden mule} kick!$}
+{
+	play kick
 }
 {9}
 
@@ -1295,11 +1275,44 @@
 }
 {9}
 
-#ACTION {%1's flail %2 %3{.|!}$}
+#ACTION {%1{r|'s} flail %2 %3{.|!}$}
 {
 	#if {"%2" != "misses"}
 	{
 		play flail
+	}
+}
+{9}
+
+#ACTION {%1{r|'s} kick %2 %3{.|!}$}
+{
+	play kick
+}
+{9}
+
+#ACTION {%1{r|'s} whip %2 %3{.|!}$}
+{
+	#if {"%2" != "misses"}
+	{
+		play whip
+	}
+}
+{9}
+
+#ACTION {%1{r|'s} {slash|slice|chop|hack} %2 %3{.|!}$}
+{
+	#if {"%2" != "misses"}
+	{
+		play slash
+	}
+}
+{9}
+
+#ACTION {%1{r|'s} {stab|pierce|bite|peck} %2 %3{.|!}$}
+{
+	#if {"%2" != "misses"}
+	{
+		play stab
 	}
 }
 {9}
