@@ -1,4 +1,7 @@
-#alias {makewoad %1} {#showme {Ok, building %1 wood woads.};#var {maxWoads} {%1};#ticker {buyer} {#if {"$position" == "sleep"} {wake};buy gondola;buy gondola;drop gondola;drop gondola;c wood ground} {30}} {9}
+#alias {makewoad %1} {#showme {Ok, building %1 wood woads.};#var {maxWoads} {%1};#ticker {buyer} {#if {$currentMana > 150} {#if {"$position" == "sleep"} {wake};buy gondola;buy gondola;drop gondola;drop gondola;c wood ground}} {10}} {9}
 #var {woadCounter} {0}
-#act {^A wood woad starts following you.$} {sleep;#delay {3} {c deanimate wood}} {9}
-#act {^You get a large, misshapen piece of wood.$} {put deanimate $container;#math {woadCounter} {$woadCounter + 1};#if {$woadCounter >= $maxWoads} {#showme {Wood woad creation complete.};rest;#unticker {buyer};#class {woadbot} {kill}}} {9}
+#act {^A wood woad starts following you.$} {#delay {3} {c deanimate wood}} {9}
+#act {^You get a large, misshapen piece of wood.$} {sleep;put deanimate $container;#math {woadCounter} {$woadCounter + 1};#if {$woadCounter >= $maxWoads} {#showme {Wood woad creation complete.};rest;#unticker {buyer};#class {woadbot} {kill}}} {9}
+#act {^A wood woad twists and shrinks, but instead of reforming smoothly, it suddenly fractures and splinters!$} {sleep} {9}
+#act {^Tensor's floating disc cannot carry any more weight without sinking.$} {c tens} {9}
+#act {^A floating blue-tinted disc slowly solidifies and hovers before you.$} {put deanimate disk} {9}
