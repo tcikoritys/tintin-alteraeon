@@ -84,6 +84,17 @@
 
 #ACTION {^You are in an awful condition!$}
 {
+	#if {"$autorecall" == "true"}
+	{
+		#if {$currentMana >= 15 && "$wordOfRecall" == "true"}
+		{
+			,
+		};
+		#else
+		{
+			/
+		}
+	};
 	#if {"$bot" == "true"}
 	{
 		nobot;
@@ -1176,6 +1187,12 @@
 }
 {9}
 
+#ACTION {%1 {pulls|pull} out a dragon tooth, {casts|cast} a spell, and quickly {drops|drop} it.$}
+{
+	play create-skeleton
+}
+{9}
+
 #ACTION {%1 {punch|pound} %2 %3{.|!}$}
 {
 	#if {"%2" != "misses"}
@@ -1375,6 +1392,12 @@
 	{
 		#delay {0.5} {play attention}
 	}
+}
+{9}
+
+#ACTION {^(FYI: %1 has just sent you a mudmail)$}
+{
+	play new-mail
 }
 {9}
 
@@ -1703,6 +1726,17 @@
 
 #ACTION {^You are pretty hurt.$}
 {
+	#if {"$autorecall" == "true"}
+	{
+		#if {$currentMana >= 15 && "$wordOfRecall" == "true"}
+		{
+			,
+		};
+		#else
+		{
+			/
+		}
+	};
 	play pretty-hurt
 }
 {9}
@@ -1833,6 +1867,12 @@
 #ACTION {^You guide the spell directly toward %1!$}
 {
 	play frostbite-zip
+}
+{9}
+
+#ACTION {^You have %1 new mudmail messages!$}
+{
+	play new-mail
 }
 {9}
 
@@ -2029,42 +2069,45 @@
 	{
 		#unvariable {lastSoulSteal}
 	};
-	#if {"$cryOfVictory" == "true"}
+	#if {!&{pkMode}}
 	{
-		victory
-	};
-	#if {&{combat}}
-	{
-		#foreach {$combat} {spell}
+		#if {"$cryOfVictory" == "true"}
 		{
-			$spell
-		}
-	};
-	#unvariable {combat};
-	#if {"$corpsecutter" == "true"}
-	{
-		harvest components corpse
-	};
-	#if {"$harvestTeeth" == "true" && "$bot" != "true"}
-	{
-		harvest teeth corpse
-	};
-	#if {"$bot" == "true"}
-	{
-		x
-	};
-	#if {"$automove" == "true" && "$bot" == "true"}
-	{
-		wander;
-		#if {"$taunt" == "true"}
+			victory
+		};
+		#if {&{combat}}
 		{
-			taunt
+			#foreach {$combat} {spell}
+			{
+				$spell
+			}
+		};
+		#unvariable {combat};
+		#if {"$corpsecutter" == "true"}
+		{
+			harvest components corpse
+		};
+		#if {"$harvestTeeth" == "true" && "$bot" != "true"}
+		{
+			harvest teeth corpse
+		};
+		#if {"$bot" == "true"}
+		{
+			x
+		};
+		#if {"$automove" == "true" && "$bot" == "true"}
+		{
+			wander;
+			#if {"$taunt" == "true"}
+			{
+				taunt
+			}
+		};
+		tweetQuest;
+		#if {&{position}}
+		{
+			$position
 		}
-	};
-	tweetQuest;
-	#if {&{position}}
-	{
-		$position
 	}
 }
 {9}
@@ -2177,6 +2220,20 @@
 	set msp on;
 	#line {gag};
 	set ctrigger on
+}
+{5}
+
+#ALIAS {^nopkmode$}
+{
+	#unvariable {pkMode};
+	#showme {PK mode disabled.}
+}
+{5}
+
+#ALIAS {^pkmode$}
+{
+	#variable {pkMode} {true};
+	#showme {PK mode activated.}
 }
 {5}
 
@@ -2559,6 +2616,13 @@
 }
 {9}
 
+#ALIAS {^autorecall$}
+{
+	#variable {autorecall} {true};
+	#showme {You will automatically recall if you are in awful or pretty hurt.}
+}
+{9}
+
 #ALIAS {^brag cap$}
 {
 	#line {gag};
@@ -2624,6 +2688,13 @@
 {
 	#unvariable {autoheal};
 	#showme {Autoheal is now off.}
+}
+{9}
+
+#ALIAS {^noautorecall$}
+{
+	#unvariable {autorecall};
+	#showme {You will no automatically recall.}
 }
 {9}
 

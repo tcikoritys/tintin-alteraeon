@@ -50,6 +50,8 @@ autometal Makes a metal construct, same requirements aas bone guardian and wood 
 autofiend Automatically make a new shadow fiend if the current one leaves or dies. You need soulstones of pale bluee or deep blue in your container for this to work.
 autoheal automatically someone if you hp them and they have less than a third of their hitpoints
 noautoheal turn off autohealing this is default
+autorecall automatically recalls you if you drop to prety hurt or awful condition.
+noautorecall turns off autorecall. this is default.
 autorefresh will refresh you automatically if your mv is below a fifth. Requires ctrigger to be set to on. This is the default now.
 noautorefresh turns off autorefresh.
 bgmusic turn background music on
