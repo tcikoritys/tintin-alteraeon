@@ -88,7 +88,7 @@
 	{
 		#if {$currentMana >= 15 && "$wordOfRecall" == "true"}
 		{
-			,
+			.
 		};
 		#else
 		{
@@ -534,7 +534,10 @@
 
 #ACTION {^%1 {lands|land} a textbook roundhouse kick squarely on %2!$}
 {
-	play kick
+	#if {"$combatsound" == "true"}
+	{
+		play kick
+	}
 }
 {5}
 
@@ -591,7 +594,10 @@
 
 #ACTION {^A zombie slams into %1!$}
 {
-	play bash
+	#if {"$combatsound" == "true"}
+	{
+		play bash
+	}
 }
 {5}
 
@@ -633,13 +639,19 @@
 
 #ACTION {^You bash full tilt into %1!$}
 {
-	play bash
+	#if {"$combatsound" == "true"}
+	{
+		play bash
+	}
 }
 {5}
 
 #ACTION {^You bash headfirst into %1!$}
 {
-	play bash
+	#if {"$combatsound" == "true"}
+	{
+		play bash
+	}
 }
 {5}
 
@@ -664,7 +676,10 @@
 
 #ACTION {^You catch %1 a little off center with your bash!$}
 {
-	play bash
+	#if {"$combatsound" == "true"}
+	{
+		play bash
+	}
 }
 {5}
 
@@ -676,7 +691,10 @@
 
 #ACTION {^You disarm %1 and send %2 weapon flying!$}
 {
-	play disarm
+	#if {"$combatsound" == "true"}
+	{
+		play disarm
+	}
 }
 {5}
 
@@ -767,13 +785,19 @@
 
 #ACTION {^Your full circle kick plants a foot right where it should be.$}
 {
-	play kick
+	#if {"$combatsound" == "true"}
+	{
+		play kick
+	}
 }
 {5}
 
 #ACTION {^Your kick to %1 could have been better, but you got the point across.$}
 {
-	play kick
+	#if {"$combatsound" == "true"}
+	{
+		play kick
+	}
 }
 {5}
 
@@ -822,7 +846,10 @@
 
 #ACTION {%1 {kicks|kick} %2 in the back of the head while {she|he|it}'s down!$}
 {
-	play fatal-kick
+	#if {"$combatsound" == "true"}
+	{
+		play fatal-kick
+	}
 }
 {8}
 
@@ -988,19 +1015,28 @@
 
 #ACTION {%1 delivers a powerful kick to%2!$}
 {
-	play kick
+	#if {"$combatsound" == "true"}
+	{
+		play kick
+	}
 }
 {9}
 
 #ACTION {%1 disarms %2 and sends %3 weapon flying!$}
 {
-	play disarm
+	#if {"$combatsound" == "true"}
+	{
+		play disarm
+	}
 }
 {9}
 
 #ACTION {%1 disarms you and sends your weapon flying!$}
 {
-	play disarm
+	#if {"$combatsound" == "true"}
+	{
+		play disarm
+	}
 }
 {9}
 
@@ -1054,7 +1090,10 @@
 
 #ACTION {%1 kicks %2 in the back of the head, and you hear a faint crack of something breaking.$}
 {
-	play fatal-kick
+	#if {"$combatsound" == "true"}
+	{
+		play fatal-kick
+	}
 }
 {9}
 
@@ -1099,13 +1138,19 @@
 
 #ACTION {%1 shield bash %2{!|.}$}
 {
-	play bash
+	#if {"$combatsound" == "true"}
+	{
+		play bash
+	}
 }
 {9}
 
 #ACTION {%1 takes the full force of %2 bodyslam bash!$}
 {
-	play bash
+	#if {"$combatsound" == "true"}
+	{
+		play bash
+	}
 }
 {9}
 
@@ -1123,7 +1168,10 @@
 
 #ACTION {%1 tries to disarm%2.$}
 {
-	play disarm-fail
+	#if {"$combatsound" == "true"}
+	{
+		play disarm-fail
+	}
 }
 {9}
 
@@ -1135,7 +1183,10 @@
 
 #ACTION {%1 {are|is} engulfed in flames!$}
 {
-	play flame-engulf
+	#if {"$combatsound" == "true"}
+	{
+		play flame-engulf
+	}
 }
 {9}
 
@@ -1177,13 +1228,19 @@
 
 #ACTION {%1 {kicks|kick} %2 while {she|he|it}'s down!$}
 {
-	play kick
+	#if {"$combatsound" == "true"}
+	{
+		play kick
+	}
 }
 {9}
 
 #ACTION {%1 {parry|parries} %2 attack.$}
 {
-	play parry
+	#if {"$combatsound" == "true"}
+	{
+		play parry
+	}
 }
 {9}
 
@@ -1197,7 +1254,10 @@
 {
 	#if {"%2" != "misses"}
 	{
-		play punch
+		#if {"$combatsound" == "true"}
+		{
+			play punch
+		}
 	}
 }
 {9}
@@ -1240,13 +1300,20 @@
 
 #ACTION {%1 {takes|take} the full force of %2's {beautiful full circle|sudden mule} kick!$}
 {
-	play kick
+	#if {"$combatsound" == "true"}
+	{
+		play kick
+	}
 }
 {9}
 
 #ACTION {%1 {tells the clan|tells you|tells the group|replies to you},%2'$}
 {
-	play msg
+	play msg;
+	#if {&{speech}}
+	{
+		#system {spd-say -S -P important -r $speechRate "%0"}
+	}
 }
 {9}
 
@@ -1296,14 +1363,20 @@
 {
 	#if {"%2" != "misses"}
 	{
-		play flail
+		#if {"$combatsound" == "true"}
+		{
+			play flail
+		}
 	}
 }
 {9}
 
 #ACTION {%1{r|'s} kick %2 %3{.|!}$}
 {
-	play kick
+	#if {"$combatsound" == "true"}
+	{
+		play kick
+	}
 }
 {9}
 
@@ -1311,7 +1384,10 @@
 {
 	#if {"%2" != "misses"}
 	{
-		play whip
+		#if {"$combatsound" == "true"}
+		{
+			play whip
+		}
 	}
 }
 {9}
@@ -1320,7 +1396,10 @@
 {
 	#if {"%2" != "misses"}
 	{
-		play slash
+		#if {"$combatsound" == "true"}
+		{
+			play slash
+		}
 	}
 }
 {9}
@@ -1329,7 +1408,10 @@
 {
 	#if {"%2" != "misses"}
 	{
-		play stab
+		#if {"$combatsound" == "true"}
+		{
+			play stab
+		}
 	}
 }
 {9}
@@ -1338,7 +1420,10 @@
 {
 	#if {"%1" != "misses"}
 	{
-		play flail
+		#if {"$combatsound" == "true"}
+		{
+			play flail
+		}
 	}
 }
 {9}
@@ -1688,6 +1773,12 @@
 }
 {9}
 
+#ACTION {^The line of frost zips randomly across the ground.}
+{
+	play frostbite-random
+}
+{9}
+
 #ACTION {^The spell rips up out of the ground and explodes in a harmless shower of frost.$}
 {
 	play frostbite-harmless
@@ -1730,7 +1821,7 @@
 	{
 		#if {$currentMana >= 15 && "$wordOfRecall" == "true"}
 		{
-			,
+			.
 		};
 		#else
 		{
@@ -1972,7 +2063,10 @@
 
 #ACTION {^You try to disarm%1but fail.$}
 {
-	play disarm-fail
+	#if {"$combatsound" == "true"}
+	{
+		play disarm-fail
+	}
 }
 {9}
 
@@ -2651,6 +2745,13 @@
 }
 {9}
 
+#ALIAS {^combatsound$}
+{
+	#variable {combatsound} {true};
+	#showme {Combat sound enabled.}
+}
+{9}
+
 #ALIAS {^getup$}
 {
 	\stand
@@ -2698,6 +2799,20 @@
 }
 {9}
 
+#ALIAS {^nocombatsound$}
+{
+	#unvariable {combatsound};
+	#showme {Combat sound disabled.}
+}
+{9}
+
+#ALIAS {^nospeech$}
+{
+	#unvariable {speech};
+	#showme {speech disabled.}
+}
+{9}
+
 #ALIAS {^recast}
 {
 	#if {&{recast}}
@@ -2714,6 +2829,13 @@
 #ALIAS {^regen$}
 {
 	eqset wear regen
+}
+{9}
+
+#ALIAS {^speech$}
+{
+	#variable {speech} {true};
+	#showme {speech enabled.}
 }
 {9}
 
@@ -3042,6 +3164,13 @@
 }
 {9}
 
+#ALIAS {speechrate %1}
+{
+	#variable {speechrate} {%1};
+	#showme {speech rate is now %1.}
+}
+{9}
+
 #ALIAS {spell %1}
 {
 	spells | grep -i %1
@@ -3282,10 +3411,12 @@
 #SUBSTITUTE       {MOV_REGEN}  {MOVE_REGEN}  {5}
 #VARIABLE         {boneMaterial}  {boneguardian}
 #VARIABLE         {brewContainer}  {bowl}
+#VARIABLE         {combatsound}  {true}
 #VARIABLE         {harmSpell}  {cause light wounds}
 #VARIABLE         {healSpell}  {cure light wounds}
 #VARIABLE         {metalMaterial}  {metalconstruct}
 #VARIABLE         {name}  {Name}
 #VARIABLE         {password}  {password}
 #VARIABLE         {soundCommand}  {ogg123 -q}
+#VARIABLE         {speechRate}  {80}
 #VARIABLE         {woadMaterial}  {deanimate}

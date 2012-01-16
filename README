@@ -61,6 +61,8 @@ bless target cast bless on someone else
 bm or bloodmist cast bloodmist
 bm or bloodmist target cast bloodmist on target
 brag cap or brag gt cap will brag your experience cap. this is not availalbe in normatl brag commands.
+combatsound turn on combat sound like slashes, punches, kicks, etc. This is default.
+nocombatsound turns off combat sound.
 fireball and fb cast fireball
 fireball and fb target cast fireball on a specific target
 cfb or cfireball channelcast fireball
@@ -76,7 +78,8 @@ lb or lightning cast lightning bolt
 lb or lightning target cast lightning bolton specified target
 clb or clightning channel cast lightning bolt
 clb or clightning target channel cast lightning bolton specified target
-twitter post achievements and deaths to Twitter requires the program TTYtter to be installed and properly configured: http://www.floodgap.com/software/ttytter/
+speech Uses speech dispatcher to read tells and some other types of communication like clantell. You can change the rate with the speechrat command as in speechrate 80. Anything from -100 to 100 will work.
+nospeech turns off speech-dispatcher for tells, this is default.twitter post achievements and deaths to Twitter requires the program TTYtter to be installed and properly configured: http://www.floodgap.com/software/ttytter/
 notwitter turn Twitter posts off
 To sac a corpse type x and press enter. You will use any skills you have like corpsecutter aand/or bloodsacrifice.
 If you have the kick skill k will be aliased to kick.
