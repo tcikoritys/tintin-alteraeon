@@ -1,3 +1,4 @@
+#act {^The red in your vision disappears.$} {#if {"$infravision" == "true"} {c infravision}} {9}
 #ACTION {%1 has %2 of %3 hitpoints.$}
 {
 	#if {"$autoheal" == "true"}
@@ -284,6 +285,12 @@
 #ACTION {^ %1 dying breath%2}
 {
 	#variable {dyingBreath} {true}
+}
+{5}
+
+#ACTION {^ %1 infravision%2}
+{
+	#variable {infravision} {true}
 }
 {5}
 
@@ -1773,7 +1780,7 @@
 }
 {9}
 
-#ACTION {^The line of frost zips randomly across the ground.}
+#ACTION {^The %1 line of frost zips randomly across the ground...$}
 {
 	play frostbite-random
 }
@@ -2158,7 +2165,7 @@
 
 #ACTION {^kxwt_mdeath$}
 {
-	#send {get all.$throwWeapon corpse;get coins corpse};
+	#send {get all.$throwWeapon corpse};
 	#if {&{lastSoulSteal}}
 	{
 		#unvariable {lastSoulSteal}
@@ -3208,7 +3215,7 @@
 
 #ALIAS {x}
 {
-	#send {get gold corpse};
+	#send {get coins corpse};
 	#if {"$consume" == "true"}
 	{
 		control all consume corpse
