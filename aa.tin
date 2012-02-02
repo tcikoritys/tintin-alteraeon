@@ -1,4 +1,3 @@
-#act {^The red in your vision disappears.$} {#if {"$infravision" == "true"} {c infravision}} {9}
 #ACTION {%1 has %2 of %3 hitpoints.$}
 {
 	#if {"$autoheal" == "true"}
@@ -276,21 +275,9 @@
 }
 {5}
 
-#ACTION {^ %1 cure critical wounds%2}
-{
-	#variable {healSpell} {cure critical wounds}
-}
-{5}
-
 #ACTION {^ %1 dying breath%2}
 {
 	#variable {dyingBreath} {true}
-}
-{5}
-
-#ACTION {^ %1 infravision%2}
-{
-	#variable {infravision} {true}
 }
 {5}
 
@@ -318,6 +305,12 @@
 }
 {5}
 
+#ACTION {^ %1 infravision%2}
+{
+	#variable {infravision} {true}
+}
+{5}
+
 #ACTION {^ %1 lightning bolt%2}
 {
 	#variable {lightningBolt} {true}
@@ -339,6 +332,12 @@
 #ACTION {^ %1 sacred touch%2}
 {
 	#variable {sacredTouch} {true}
+}
+{5}
+
+#ACTION {^ %1 soulbind%2}
+{
+	#variable {soulbind} {true}
 }
 {5}
 
@@ -381,6 +380,12 @@
 #ACTION {^ %1bone shield%2}
 {
 	#variable {boneShield} {true}
+}
+{5}
+
+#ACTION {^ %1breath of life%2}
+{
+	#variable {healSpell} {breath of life}
 }
 {5}
 
@@ -751,6 +756,12 @@
 }
 {5}
 
+#ACTION {^You receive %1 experience.$}
+{
+	#variable {lastReceivedExp} {%1}
+}
+{5}
+
 #ACTION {^You roughly hack out a small bladder of %1 fluid and tie off the ends with string.$}
 {
 	play corpsecutter
@@ -826,13 +837,19 @@
 	{
 		#if {"$areaRefresh" == "true"}
 		{
-			c area
+			#if {$currentMana >= 28}
+			{
+				c area
+			}
 		};
 		#else
 		{
 			#if {"$refresh" == "true"}
 			{
-				c refresh
+				#if {$currentMana >= 15}
+				{
+					c refresh
+				}
 			}
 		}
 	}
@@ -1149,6 +1166,12 @@
 	{
 		play bash
 	}
+}
+{9}
+
+#ACTION {%1 spell rips up out of the ground and explodes in a harmless shower of frost.$}
+{
+	play frostbite-harmless
 }
 {9}
 
@@ -1753,6 +1776,12 @@
 }
 {9}
 
+#ACTION {^The %1 line of frost zips randomly across the ground...$}
+{
+	play frostbite-random
+}
+{9}
+
 #ACTION {^The Master Tonberry is DEAD!$}
 {
 	play ff-boss-death
@@ -1780,15 +1809,12 @@
 }
 {9}
 
-#ACTION {^The %1 line of frost zips randomly across the ground...$}
+#ACTION {^The red in your vision disappears.$}
 {
-	play frostbite-random
-}
-{9}
-
-#ACTION {^The spell rips up out of the ground and explodes in a harmless shower of frost.$}
-{
-	play frostbite-harmless
+	#if {"$infravision" == "true"}
+	{
+		c infravision
+	}
 }
 {9}
 
@@ -1943,6 +1969,20 @@
 	#if {"$armor" == "true"}
 	{
 		c armor
+	}
+}
+{9}
+
+#ACTION {^You feel new bones and flesh forming a protective armor plate over your body.$}
+{
+	#if {"$soulbind" == "true"}
+	{
+		#send {stand;get blue soulstone $container};
+		soulbind armor
+	};
+	#if {&{position}}
+	{
+		$position
 	}
 }
 {9}
@@ -2165,49 +2205,59 @@
 
 #ACTION {^kxwt_mdeath$}
 {
-	#send {get all.$throwWeapon corpse};
-	#if {&{lastSoulSteal}}
+	#if {&{lastReceivedExp}}
 	{
-		#unvariable {lastSoulSteal}
-	};
-	#if {!&{pkMode}}
-	{
-		#if {"$cryOfVictory" == "true"}
+		#send {get all.$throwWeapon corpse};
+		#if {&{lastSoulSteal}}
 		{
-			victory
+			#unvariable {lastSoulSteal}
 		};
-		#if {&{combat}}
+		#if {!&{pkMode}}
 		{
-			#foreach {$combat} {spell}
+			#if {"$cryOfVictory" == "true"}
 			{
-				$spell
-			}
-		};
-		#unvariable {combat};
-		#if {"$corpsecutter" == "true"}
-		{
-			harvest components corpse
-		};
-		#if {"$harvestTeeth" == "true" && "$bot" != "true"}
-		{
-			harvest teeth corpse
-		};
-		#if {"$bot" == "true"}
-		{
-			x
-		};
-		#if {"$automove" == "true" && "$bot" == "true"}
-		{
-			wander;
-			#if {"$taunt" == "true"}
+				victory
+			};
+			#if {&{combat}}
 			{
-				taunt
+				#foreach {$combat} {spell}
+				{
+					$spell
+				}
+			};
+			#unvariable {combat};
+			#if {"$corpsecutter" == "true"}
+			{
+				harvest components corpse
+			};
+			#if {"$harvestTeeth" == "true" && "$bot" != "true"}
+			{
+				harvest teeth corpse
+			};
+			#if {"$bot" == "true"}
+			{
+				x
+			};
+			#if {"$automove" == "true" && "$bot" == "true"}
+			{
+				wander;
+				#if {"$taunt" == "true"}
+				{
+					taunt
+				}
+			};
+			#if {$lastReceivedExp >= $cap}
+			{
+				tweetQuest
+			};
+			#if {&{lastReceivedExp}}
+			{
+				#unvariable {lastReceivedExp}
+			};
+			#if {&{position}}
+			{
+				$position
 			}
-		};
-		tweetQuest;
-		#if {&{position}}
-		{
-			$position
 		}
 	}
 }
@@ -2229,6 +2279,12 @@
 			#session {1}
 		}
 	}
+}
+{9}
+
+#ACTION {^large chunks. (worn by you)$}
+{
+	c bone armor $name
 }
 {9}
 
