@@ -73,6 +73,17 @@
 }
 {1}
 
+#ACTION {^The gods penalize you for botting!$}
+{
+	c word of recall;
+	stop;
+	/;
+	quit;
+	play attention;
+	#end
+}
+{1}
+
 #ACTION {^You are drowning!$}
 {
 	#if {"$waterBreathing" == "true"}
@@ -1501,6 +1512,18 @@
 }
 {9}
 
+#ACTION {^%S appears out of a flickering blue glow.$}
+{
+	play waypoint-arrive
+}
+{9}
+
+#ACTION {^%S vanishes into a flickering red glow.$}
+{
+	play waypoint-leave
+}
+{9}
+
 #ACTION {^(%1 is trying to get your attention)$}
 {
 	#if {!&{replaying}}
@@ -1862,6 +1885,12 @@
 		}
 	};
 	play pretty-hurt
+}
+{9}
+
+#ACTION {^You are surrounded by a flickering blue glow.  When it fades, you find yourself elsewhere...$}
+{
+	play waypoint-travel
 }
 {9}
 
@@ -2271,12 +2300,21 @@
 		{
 			#if {&{terrain}}
 			{
-				#line {gag};
-				#zap {backgroundMusic}
+				#if {&{musicSession}}
+				{
+					#line {gag};
+					#zap {backgroundMusic};
+					#unvariable {musicSession}
+				}
 			};
 			#variable {terrain} {%1};
-			#gts {#run {backgroundMusic} {ogg123 -r -q sounds/terrain-%1.ogg}};
-			#session {1}
+			#script {fileName} {if [ -f sounds/terrain-%1.ogg ] ; then echo "true";fi};
+			#if {&{fileName[1]}}
+			{
+				#gts {#run {backgroundMusic} {ogg123 -r -q sounds/terrain-%1.ogg}};
+				#session {1};
+				#variable {musicSession} {true}
+			}
 		}
 	}
 }
