@@ -2356,7 +2356,10 @@
 
 #ACTION {^large chunks. (worn by you)$}
 {
-	c bone armor $name
+	#if {"$autobonearmor" == "true"}
+	{
+		c bone armor $name
+	}
 }
 {9}
 
@@ -2482,6 +2485,13 @@
 }
 {5}
 
+#ALIAS {autobonearmor}
+{
+	#variable {autobonearmor} {true};
+	#showme {Bone armor will now autocast}
+}
+{5}
+
 #ALIAS {autoclay}
 {
 	#variable {autoclay} {true};
@@ -2559,9 +2569,11 @@
 }
 {5}
 
-#ALIAS {id %1}
+#ALIAS {id %1} {#if {"$identify" == "true"} {c identify %1};#else {#send {identify %1}}} {5}
+
+#ACTION {^%sidentify%s%1}
 {
-	c id %1
+	#variable {identify} {true}
 }
 {5}
 
@@ -2569,6 +2581,13 @@
 {
 	#variable {autobone} {false};
 	#showme {Bone guardian will no longer autocast.}
+}
+{5}
+
+#ALIAS {noautobonearmor}
+{
+	#variable {autobonearmor} {false};
+	#showme {Bone armor will no longer autocast.}
 }
 {5}
 

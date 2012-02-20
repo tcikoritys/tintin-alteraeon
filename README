@@ -42,6 +42,7 @@ alt +, south
 alt+m southwest
 alt_. southeast
 autoclay cast clay man automatically if your current clay man dies
+autobonearmor recast bone armor when it drops. Will automatically soulbind the armor if you have the skill and a blue soulstone. use noautobonearmor to turn it off.
 autowoad automatically try to create a new wood woad of the current woad dies.
 (NOTES: turn off the autocast with noautoclay or noautowoad. These should not be used together and turningon one should disable the other.
 the variable woadMaterial should be set to the material you want to use to create the woad. The material for creating the woad should be located in your container. The container variable needs to be set for this to work as well. Anytime you put something somewhere the destination is set as your container. So, put gondola sack will set your container as sack)
