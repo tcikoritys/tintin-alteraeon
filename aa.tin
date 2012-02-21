@@ -2528,7 +2528,7 @@
 #ALIAS {autorefresh}
 {
 	#variable {autorefresh} {true};
-	#showme {You will automaticaly cast refresh spells if your MV is low.}
+	#showme {You will automatically cast refresh spells if your MV is low.}
 }
 {5}
 
@@ -2622,7 +2622,7 @@
 #ALIAS {noautorefresh}
 {
 	#variable {autorefresh} {false};
-	#showme {You will no longer automaticaly cast refresh spells.}
+	#showme {You will no longer automatically cast refresh spells.}
 }
 {5}
 
@@ -2867,7 +2867,7 @@
 #ALIAS {^autorecall$}
 {
 	#variable {autorecall} {true};
-	#showme {You will automatically recall if you are in awful or pretty hurt.}
+	#showme {You will automatically recall if you are in awful condition or pretty hurt.}
 }
 {9}
 
@@ -2949,7 +2949,7 @@
 #ALIAS {^noautorecall$}
 {
 	#unvariable {autorecall};
-	#showme {You will no automatically recall.}
+	#showme {You will not automatically recall.}
 }
 {9}
 
